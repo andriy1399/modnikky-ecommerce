@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "modnikky"
+    }
+  },
+  "defaultProject": "modnikky",
+  "cli": {
+    "analytics": false
+  }
 }
