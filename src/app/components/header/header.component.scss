@@ -1,0 +1,85 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  padding: 17px 60px;
+  &__title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    h1 {
+      font-size: 1.666em;
+    }
+  }
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    ul {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-width: 285px;
+      a {
+        font-size: 0.8rem;
+        &:hover {
+          opacity: 0.8;
+        }
+
+        svg {
+          width: 14px;
+        }
+      }
+    }
+  }
+
+  &__item-wrapper {
+    width: 185px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.form-control {
+  margin-top: 1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 2.4em;
+  label {
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .lb {
+    margin-top: 1px;
+    z-index: 10;
+    position: absolute;
+    cursor: pointer;
+  }
+  &__search {
+    border: none;
+    outline: none;
+    padding-left: 1.3em;
+    width: 0;
+    transition: all 1s ease;
+    &:focus {
+      width: 200px;
+      background: linear-gradient(360deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0) 5%);
+      left: -200px;
+    }
+  }
+}
+
+.search-active {
+}
+.active {
+  a {
+    opacity: 0.8;
+  }
+  svg {
+    fill: rgba(0, 0, 0, 0.801);
+  }
+}

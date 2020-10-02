@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "helvetica-p";
+  src: url("assets/fonts/HelveticaNeueLTStd-Hv.otf");
+}
+
+@font-face {
+  font-family: "helvetica-h";
+  src: url("assets/fonts/HelveticaNeueLTStd-MdEx.otf");
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p,
+span,
+small {
+  font-family: "helvetica-p";
+  font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "helvetica-h";
+  font-size: 16px;
+}
+body {
+  width: 100%;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
