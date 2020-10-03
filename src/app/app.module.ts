@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -15,6 +15,11 @@ import { ProductComponent } from './pages/product/product.component';
 import { BagComponent } from './pages/bag/bag.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 
+import { MatMenuModule } from '@angular/material/menu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,12 +33,18 @@ import { FavoritesComponent } from './pages/favorites/favorites.component';
     SaleComponent,
     ProductComponent,
     BagComponent,
-    FavoritesComponent
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatMenuModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatListModule,
+    MatIconModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })
