@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { ShopComponent } from './pages/shop/shop.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SaleComponent } from './pages/sale/sale.component';
@@ -17,10 +17,14 @@ const routes: Routes = [
   { path: 'favorites', component: FavoritesComponent },
   { path: 'bag', component: BagComponent },
   { path: 'product/:category/:id', component: ProductComponent },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules,
+    scrollPositionRestoration: 'top',
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

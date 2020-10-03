@@ -15,11 +15,12 @@ import { ProductComponent } from './pages/product/product.component';
 import { BagComponent } from './pages/bag/bag.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 
-import { MatMenuModule } from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedModule } from './shared/shared.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,14 +35,15 @@ import { MatIconModule } from '@angular/material/icon';
     ProductComponent,
     BagComponent,
     FavoritesComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatMenuModule,
+    SharedModule,
     BrowserAnimationsModule,
+    MatMenuModule,
     MatButtonModule,
-    MatListModule,
     MatIconModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
