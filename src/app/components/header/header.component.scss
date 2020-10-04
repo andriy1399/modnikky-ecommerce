@@ -1,5 +1,5 @@
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -223,6 +223,9 @@
     &__menu-items {
       display: flex;
       align-items: center;
+      span {
+        font-family: helvetica-h;
+      }
     }
   }
 

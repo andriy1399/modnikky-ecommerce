@@ -20,7 +20,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './shared/shared.module';
-
+import { HeaderBgDirective } from './shared/directives/header-bg.directive';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,7 @@ import { SharedModule } from './shared/shared.module';
     ProductComponent,
     BagComponent,
     FavoritesComponent,
-
+    HeaderBgDirective
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     MatMenuModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    IvyCarouselModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
