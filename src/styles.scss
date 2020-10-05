@@ -1,19 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
-@font-face {
-  font-family: "helvetica-p";
-  src: url("assets/fonts/HelveticaNeueLTStd-Hv.otf");
-}
 
 @font-face {
   font-family: "helvetica-h";
   src: url("assets/fonts/HelveticaNeueLTStd-MdEx.otf");
 }
-
+@font-face {
+  font-family: "helvetica-p";
+  src: url("assets/fonts/HelveticaNeueLTStd-UltLt.otf");
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 p,
@@ -28,7 +36,9 @@ h2,
 h3,
 h4,
 h5,
-h6,a {
+h6,
+a,
+input {
   font-family: "helvetica-h", sans-serif, Arial;
   font-size: 16px;
 }
@@ -46,5 +56,9 @@ a {
   color: #000;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+button {
+  outline: none;
+  border: 0;
+  background-color: transparent;
+  font-family: "helvetica-h", sans-serif, Arial;
+}

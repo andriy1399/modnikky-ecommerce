@@ -1,11 +1,16 @@
+
+
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background-color: #ffffff;
   padding: 17px 60px;
   transition: all 0.4s ease;
+  z-index: 9999999;
+
+
   &__burger {
     display: none;
   }
@@ -40,7 +45,7 @@
         }
         svg {
           width: 14px;
-          line-height: 1.5;
+          // line-height: 1.5;
         }
       }
     }
@@ -48,49 +53,47 @@
   &__phone-icon {
     display: none;
   }
+}
+.search {
+  svg {
+    width: 17px;
+  }
+  &__wrapper {
+    width: 100%;
+    position: relative;
+  }
 
-  &__item-wrapper {
-    width: 185px;
+  &__input {
+    width: 100%;
+    padding: 0.3em 1.7em;
+    background-color: transparent;
+    outline: none;
+    border: 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid black;
+    &::placeholder {
+      color: rgb(105, 105, 105);
+    }
+  }
+  label {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 199;
+  }
+  &__close {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    cursor: pointer;
   }
 }
 
-// .form-control {
-//   margin-top: 1px;
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-//   margin-right: 2.4em;
-//   label {
-//     width: 12px;
-//     font-size: 0.8rem;
-//     cursor: pointer;
-//     font-family: "helvetica-h";
-//   }
-//   .lb {
-//     margin-top: 1px;
-//     z-index: 10;
-//     position: absolute;
-//     cursor: pointer;
-//   }
-//   &__search {
-//     border: none;
-//     outline: none;
-//     padding-left: 1.3em;
-//     width: 0;
-//     transition: all 1s ease;
-//     &:focus {
-//       width: 160px;
-//       background: linear-gradient(360deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0) 5%);
-//       left: -200px;
-//     }
-//   }
-// }
-
-.search-active {
-}
 .active {
   a {
     span {
@@ -114,6 +117,14 @@
   svg,
   path {
     fill: #ffffff;
+  }
+
+  input {
+    color: #ffffff;
+    border-color: #ffffff;
+    &::placeholder {
+      color: #dbd8d8;
+    }
   }
 }
 
@@ -141,6 +152,8 @@
     }
     &__nav {
       ul {
+        display: flex;
+        align-items: flex-start;
         &:nth-child(1) {
           display: none;
         }
@@ -148,6 +161,7 @@
         a {
           svg {
             width: 23px;
+            height: 23px;
           }
         }
       }
@@ -162,7 +176,17 @@
     &__hide-li {
       display: none;
     }
+  }
 
+  .search {
+    svg {
+      width: 23px;
+    }
+
+    &__input {
+      padding: 0.6em 1.7em;
+      font-size: 1.1rem;
+    }
   }
 
 }
@@ -190,7 +214,6 @@
           svg {
             width: 17px;
             height: 17px;
-            margin-top: 2px;
           }
         }
       }
@@ -223,7 +246,20 @@
     &__menu-items {
       display: flex;
       align-items: center;
+      span {
+        font-family: helvetica-h;
+      }
     }
   }
 
+  .search {
+    svg {
+      width: 17px;
+    }
+
+    &__input {
+      padding: 0.45em 1.7em;
+      font-size: 1rem;
+    }
+  }
 }
