@@ -1,5 +1,5 @@
-<header appHeaderBg class="header dark-mode" >
-  <nav class="header__nav">
+<header appHeaderBg  class="header dark-mode">
+  <nav class="header__nav" *ngIf="!isSearchClicked">
     <ul>
       <li routerLinkActive='active'><a [routerLink]="['/new-arrivals']">NEW ARRIVALS</a></li>
       <li routerLinkActive='active'><a [routerLink]="['/shop']">SHOP</a></li>
@@ -16,6 +16,12 @@
         </mat-icon>
       </button>
       <mat-menu #menu xPosition="after">
+        <button mat-menu-item class="header__menu-items">
+          <mat-icon>
+            <img src="../../../assets/icons/add-button.svg" alt="">
+          </mat-icon>
+          <span>SIGN IN</span>
+        </button>
         <button mat-menu-item [routerLink]="['/new-arrivals']" class="header__menu-items">
           <mat-icon>
             <img src="../../../assets/icons/new.svg" alt="">
@@ -23,7 +29,7 @@
           <span>NEW ARRIVALS</span>
         </button>
         <button mat-menu-item [routerLink]="['/shop']" class="header__menu-items">
-          <mat-icon> <img src="../../../assets/icons/star.svg"  style="margin-bottom: 4px;" alt=""></mat-icon>
+          <mat-icon> <img src="../../../assets/icons/star.svg" style="margin-bottom: 4px;" alt=""></mat-icon>
           <span>SHOP</span>
         </button>
         <button mat-menu-item [routerLink]="['/sale']" class="header__menu-items">
@@ -36,9 +42,9 @@
       <h1>MODNIKKY</h1>
     </a>
     <ul>
-      <li >
-        <a>
-          <svg viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
+      <li>
+        <a (click)="isSearchClicked = !isSearchClicked">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M23.7061 22.2955L17.9363 16.5257C19.3665 14.782 20.2286 12.5486 20.2286 10.1143C20.2286 4.53061 15.698 0 10.1143 0C4.52571 0 0 4.53061 0 10.1143C0 15.698 4.52571 20.2286 10.1143 20.2286C12.5486 20.2286 14.7771 19.3714 16.5208 17.9412L22.2906 23.7061C22.6824 24.098 23.3143 24.098 23.7061 23.7061C24.098 23.3192 24.098 22.6824 23.7061 22.2955ZM10.1143 18.2155C5.64245 18.2155 2.00816 14.5812 2.00816 10.1143C2.00816 5.64735 5.64245 2.00816 10.1143 2.00816C14.5812 2.00816 18.2204 5.64735 18.2204 10.1143C18.2204 14.5812 14.5812 18.2155 10.1143 18.2155Z"
               fill="#000F08" />
@@ -72,4 +78,32 @@
       </li>
     </ul>
   </nav>
+  <div class="search" *ngIf="isSearchClicked">
+    <div class="search__wrapper">
+      <label for="search">
+        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M23.7061 22.2955L17.9363 16.5257C19.3665 14.782 20.2286 12.5486 20.2286 10.1143C20.2286 4.53061 15.698 0 10.1143 0C4.52571 0 0 4.53061 0 10.1143C0 15.698 4.52571 20.2286 10.1143 20.2286C12.5486 20.2286 14.7771 19.3714 16.5208 17.9412L22.2906 23.7061C22.6824 24.098 23.3143 24.098 23.7061 23.7061C24.098 23.3192 24.098 22.6824 23.7061 22.2955ZM10.1143 18.2155C5.64245 18.2155 2.00816 14.5812 2.00816 10.1143C2.00816 5.64735 5.64245 2.00816 10.1143 2.00816C14.5812 2.00816 18.2204 5.64735 18.2204 10.1143C18.2204 14.5812 14.5812 18.2155 10.1143 18.2155Z" />
+        </svg>
+      </label>
+      <input type="text" class="search__input" id="search" placeholder="Search here..." autocomplete="off">
+      <span class="search__close" (click)="isSearchClicked = !isSearchClicked">
+        <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+           viewBox="0 0 409.806 409.806" style="enable-background:new 0 0 409.806 409.806;"
+          xml:space="preserve">
+          <g>
+            <g>
+              <path d="M228.929,205.01L404.596,29.343c6.78-6.548,6.968-17.352,0.42-24.132c-6.548-6.78-17.352-6.968-24.132-0.42
+			c-0.142,0.137-0.282,0.277-0.42,0.42L204.796,180.878L29.129,5.21c-6.78-6.548-17.584-6.36-24.132,0.42
+			c-6.388,6.614-6.388,17.099,0,23.713L180.664,205.01L4.997,380.677c-6.663,6.664-6.663,17.468,0,24.132
+			c6.664,6.662,17.468,6.662,24.132,0l175.667-175.667l175.667,175.667c6.78,6.548,17.584,6.36,24.132-0.42
+			c6.387-6.614,6.387-17.099,0-23.712L228.929,205.01z" />
+            </g>
+          </g>
+
+        </svg>
+
+      </span>
+    </div>
+  </div>
 </header>
