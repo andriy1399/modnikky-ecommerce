@@ -6,7 +6,7 @@
 }
 @font-face {
   font-family: "helvetica-p";
-  src: url("assets/fonts/HelveticaNeueLTStd-UltLt.otf");
+  src: url("assets/fonts/HelveticaNeueLTStd-LtEx.otf");
 }
 
 * {
@@ -26,7 +26,8 @@ body {
 
 p,
 span,
-small {
+small,
+li {
   font-family: "helvetica-p", sans-serif, Arial;
   font-size: 16px;
 }
@@ -61,4 +62,10 @@ button {
   border: 0;
   background-color: transparent;
   font-family: "helvetica-h", sans-serif, Arial;
+}
+
+input {
+  border: 0;
+  outline: none;
+  background-color: transparent;
 }

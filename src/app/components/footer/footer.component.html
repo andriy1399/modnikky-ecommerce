@@ -1,1 +1,36 @@
-<p>footer works!</p>
+<footer class="footer">
+  <div class="footer__get-email">
+    <h5>SING UP FOR UPDATES</h5>
+    <p>Sign up for exclusive early sale access and tailored new arrivals.</p>
+    <div class="footer__form-control">
+      <input type="email" class="footer__form-email" placeholder="Your email address">
+      <input type="submit" value="JOIN" class="footer__form-submit">
+      <span></span>
+    </div>
+  </div>
+
+  <div class="footer__info">
+    <div class="row">
+      <div class="col" *ngFor="let info of footerInfo">
+        <h5 class="footer__list-title">{{ info.pTitle }}</h5>
+        <ul class="footer__list">
+          <li *ngFor="let item of info.pList">
+            <ng-container *ngIf="!item.img; else withImg">
+              <a>{{ item.text }}</a>
+            </ng-container>
+            <ng-template #withImg>
+              <a [href]="item.href" target="_blanc">
+                <img width="20px" height="20px" [src]="item.img" alt="">
+                <span>{{ item.text }}</span>
+              </a>
+            </ng-template>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__info-mobile">
+    <app-panel *ngFor="let info of footerInfo; let l = last" [panelData]="info" [getLast]="l"></app-panel>
+  </div>
+</footer>

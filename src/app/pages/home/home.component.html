@@ -75,7 +75,7 @@
   <section class="carousel">
     <p class="carousel__subtitle">NEW ARRIVALS</p>
     <carousel style="padding: 0;" height=650 [autoplay]="true" [loop]="true" [cellsToShow]="getCellCount()"
-      [overflowCellsLimit]='1' [margin]='0'>
+      [overflowCellsLimit]='0' [margin]='0'>
       <div class="carousel-cell" *ngFor="let img of images">
           <img [src]="img" style=" object-fit: cover; object-position: center;">
           <div class="carousel__btn-wrapper">
@@ -102,5 +102,4 @@
     </div>
   </section>
 </div>
-<!-- https://www.verishop.com/blog/wp-content/uploads/2020/01/58-scaled.jpg -->
-<!-- sale is here -->
+

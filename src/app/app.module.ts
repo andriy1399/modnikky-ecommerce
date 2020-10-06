@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './shared/shared.module';
 import { HeaderBgDirective } from './shared/directives/header-bg.directive';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { PanelComponent } from './components/panel/panel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     ProductComponent,
     BagComponent,
     FavoritesComponent,
-    HeaderBgDirective
+    HeaderBgDirective,
+    PanelComponent
   ],
   imports: [
     BrowserModule,
