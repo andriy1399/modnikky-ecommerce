@@ -1,0 +1,183 @@
+.footer {
+  margin-top: 120px;
+  width: 100%;
+  padding-bottom: 3em;
+  &__get-email {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h5 {
+      font-size: 1.4rem;
+      color: #000f08;
+    }
+    p {
+      font-size: 0.9rem;
+    }
+  }
+  &__info-mobile {
+    display: none;
+  }
+  &__form-control {
+    margin-top: 1.8em;
+    position: relative;
+    width: 550px;
+    span {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0px;
+      height: 1px;
+      background-color: black;
+      transition: width 0.3s ease-in-out;
+    }
+  }
+
+  &__form-email {
+    width: 100%;
+    padding: 0.35em 0;
+    border-bottom: 1px solid #d8d8d8;
+    &::placeholder {
+      color: #8c8c8c;
+    }
+    &:focus ~ span {
+      width: 100%;
+    }
+  }
+
+  &__form-submit {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active ~ span {
+      width: 100%;
+    }
+  }
+  &__info {
+    margin-top: 3.5em;
+    width: 100%;
+    padding: 0 80px;
+  }
+  &__list-title {
+    color: #000f08;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+  }
+
+  &__list {
+    margin-top: 2em;
+    li {
+      padding: 0.5em 0;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    a {
+      font-size: 1rem;
+      text-transform: uppercase;
+      display: flex;
+      font-family: helvetica-p;
+      align-items: center;
+    }
+    img {
+      width: 16px;
+      height: 16px;
+      margin-right: 0.5em;
+    }
+    span {
+      font-family: helvetica-p;
+    }
+  }
+}
+.row {
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 1200px) {
+  .footer {
+    &__info {
+      margin-top: 3em;
+      padding: 0 40px;
+    }
+  }
+  .row {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .footer {
+    margin-top: 140px;
+    padding-bottom: 3.5em;
+
+    &__form-control {
+      margin-top: 1.8em;
+      width: 90%;
+    }
+
+    &__form-email {
+      padding: 0.45em 0;
+    }
+
+    &__info {
+      margin-top: 3em;
+      padding: 0 40px;
+    }
+    &__list-title {
+      color: #000f08;
+      font-size: 1.1rem;
+    }
+
+    &__list {
+      li,
+      a,
+      span {
+        font-size: 0.8rem;
+      }
+    }
+  }
+  .row {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    margin-top: 140px;
+    padding-bottom: 3.5em;
+
+    &__form-control {
+      margin-top: 1.8em;
+      width: 90%;
+    }
+    &__get-email {
+
+      h5 {
+        font-size: 1.4rem;
+      }
+      p {
+        font-size: 0.8rem;
+        width: 90%;
+      }
+    }
+    &__form-email {
+      padding: 0.45em 0;
+    }
+
+    &__info {
+      display: none;
+    }
+    &__info-mobile {
+      display: block;
+      margin-top: 4em;
+    }
+  }
+}

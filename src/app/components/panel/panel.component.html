@@ -1,0 +1,32 @@
+<div class="panel"  [ngStyle]="{'border-bottom': getLast ? '1px solid #c9c9c9': '0'}">
+
+  <div class="panel__wrapper" (click)="isClicked = !isClicked">
+    <span class="panel__icon" [ngClass]="{'panel__icon--rotate': isClicked}">
+      <img src="../../../assets/icons/less.svg" alt="" *ngIf="isClicked">
+      <img src="../../../assets/icons/more.svg" alt="" *ngIf="!isClicked">
+    </span>
+    <div class="panel__title">
+      <h5>{{ panelData.pTitle }}</h5>
+    </div>
+  </div>
+  <div class="panel__text" [ngClass]="{'panel__text--show': isClicked}">
+    <ng-container *ngIf="panelData.pText; else list">
+      {{ panelData }}
+    </ng-container>
+    <ng-template #list>
+      <ul>
+        <li *ngFor="let li of panelData.pList">
+          <ng-container *ngIf="!li.img; else withImg">
+            <a>{{ li.text }}</a>
+          </ng-container>
+          <ng-template #withImg>
+            <a [href]="li.href" target="_blanc">
+              <img width="20px" height="20px" [src]="li.img" alt="">
+              <span>{{ li.text }}</span>
+            </a>
+          </ng-template>
+        </li>
+      </ul>
+    </ng-template>
+  </div>
+</div>

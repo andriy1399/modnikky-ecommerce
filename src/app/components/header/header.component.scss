@@ -42,9 +42,11 @@
         span {
           font-size: 0.8rem;
           font-family: "helvetica-h";
+          cursor: pointer;
         }
         svg {
           width: 14px;
+          cursor: pointer;
           // line-height: 1.5;
         }
       }
@@ -70,10 +72,24 @@
     outline: none;
     border: 0;
     font-size: 0.9rem;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(53, 53, 53);
     &::placeholder {
       color: rgb(105, 105, 105);
     }
+    &:focus ~ .focus-line {
+      width: 100%;
+    }
+  }
+
+  .focus-line {
+    position: absolute;
+    width:0px;
+    height: 1px;
+    background-color: black;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width .3s ease-in-out;
   }
   label {
     position: absolute;
@@ -121,10 +137,14 @@
 
   input {
     color: #ffffff;
-    border-color: #ffffff;
+    border-color: #e6e5e5;
     &::placeholder {
       color: #dbd8d8;
     }
+  }
+
+  .focus-line {
+    background-color: #ffffff;
   }
 }
 
