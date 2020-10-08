@@ -1,0 +1,245 @@
+.sign-in {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100000;
+  background-color: rgba(0, 0, 0, 0.404);
+  overflow: auto;
+  &__modal {
+    width: 550px;
+    margin: 100px auto 0;
+    background-color: white;
+    padding: 2em;
+  }
+
+  &__modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    h3 {
+      margin-bottom: 0;
+      font-size: 1.1rem;
+      font-family: helvetica-h;
+    }
+  }
+
+  &__cancel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+    img {
+      width: 17px;
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__modal-body {
+    padding: 2em 1em;
+  }
+
+  &__form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  .full-width {
+    width: 100%;
+    margin-bottom: 0.8em;
+  }
+  &__check {
+    display: flex;
+  }
+
+  &__check-control {
+    position: relative;
+    padding: 0.5em 0 2em 2em;
+    input[type="checkbox"] {
+      display: none;
+    }
+    label {
+      position: absolute;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #efefef;
+      box-shadow: inset 0 0 0 1px black;
+      cursor: pointer;
+    }
+    input[type="checkbox"]:checked ~ label {
+      background-position: center;
+      background-size: 85% 85%;
+      background-repeat: no-repeat;
+      background-color: rgb(0, 0, 0);
+      background-image: url("../../../assets/icons/check-white.svg");
+    }
+  }
+
+  &__check-text {
+    font-size: 0.8rem;
+  }
+
+  &__links {
+    color: #b6b6b6;
+    font-family: helvetica-p;
+    font-size: 0.8rem;
+    a {
+      font-size: inherit;
+      color: #4b4a4a;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__modal-footer {
+    padding: 0 1em;
+
+    a {
+      font-size: 0.8rem;
+      color: #4b4a4a;
+      &:hover {
+        color: #1d1d1d;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+  }
+  &__submit {
+    padding: 1em;
+    width: 250px;
+    text-transform: uppercase;
+    color: rgb(235, 233, 233);
+    background-color: black;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.4s ease-in-out;
+    &:hover {
+      opacity: 0.85;
+    }
+    &:disabled {
+      opacity: 0.6;
+      cursor: no-drop;
+    }
+  }
+
+  &__alert {
+    padding: .5em;
+    box-shadow: 0 0 0 1px #f44336;
+    margin-bottom: .5em;
+    font-size: .65rem;
+  }
+
+  &__alert-text {
+    color: #f44336;
+    font-size: inherit;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .sign-in {
+    &__modal {
+      width: 100%;
+      padding: 1.5em;
+    }
+    &__title {
+      h3 {
+        font-size: 1rem;
+      }
+    }
+
+    &__cancel {
+      img {
+        width: 16px;
+      }
+    }
+    &__modal-body {
+      padding: 1.5em 0.7em;
+    }
+
+    &__form {
+      width: 100%;
+    }
+    .full-width {
+      margin-bottom: 0.7em;
+    }
+
+    &__check-control {
+      label {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &__check-text {
+      font-size: 0.7rem;
+    }
+    &__links {
+      font-size: 0.7rem;
+    }
+
+    &__modal-footer {
+      padding: 0 1em;
+      a {
+        font-size: 0.7rem;
+      }
+    }
+
+    &__btn-wrapper {
+      margin-top: 0.7em;
+    }
+    &__submit {
+      padding: 0.8em;
+      width: 220px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sign-in {
+    &__modal-body {
+      padding: 1.5em 0em;
+    }
+
+    .full-width {
+      margin-bottom: 0.6em;
+    }
+
+    &__check-control {
+      label {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    &__check-text {
+      font-size: 0.6rem;
+    }
+    &__links {
+      font-size: 0.6rem;
+    }
+
+    &__modal-footer {
+      padding: 0;
+    }
+
+    &__btn-wrapper {
+      margin-top: 0.6em;
+    }
+  }
+
+}

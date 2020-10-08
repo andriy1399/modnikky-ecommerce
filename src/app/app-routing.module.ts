@@ -7,6 +7,9 @@ import { ProductComponent } from './pages/product/product.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { BagComponent } from './pages/bag/bag.component';
 import { NewArrivalsComponent } from './pages/new-arrivals/new-arrivals.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { ProfileGuard } from './shared/guards/profile.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -17,7 +20,17 @@ const routes: Routes = [
   { path: 'favorites', component: FavoritesComponent },
   { path: 'bag', component: BagComponent },
   { path: 'product/:category/:id', component: ProductComponent },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) }
+  {
+    path: 'profile',
+    canActivate: [ProfileGuard],
+    component: ProfileComponent
+  },
+  {
+    path: 'admin',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
+  {path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];
 
 @NgModule({

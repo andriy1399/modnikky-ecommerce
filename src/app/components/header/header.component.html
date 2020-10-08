@@ -16,12 +16,22 @@
         </mat-icon>
       </button>
       <mat-menu #menu xPosition="after">
-        <button mat-menu-item class="header__menu-items">
+        <button *ngIf="!loginStatus" mat-menu-item class="header__menu-items" (click)="signInModal.isSignInClicked = true">
           <mat-icon>
             <img src="../../../assets/icons/add-button.svg" alt="">
           </mat-icon>
           <span>SIGN IN</span>
         </button>
+        <button *ngIf="loginStatus" mat-menu-item class="header__menu-items" [routerLink]="['/' + urlAddress]">
+          <mat-icon>
+            <img src="../../../assets/icons/add-button.svg" alt="">
+          </mat-icon>
+          <span >{{ urlName | uppercase }}</span>
+        </button>
+
+        <li class="header__hide-li" *ngIf="loginStatus">
+          <a [routerLink]="['/' + urlAddress]">{{ urlName | uppercase }}</a>
+        </li>
         <button mat-menu-item [routerLink]="['/new-arrivals']" class="header__menu-items">
           <mat-icon>
             <img src="../../../assets/icons/new.svg" alt="">
@@ -54,8 +64,11 @@
           </span>
         </a>
       </li>
-      <li class="header__hide-li">
-        <a>SIGN IN</a>
+      <li class="header__hide-li" *ngIf="!loginStatus">
+        <a (click)="signInModal.isSignInClicked = true">SIGN IN</a>
+      </li>
+      <li class="header__hide-li" *ngIf="loginStatus">
+        <a [routerLink]="['/' + urlAddress]">{{ urlName | uppercase }}</a>
       </li>
       <li routerLinkActive='active'>
         <a [routerLink]="['bag']">

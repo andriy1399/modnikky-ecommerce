@@ -1,1 +1,110 @@
-<p>sign-in works!</p>
+<div class="sign-in" appHideModal>
+  <div class="sign-in__modal" [@ModalAnime]>
+    <div class="sign-in__modal-header">
+      <div class="sign-in__title">
+        <h3>{{ !isCreateModal ? 'Login' : 'create account' }}</h3>
+      </div>
+      <span class="sign-in__cancel" (click)="signInModal.isSignInClicked = false">
+        <img src="../../../assets/icons/cancel.svg">
+      </span>
+    </div>
+    <div class="sign-in__modal-body">
+      <ng-container *ngIf="isCreateModal; else loginForm">
+        <form class="sign-in__form" [formGroup]='create' (ngSubmit)="submitCreate()">
+          <mat-form-field class="full-width">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName='firstName' autocomplete="off">
+            <mat-error *ngIf="create.get('firstName').hasError('required')">
+              First name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName='lastName' autocomplete="off">
+            <mat-error *ngIf="create.get('lastName').hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName='email' autocomplete="off" errorState=true>
+            <mat-error *ngIf="create.get('email').hasError('email') && !create.get('email').hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="create.get('email').hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width" [matAutosize]="true">
+            <mat-label class="full-width--ph">Password</mat-label>
+            <input matInput formControlName='password' autocomplete="off" type="password">
+            <mat-error *ngIf="create.get('password').hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="create.get('password').hasError('pattern')">
+              Password mast contain<strong> numbers, letters, upper and lower case</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <div class="sign-in__alert" *ngIf="errorTxt">
+            <small class="sign-in__alert-text">{{ errorTxt }}</small>
+          </div>
+
+          <div class="sign-in__check">
+            <div class="sign-in__check-control">
+              <input type="checkbox" id="check" formControlName="checked">
+              <label for="check"></label>
+            </div>
+            <p class="sign-in__check-text">Let's get personal! We'll send you only the good stuff: <br> Exclusive early
+              access to Sale, new arrivals and promotions. No nasties.</p>
+          </div>
+          <div class="sign-in__links">
+            By signing up you agree to <a href='#'>Terms of Service</a> and <a href="#">Privacy Policy</a>
+          </div>
+
+          <div class="sign-in__btn-wrapper">
+            <button type="submit" class="sign-in__submit" [disabled]="create.invalid || isBtnDisabled">sign up</button>
+          </div>
+        </form>
+      </ng-container>
+      <ng-template #loginForm>
+        <form class="sign-in__form" [formGroup]='login' (ngSubmit)="submitLogin()">
+          <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName='email' autocomplete="off">
+            <mat-error *ngIf="login.get('email').hasError('email') && !login.get('email').hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="login.get('email').hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width" [matAutosize]="true">
+            <mat-label class="full-width--ph">Password</mat-label>
+            <input matInput formControlName='password' autocomplete="off" type="password">
+            <mat-error *ngIf="login.get('password').hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="login.get('password').hasError('pattern')">
+              Password mast contain<strong> numbers, letters, upper and lower case</strong>
+            </mat-error>
+          </mat-form-field>
+          <div class="sign-in__alert" *ngIf="errorTxt">
+            <small class="sign-in__alert-text">{{ errorTxt }}</small>
+          </div>
+          <div class="sign-in__btn-wrapper">
+            <button type="submit" class="sign-in__submit" [disabled]="login.invalid || isBtnDisabled">sign in</button>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+    <div class="sign-in__modal-footer">
+      <ng-container *ngIf="!isCreateModal; else createAcc">
+        <a (click)="changeForm()">CREATE ACCOUNT</a>
+      </ng-container>
+      <ng-template #createAcc>
+        <a (click)="changeForm()">I HAVE AN ACCOUNT</a>
+      </ng-template>
+    </div>
+  </div>
+</div>

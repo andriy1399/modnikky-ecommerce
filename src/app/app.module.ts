@@ -19,10 +19,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+
 import { SharedModule } from './shared/shared.module';
 import { HeaderBgDirective } from './shared/directives/header-bg.directive';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { PanelComponent } from './components/panel/panel.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HideModalDirective } from './shared/directives/hide-modal.directive';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+import { ProfileComponent } from './pages/profile/profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,17 +50,27 @@ import { PanelComponent } from './components/panel/panel.component';
     BagComponent,
     FavoritesComponent,
     HeaderBgDirective,
-    PanelComponent
+    PanelComponent,
+    HideModalDirective,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     BrowserAnimationsModule,
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
-    IvyCarouselModule
+    MatInputModule,
+    IvyCarouselModule,
+
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
