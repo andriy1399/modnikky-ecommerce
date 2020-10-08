@@ -6,6 +6,7 @@ import { AdminCategoryComponent } from './admin-category/admin-category.componen
 import { AdminCatalogComponent } from './admin-catalog/admin-catalog.component';
 import { SharedModule } from '../shared/shared.module';
 
+import { MatCardModule } from '@angular/material/card';
 const routes: Routes = [
   {
     path: '', component: AdminComponent, children: [
@@ -24,6 +25,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
+    MatCardModule
   ],
   exports: [RouterModule]
 })
