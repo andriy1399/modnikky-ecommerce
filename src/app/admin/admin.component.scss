@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.sidebar {
+  width: 15%;
+  // position: fixed;
+  &__card {
+    background-color: #f7f7f7;
+  }
+  button + button {
+    margin-top: 0.4em;
+  }
+}
+.main-content {
+  width: 84%;
+  padding: 0 1em;
+}
+.btn-width {
+  width: 100% !important;
+}
+
+.mat-btn-color {
+  // color: green;
+  // background-color: rgb(31, 235, 31);
+}
+
+.sign-out-btn {
+  margin-top: 2em !important;
+}

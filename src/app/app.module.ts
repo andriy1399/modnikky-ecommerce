@@ -18,14 +18,12 @@ import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 
 import { SharedModule } from './shared/shared.module';
 import { HeaderBgDirective } from './shared/directives/header-bg.directive';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { PanelComponent } from './components/panel/panel.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HideModalDirective } from './shared/directives/hide-modal.directive';
 
 import { AngularFireModule } from '@angular/fire';
@@ -57,13 +55,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
     SharedModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    MatIconModule,
-    MatInputModule,
     IvyCarouselModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),

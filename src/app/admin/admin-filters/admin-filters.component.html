@@ -1,0 +1,76 @@
+<div class="admin-body">
+  <div class="admin-body__form">
+    <form>
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Filter name</mat-label>
+        <input matInput autocomplete="off" [(ngModel)]="name" name="name">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Criteria</mat-label>
+        <mat-chip-list #chipList aria-label="criteria selection">
+          <mat-chip *ngFor="let c of criteria" [selectable]="selectable" [removable]="removable" (removed)="remove(c)">
+            {{ c }}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="New criteria..." [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+      <ng-container *ngIf="isEditing; else addBtn">
+        <button mat-flat-button color="accent" [disabled]="!name || !criteria.length" style="margin-bottom: 1em;"
+          (click)="saveEditedFilter()">
+          Save Filter
+        </button>
+      </ng-container>
+      <ng-template #addBtn>
+        <button mat-flat-button color="primary" [disabled]="!name || !criteria.length" style="margin-bottom: 1em;"
+          (click)="addFilter()">
+          Add Filter
+        </button>
+      </ng-template>
+
+    </form>
+  </div>
+  <div class="admin-body__table">
+    <table mat-table [dataSource]="dataFilters" class="admin-body__table-in mat-elevation-z8">
+
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="filterName">
+        <th mat-header-cell *matHeaderCellDef> Filter name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="filterCriteria">
+        <th mat-header-cell *matHeaderCellDef> Criteria </th>
+        <td mat-cell *matCellDef="let element" style="width: 650px; padding: 1em;">
+          <mat-chip-list>
+            <mat-chip *ngFor="let c of element.criteria">{{ c }}</mat-chip>
+          </mat-chip-list>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element;  let i = index">
+          <button mat-stroked-button color="accent" (click)="editFilter(element)">Edit</button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element;  let i = index">
+          <button mat-stroked-button color="warn" (click)="deleteFilter(element.id)">Delete</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+    </table>
+  </div>
+</div>
