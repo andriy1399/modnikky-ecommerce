@@ -1,0 +1,24 @@
+.admin-body {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  &__form {
+    width: 40%;
+  }
+  &__btn-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  &__table {
+    width: 58%;
+  }
+  &__table-in {
+    width: 100%;
+  }
+  &__checkbox-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+}

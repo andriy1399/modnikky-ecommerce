@@ -1,4 +1,4 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 const routes: Routes = [
   {
     path: '', component: AdminComponent, children: [
@@ -34,7 +35,8 @@ const routes: Routes = [
     MatCardModule,
     MatFormFieldModule,
     MatChipsModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule
   ],
   exports: [RouterModule]
 })

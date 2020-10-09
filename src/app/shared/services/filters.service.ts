@@ -1,4 +1,3 @@
-import { IfStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';

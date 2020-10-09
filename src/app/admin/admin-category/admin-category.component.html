@@ -1,1 +1,71 @@
+<div class="admin-body">
+  <div class="admin-body__form">
+    <form>
+      <h4>Show in...</h4>
+      <div class="admin-body__checkbox-wrapper">
+        <mat-checkbox color='primary' [(ngModel)]="showNewArrivals" name="showNewArrivals">New Arrivals</mat-checkbox>
+        <mat-checkbox color='primary' [(ngModel)]="showShop" name="showShop">Shop</mat-checkbox>
+        <mat-checkbox color='primary' [(ngModel)]="showSale" name="showSale">Sale</mat-checkbox>
+      </div>
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Category name</mat-label>
+        <input matInput autocomplete="off" [(ngModel)]="nameCategory" name="nameCategory">
+      </mat-form-field>
+      <div class="admin-body__btn-wrapper">
+        <ng-container *ngIf="isEditing; else addBtn">
+          <button mat-flat-button color="accent" [disabled]="!nameCategory" (click)="saveEditedCategory()">
+            Save Category
+          </button>
+        </ng-container>
+        <ng-template #addBtn>
+          <button mat-flat-button color="primary" [disabled]="!nameCategory" (click)="addCategory()">
+            Add Category
+          </button>
+        </ng-template>
+      </div>
+    </form>
+  </div>
 
+  <div class="admin-body__table">
+    <table mat-table [dataSource]="dataCategory" class="admin-body__table-in mat-elevation-z8">
+
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="categoryName">
+        <th mat-header-cell *matHeaderCellDef> Category name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="showIn">
+        <th mat-header-cell *matHeaderCellDef> Show in </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-chip-list>
+            <mat-chip color="primary" selected=true *ngIf="element.showNewArrivals">New Arrivals</mat-chip>
+            <mat-chip color="primary" selected=true *ngIf="element.showShop">Shop</mat-chip>
+            <mat-chip color="primary" selected=true *ngIf="element.showSale">Sale</mat-chip>
+          </mat-chip-list>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element;  let i = index">
+          <button mat-stroked-button color="accent" (click)="editCategory(element)">Edit</button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element;  let i = index">
+          <button mat-stroked-button color="warn" (click)="deleteCategory(element.id)">Delete</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></tr>
+    </table>
+  </div>
+</div>
