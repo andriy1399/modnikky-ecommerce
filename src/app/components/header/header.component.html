@@ -1,9 +1,9 @@
 <header appHeaderBg  class="header dark-mode">
   <nav class="header__nav" *ngIf="!isSearchClicked">
     <ul>
-      <li routerLinkActive='active'><a [routerLink]="['/new-arrivals']">NEW ARRIVALS</a></li>
-      <li routerLinkActive='active'><a [routerLink]="['/shop']">SHOP</a></li>
-      <li routerLinkActive='active'><a [routerLink]="['/sale']">SALE</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/catalog/new-arrivals']">NEW ARRIVALS</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/catalog/shop']">SHOP</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/catalog/sale']">SALE</a></li>
     </ul>
     <div class="header__burger">
       <button mat-icon-button [matMenuTriggerFor]="menu" class="header__burger-btn">

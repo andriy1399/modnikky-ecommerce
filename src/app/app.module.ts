@@ -31,6 +31,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ProductListComponent } from './pages/shop/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     HeaderBgDirective,
     PanelComponent,
     HideModalDirective,
-    ProfileComponent
+    ProfileComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

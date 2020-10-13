@@ -10,13 +10,19 @@ import { NewArrivalsComponent } from './pages/new-arrivals/new-arrivals.componen
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { ProfileGuard } from './shared/guards/profile.guard';
+import { ProductListComponent } from './pages/shop/product-list/product-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
-  { path: 'shop', component: ShopComponent },
-  { path: 'sale', component: SaleComponent },
-  { path: 'new-arrivals', component: NewArrivalsComponent },
+  {
+    path: 'catalog/:type', component: ShopComponent, children: [
+      { path: '', pathMatch: 'full', redirectTo: 'view-all' },
+      { path: 'view-all', component: ProductListComponent },
+      { path: ':category', component: ProductListComponent }
+    ]
+  },
+
   { path: 'favorites', component: FavoritesComponent },
   { path: 'bag', component: BagComponent },
   { path: 'product/:category/:id', component: ProductComponent },
@@ -30,7 +36,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
-  {path: '**', redirectTo: 'home', pathMatch: 'full'}
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
