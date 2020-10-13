@@ -23,7 +23,6 @@ import { SharedModule } from './shared/shared.module';
 import { HeaderBgDirective } from './shared/directives/header-bg.directive';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { PanelComponent } from './components/panel/panel.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HideModalDirective } from './shared/directives/hide-modal.directive';
 
 import { AngularFireModule } from '@angular/fire';
@@ -55,7 +54,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     SharedModule,
     BrowserAnimationsModule,
     MatMenuModule,

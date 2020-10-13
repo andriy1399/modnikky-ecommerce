@@ -15,7 +15,6 @@ export class FooterComponent implements OnInit {
         { text: 'DELIVERY & RETURNS' },
         { text: 'PAYMENT' },
         { text: 'MAKE A RETURN' },
-        { text: 'MAKE A RETURN' },
         { text: 'FAQ' }
       ]
     },

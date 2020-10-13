@@ -1,1 +1,284 @@
-<p>admin-catalog works!</p>
+<mat-tab-group mat-stretch-tabs="center" [selectedIndex]="tabsIndex" (selectedIndexChange)="setTabs($event)">
+  <mat-tab label="Form">
+    <form [formGroup]="product" (ngSubmit)="isEditing ? saveProduct() : addProduct()">
+      <div class="form-field-wrapper">
+        <mat-form-field appearance="fill" style="width: 49%;">
+          <mat-label>Choose category</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let category of categories" [value]="category.name">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 49%">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+      </div>
+      <div class="form-field-wrapper">
+        <mat-form-field appearance="fill" style="width: 49%;">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName=description></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 49%;">
+          <mat-label>Fabric composition</mat-label>
+          <textarea matInput formControlName=fabricComposition></textarea>
+        </mat-form-field>
+      </div>
+      <div class="form-field-wrapper">
+        <mat-form-field appearance="fill" style="width: 49%">
+          <mat-label>Sizes</mat-label>
+          <mat-select formControlName="size" multiple>
+            <mat-option *ngFor="let sz of allSize; index as i" [value]="sz">{{sz}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 49%">
+          <mat-label>Fabric</mat-label>
+          <mat-select formControlName="fabric" multiple>
+            <mat-option *ngFor="let fabric of allFabric; index as i" [value]="fabric">{{fabric}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <h4 style="text-align: center;">Choose product color and two images *</h4>
+      <div class="form-field-wrapper" style="align-items: flex-start;">
+        <div class="image-upload-block" style="width: 28%;">
+          <div class="form-control" *ngIf="!uploadProgress || imgStatus">
+            <div class="form-control__file">
+              <input type="file" formArrayName="file" id="file" class="form-control__file-input"
+                (change)="uploadFile($event)">
+              <label for="file" matRipple>
+                Choose file
+              </label>
+            </div>
+          </div>
+          <mat-progress-spinner diameter='55' [mode]="'determinate'" [value]="uploadProgress | async"
+            *ngIf="uploadProgress  && !imgStatus">
+          </mat-progress-spinner>
+        </div>
+
+        <mat-form-field appearance="fill" style="width: 50%;">
+          <mat-label>Choose color</mat-label>
+          <mat-select formControlName="color">
+            <mat-option *ngFor="let color of allColors" [value]="color">
+              {{ color }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="form-ctrl" style="width: 20%;">
+          <input type='color' formControlName='colorHex' id='color' class="form-ctrl__color-input">
+        </div>
+      </div>
+      <div class="row" *ngIf="previewImages.length">
+        <div class="img-box" *ngFor="let img of previewImages">
+          <img [src]="img" width="100%" height="100%">
+        </div>
+        <div class="color-box">{{ product.get('color').value }}</div>
+        <div class="color-hex-box" [ngStyle]="{'backgroundColor': product.get('colorHex').value}"></div>
+        <div class="btn-box">
+          <button mat-raised-button color="primary" type="button"
+            [disabled]="previewImages.length !== 2 || !product.get('color').value"
+            (click)="addPreviewImages()">Add</button>
+        </div>
+        <div class="btn-box">
+          <button mat-raised-button color="warn" type="button" (click)="clearPreviewImages()">Remove</button>
+        </div>
+      </div>
+
+      <table class="form-table" *ngIf="choosesImagesArr.length">
+        <thead>
+          <tr>
+            <th class="form-table__count">№</th>
+            <th>Images</th>
+            <th>Color</th>
+            <th>Color Hex</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of choosesImagesArr; index as i">
+            <th class="form-table__count">{{ i + 1 }}</th>
+            <td class="form-table__td-img">
+              <img [src]="img" *ngFor="let img of item.images" width="150px" height="230px" alt="">
+            </td>
+            <td>
+              <h3>{{ item.color.colorName }}</h3>
+            </td>
+            <td>
+              <div style="width: 60px; height: 60px; margin: 0 auto;"
+                [ngStyle]="{'backgroundColor': item.color.colorHex}"></div>
+              <h5>{{ item.color.colorHex }}</h5>
+            </td>
+            <td>
+              <button mat-raised-button color="warn" type="button" (click)="deleteImagesInForm(i)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="form-field-wrapper" style="align-items: flex-start;">
+        <mat-form-field appearance="fill" style="width: 25%;">
+          <mat-label>Price</mat-label>
+          <input matInput type="number" class="example-right-align" autocomplete="off" formControlName='price'>
+          <span matPrefix>$&nbsp;</span>
+        </mat-form-field>
+        <div style="display: flex; flex-direction: column;">
+          <mat-checkbox color='primary' formControlName="isSale" (change)="saleChange()">Sale</mat-checkbox>
+          <mat-checkbox color='primary' formControlName="isNewArrivals" (change)="newArrivalsChange()">New Arrivals
+          </mat-checkbox>
+        </div>
+
+        <mat-form-field appearance="fill" style="width: 25%;">
+          <mat-label>Discount</mat-label>
+          <input matInput formControlName='discount' placeholder="write as a percentage or number" autocomplete="off">
+        </mat-form-field>
+
+        <mat-form-field color="accent" appearance="fill" style="width: 25%;">
+          <mat-label>Date of Edition</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName='dateOfEdition'>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker color="primary"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <ng-container *ngIf="isEditing; else bntAdd">
+        <button mat-raised-button color="accent" type="submit"
+          [disabled]="product.invalid || !choosesImagesArr.length">Save Product</button>
+      </ng-container>
+      <ng-template #bntAdd>
+        <button mat-raised-button color="primary" type="submit"
+          [disabled]="product.invalid || !choosesImagesArr.length">Add Product</button>
+      </ng-template>
+
+
+    </form>
+  </mat-tab>
+
+  <mat-tab label="Table">
+
+    <mat-form-field appearance="fill" style="width: 100%; margin-top: 1em;">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="products" multiTemplateDataRows class="mat-elevation-z8">
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef> Image </th>
+        <td mat-cell *matCellDef="let element">
+          <img [src]="element.images[0].images[0]" width="170" height="270" alt="">
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Category </th>
+        <td mat-cell *matCellDef="let element">
+          <h4>{{ element.category }}</h4>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let element">
+          <h3>{{ element.name }}</h3>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="size">
+        <th mat-header-cell *matHeaderCellDef> Size </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-chip-list aria-label="Fish selection">
+            <mat-chip color="primary" selected *ngFor="let sz of element.size">{{ sz }}</mat-chip>
+          </mat-chip-list>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element">
+          <h3 [style.textDecoration]="element.isSale ? 'line-through': 'none'">${{ element.price |number: '1.2-2' }}
+          </h3>
+          <h4 *ngIf="element.isSale">${{ element.sale.priceWithDiscount |number: '1.2-2' }}</h4>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button color="accent" (click)="editProduct(element)" type="button">Edit</button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button color="warn" (click)="deleteProduct(element)">Delete</button>
+        </td>
+      </ng-container>
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+          <div class="table-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="info-block">
+              <div class="info-block__wrapper">
+                <div class="info-block__row" *ngFor="let imgInfo of element.images">
+                  <div class="info-block__img-box" *ngFor="let img of imgInfo.images">
+                    <img [src]="img" width="120px" height="200px">
+                  </div>
+                  <div class="info-block__color-box">
+                    <h4><b>Color:</b> {{ imgInfo.color.colorName }}</h4>
+                    <div class="info-block__box-clr" [ngStyle]="{'backgroundColor': imgInfo.color.colorHex}"></div>
+                    <h5>{{ imgInfo.color.colorHex }}</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="more-info">
+                <div class="more-info__description-wrapper">
+                  <mat-card style="margin: 0.5em 0;">
+                    <div class="more-info__description">
+                      <h4>Description:</h4>
+                      <p>{{ element.description }}</p>
+                    </div>
+                  </mat-card>
+                  <mat-card style="margin: 0.5em 0;">
+                    <div class="more-info__description">
+                      <h4>Fabric Composition:</h4>
+                      <p>{{ element.fabricComposition.fabricText }}</p>
+                      <mat-chip-list aria-label="Fish selection">
+                        <mat-chip color="primary" selected *ngFor="let fb of element.fabricComposition.fabricTypes">
+                          {{ fb }}</mat-chip>
+                      </mat-chip-list>
+                    </div>
+                  </mat-card>
+
+                </div>
+                <mat-card *ngIf="element.isSale" style="margin: 0.5em 0;">
+                  <h4>Discount:</h4>
+                  <p><b>Percents:</b> {{ element.sale.percents }}</p>
+                  <p><b>Dollars:</b> {{ element.sale.dollars | number: '1.2-2' }}</p>
+                  <p><b>Price after discount:</b> {{ element.sale.priceWithDiscount | number: '1.2-2' }}</p>
+                </mat-card>
+
+                <mat-card *ngIf="element.isNewArrivals" style="margin: 0.5em 0;">
+                  <p><span>Will be available on:</span> {{ element.dateOfEdition.toDate() | date:'yyyy-MM-dd'}}</p>
+                </mat-card>
+
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="table-element-row"
+        [class.table-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="table-detail-row"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+  </mat-tab>
+</mat-tab-group>

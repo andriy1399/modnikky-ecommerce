@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { IFilter } from '../../shared/interfaces/filter.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { FiltersService } from '../../shared/services/filters.service';
+import { Observable } from 'rxjs';
+import { MatAutocomplete } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-admin-filters',
