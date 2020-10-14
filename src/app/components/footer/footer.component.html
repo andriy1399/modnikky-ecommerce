@@ -31,6 +31,6 @@
   </div>
 
   <div class="footer__info-mobile">
-    <app-panel *ngFor="let info of footerInfo; let l = last" [panelData]="info" [getLast]="l"></app-panel>
+    <app-panel *ngFor="let info of footerInfo; let l = last" [borders]='true' [panelData]="info" [getLast]="l"></app-panel>
   </div>
 </footer>

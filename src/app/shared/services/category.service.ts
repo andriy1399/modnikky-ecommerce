@@ -19,6 +19,10 @@ export class CategoryService {
   getCategory(): Observable<DocumentChangeAction<unknown>[]> {
     return this.afFirestore.collection('category').snapshotChanges();
   }
+
+  getCorrectCategory(type: string): Observable<unknown[]> {
+    return this.afFirestore.collection('category', ref => ref.where(type, '==', true)).valueChanges();
+  }
   addCategory(category: ICategory): Promise<DocumentReference> {
     return this.afFirestore.collection('category').add({ ...category });
   }

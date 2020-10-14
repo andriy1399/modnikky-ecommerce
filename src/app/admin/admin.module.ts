@@ -11,7 +11,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
@@ -43,7 +42,6 @@ const routes: Routes = [
     MatFormFieldModule,
     MatChipsModule,
     MatTableModule,
-    MatCheckboxModule,
     MatTabsModule,
     MatPaginatorModule,
     MatSelectModule,

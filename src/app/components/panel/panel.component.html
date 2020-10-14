@@ -1,4 +1,6 @@
-<div class="panel"  [ngStyle]="{'border-bottom': getLast ? '1px solid #c9c9c9': '0'}">
+<div class="panel"
+  [ngStyle]="{'border-bottom': getLast ? '1px solid #c9c9c9': '0', 'border-top': borders ? '1px solid #c9c9c9' : 0}"
+  [style.padding]="padding">
 
   <div class="panel__wrapper" (click)="isClicked = !isClicked">
     <span class="panel__icon" [ngClass]="{'panel__icon--rotate': isClicked}">
@@ -6,7 +8,7 @@
       <img src="../../../assets/icons/more.svg" alt="" *ngIf="!isClicked">
     </span>
     <div class="panel__title">
-      <h5>{{ panelData.pTitle }}</h5>
+        <h5 *ngIf="panelData.pTitle">{{ panelData.pTitle }}</h5>
     </div>
   </div>
   <div class="panel__text" [ngClass]="{'panel__text--show': isClicked}">
@@ -14,7 +16,7 @@
       {{ panelData }}
     </ng-container>
     <ng-template #list>
-      <ul>
+      <ul *ngIf="panelData.pList">
         <li *ngFor="let li of panelData.pList">
           <ng-container *ngIf="!li.img; else withImg">
             <a>{{ li.text }}</a>

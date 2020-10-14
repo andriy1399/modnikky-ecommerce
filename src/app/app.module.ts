@@ -33,6 +33,8 @@ import { environment } from '../environments/environment';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProductListComponent } from './pages/shop/product-list/product-list.component';
 
+import { MatExpansionModule } from '@angular/material/expansion';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +62,7 @@ import { ProductListComponent } from './pages/shop/product-list/product-list.com
     BrowserAnimationsModule,
     MatMenuModule,
     IvyCarouselModule,
+    MatExpansionModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
