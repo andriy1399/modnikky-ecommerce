@@ -93,6 +93,7 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   private getCategory(type): void {
     this.type = type;
+    localStorage.setItem('type', JSON.stringify(type));
     let formatType: string;
     switch (type) {
       case 'shop':

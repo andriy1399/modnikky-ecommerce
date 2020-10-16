@@ -1,6 +1,20 @@
 <div class="container">
   <div class="product-details">
     <div class="product-details__img-wrapper">
+      <ul class="product-details__breadcrumb">
+        <li>
+          <a [routerLink]="[ '/catalog/'+ breadcrumb?.type +'/view-all' ]">
+            <span>{{ breadcrumb?.type | uppercase }} /</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="[ '/catalog/', breadcrumb?.type, breadcrumb?.category ]"><span>{{ breadcrumb?.category | uppercase }}
+              /</span></a>
+        </li>
+        <li>
+          <a><span>{{  breadcrumb?.name | uppercase }}</span></a>
+        </li>
+      </ul>
       <img class="animate-hover-img" *ngFor="let img of showImgArr.length ? showImgArr : product?.images[0].images;"
         [src]="img" alt="">
     </div>
@@ -37,10 +51,10 @@
 
         <div class="product-details__buttons-wrapper">
           <div class="product-details__add-to-bag-btn">
-            <button>Add to bag</button>
+            <button matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">Add to bag</button>
           </div>
           <div class="product-details__add-to-favorite-btn">
-            <button>
+            <button matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">
 
               <mat-icon [ngStyle]="{'color': 'white' }">favorite_border
               </mat-icon>
@@ -48,9 +62,28 @@
           </div>
         </div>
         <div class="panel-wrapper">
-          <app-panel [panelData]="panelDescription" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'"></app-panel>
-          <app-panel [panelData]="panelComposition" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'"></app-panel>
-          <app-panel [panelData]="panelDelivery" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'"></app-panel>
+          <app-panel [panelData]="panelDescription" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'">
+          </app-panel>
+          <app-panel [panelData]="panelComposition" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'">
+          </app-panel>
+          <app-panel [panelData]="panelDelivery" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'">
+          </app-panel>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="complete">
+    <div class="complete__wrapper">
+      <div class="complete__title-wrapper">
+        <h2>Complete the look</h2>
+      </div>
+
+      <div class="complete__product-wrapper">
+        <div class="complete__product" *ngFor="let item of completeLook">
+          <a [routerLink]="['/product/'+ item.category, item.id]" (click)="updateProduct(item.id)">
+            <img [src]="item.images[0].images[0]" [alt]="item.name">
+          </a>
         </div>
       </div>
     </div>

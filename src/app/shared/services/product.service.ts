@@ -11,7 +11,8 @@ export class ProductService {
   type = new Subject<string>();
   constructor(
     private afFirestore: AngularFirestore
-  ) { }
+  ) {
+  }
 
   updateProduct(product: IProduct): Promise<void> {
     return this.afFirestore.doc('products/' + product.id).update({ ...product });
@@ -30,40 +31,35 @@ export class ProductService {
     return this.afFirestore.collection('products').ref.doc(id);
   }
   getProductByCategory(type: string, category: string): AngularFirestoreCollection<unknown> {
-    const boolData = this.getType(type);
-    console.log(boolData);
+    const typeName = this.getType(type);
     if (category !== 'view-all') {
-      if (boolData.name === 'shop') {
+      if (typeName === 'shop') {
         return this.afFirestore.collection('products', ref => {
-          return ref.where('isSale', '==', boolData.isSale)
-            .where('isNewArrivals', '==', boolData.isNewArrivals).where('category', '==', category);
+          return ref.where('category', '==', category);
         });
       } else {
         return this.afFirestore.collection('products', ref => {
-          return ref.where(boolData.name, '==', true).where('category', '==', category);
+          return ref.where(typeName, '==', true).where('category', '==', category);
         });
       }
-
     } else {
-      if (boolData.name === 'shop') {
-        return this.afFirestore.collection('products', ref => {
-          return ref.where('isSale', '==', boolData.isSale)
-            .where('isNewArrivals', '==', boolData.isNewArrivals);
-        });
+      if (typeName === 'shop') {
+        return this.afFirestore.collection('products');
       } else {
-        return this.afFirestore.collection('products', ref => ref.where(boolData.name, '==', true));
+        return this.afFirestore.collection('products', ref => ref.where(typeName, '==', true));
       }
     }
   }
 
-  private getType(type: string): { isSale: boolean, isNewArrivals: boolean, name: string } {
+
+  private getType(type: string): string {
     switch (type) {
       case 'shop':
-        return { isSale: false, isNewArrivals: false, name: 'shop' };
+        return 'shop';
       case 'sale':
-        return { isSale: true, isNewArrivals: true, name: 'isSale' };
+        return 'isSale';
       case 'new-arrivals':
-        return { isSale: true, isNewArrivals: true, name: 'isNewArrivals' };
+        return 'isNewArrivals';
       default:
         break;
     }

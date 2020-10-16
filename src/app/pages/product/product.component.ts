@@ -3,6 +3,7 @@ import { ProductService } from '../../shared/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { IProduct, IImage } from '../../shared/interfaces/product.interface';
 import { IPanel } from '../../shared/interfaces/panel.interface';
+import { IBreadcrumb } from '../../shared/interfaces/breadcrumb.interface';
 
 @Component({
   selector: 'app-product',
@@ -15,6 +16,9 @@ export class ProductComponent implements OnInit {
   panelDescription: IPanel;
   panelComposition: IPanel;
   panelDelivery: IPanel = deliveryAndPayment;
+  type: string;
+  breadcrumb: IBreadcrumb;
+  completeLook: [IProduct, IProduct];
   constructor(
     private productsServ: ProductService,
     private route: ActivatedRoute
@@ -26,21 +30,46 @@ export class ProductComponent implements OnInit {
 
   changeProductModel(color: IImage): void {
     this.showImgArr = color.images;
-    console.log(color);
   }
-  private getProduct(): void {
+  private getProduct(productId?: string): void {
     const prodId = this.route.snapshot.paramMap.get('id');
-    this.productsServ.getProductById(prodId).get()
+    this.productsServ.getProductById(productId || prodId).get()
       .then(doc => {
         if (doc.exists) {
           const id = doc.id;
           const data = doc.data() as IProduct;
+          this.getBreadcrumb(data);
+          this.getRandomProducts(data);
           this.product = { ...data, id };
           this.panelDescription = { pTitle: 'Product description', pText: data.description } as IPanel;
           this.panelComposition = { pTitle: 'Fabric composition', pText: data.fabricComposition.fabricText } as IPanel;
-          console.log(this.panelDescription);
         }
       }).catch(err => console.log(err));
+  }
+
+  private getRandomProducts(prod: IProduct): void {
+    this.productsServ.getProducts()
+      .subscribe(data => {
+        let products = data.map(e => {
+          const id = e.payload.doc.id;
+          const otherData = e.payload.doc.data() as IProduct;
+          return { id, ...otherData };
+        });
+        products = products.filter(v => v.id !== prod.id).sort((a: any, b: any) => a.dateAdded - b.dateAdded);
+        this.completeLook = [products.reverse()[0], products.reverse()[1]];
+      });
+  }
+
+  public updateProduct(id: string): void {
+    this.getProduct(id);
+  }
+  private getBreadcrumb(product: IProduct): void {
+    const type = JSON.parse(localStorage.getItem('type'));
+    this.breadcrumb = {
+      type,
+      category: product.category,
+      name: product.name
+    };
   }
 }
 
