@@ -13,15 +13,18 @@
     </div>
     <div class="side-menu__filters" *ngIf="filters.length">
       <h5>Filters</h5>
-      <mat-accordion  multi >
-        <mat-expansion-panel [togglePosition]="'before'"  class="mat-elevation-z0" *ngFor="let filter of filters">
-          <mat-expansion-panel-header style="padding-left: .6em;" [collapsedHeight]="'35px'" [expandedHeight]="'35px'">
+      <mat-accordion multi>
+        <mat-expansion-panel [togglePosition]="'before'" class="mat-elevation-z0"
+          *ngFor="let filter of filters; trackBy: trackByFn">
+          <mat-expansion-panel-header style="padding-left: .6em;" [collapsedHeight]="'35px'" [expandedHeight]="'35px'"
+            [expanded]="true">
             <mat-panel-title style="font-size: .7rem;">
               {{ filter.name | uppercase}}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <div class="side-menu__checkbox-block">
-            <mat-checkbox [checked]='cr.active' color='primary' *ngFor="let cr of filter.criteria">{{ cr.name }}</mat-checkbox>
+            <mat-checkbox [checked]='cr.active' color='primary' (change)="setFilterChange(cr, filter)"
+              *ngFor="let cr of filter.criteria; ">{{ cr.name }}</mat-checkbox>
           </div>
         </mat-expansion-panel>
       </mat-accordion>

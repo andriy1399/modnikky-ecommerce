@@ -1,1 +1,10 @@
-<p>product-list works!</p>
+<div class="products">
+  <div class="products__row">
+    <div class="products__col" *ngFor="let product of products">
+      <a class="products__item" [routerLink]="['/product/'+ product.category, product.id]">
+        <img class="animate-hover-img" appImgHover [imgH]="product.images[0].images[1]"
+          [src]="product.images[0].images[0]" [alt]="product.name">
+      </a>
+    </div>
+  </div>
+</div>

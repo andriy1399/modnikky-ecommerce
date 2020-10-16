@@ -185,6 +185,10 @@ button {
   }
 
   &__img-box {
+    img {
+      object-position: center;
+    object-fit: cover;
+    }
   }
   &__img-box + &__img-box {
     margin-left: 1em;

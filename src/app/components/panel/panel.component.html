@@ -4,20 +4,22 @@
 
   <div class="panel__wrapper" (click)="isClicked = !isClicked">
     <span class="panel__icon" [ngClass]="{'panel__icon--rotate': isClicked}">
-      <img src="../../../assets/icons/less.svg" alt="" *ngIf="isClicked">
-      <img src="../../../assets/icons/more.svg" alt="" *ngIf="!isClicked">
+      <img src="../../../assets/icons/less.svg" alt="" *ngIf="isClicked"
+        [ngStyle]="{'width': this.iconSize + 'px', 'height': this.iconSize + 'px'}">
+      <img src="../../../assets/icons/more.svg" alt="" *ngIf="!isClicked"
+        [ngStyle]="{'width': this.iconSize + 'px', 'height': this.iconSize + 'px'}">
     </span>
     <div class="panel__title">
-        <h5 *ngIf="panelData.pTitle">{{ panelData.pTitle }}</h5>
+      <h5 *ngIf="panelData?.pTitle" [ngStyle]="{'font-size': titleSize + 'px'}">{{ panelData?.pTitle }}</h5>
     </div>
   </div>
   <div class="panel__text" [ngClass]="{'panel__text--show': isClicked}">
-    <ng-container *ngIf="panelData.pText; else list">
-      {{ panelData }}
+    <ng-container *ngIf="panelData?.pText; else list">
+      {{ panelData?.pText }}
     </ng-container>
     <ng-template #list>
-      <ul *ngIf="panelData.pList">
-        <li *ngFor="let li of panelData.pList">
+      <ul *ngIf="panelData?.pList">
+        <li *ngFor="let li of panelData?.pList">
           <ng-container *ngIf="!li.img; else withImg">
             <a>{{ li.text }}</a>
           </ng-container>

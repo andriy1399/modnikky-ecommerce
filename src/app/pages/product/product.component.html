@@ -1,1 +1,57 @@
-<p>product works!</p>
+<div class="container">
+  <div class="product-details">
+    <div class="product-details__img-wrapper">
+      <img class="animate-hover-img" *ngFor="let img of showImgArr.length ? showImgArr : product?.images[0].images;"
+        [src]="img" alt="">
+    </div>
+    <div class="product-details__details">
+      <div class="product-details__title">
+        <h2>{{ product?.name }}</h2>
+      </div>
+      <div class="product-details__price">
+        <span [ngClass]="{'last-price': product?.isSale}">USD ${{ product?.price | number:"1.2-2" }}</span>
+        <span class="discount-price" *ngIf="product?.isSale">USD
+          ${{ product?.sale.priceWithDiscount | number:"1.2-2" }}</span>
+        <span class="discount" *ngIf="product?.isSale">-{{ product?.sale.percents }} </span>
+      </div>
+      <p class="product-details__subtitle">pre-order</p>
+      <div class="product-details__color-radio">
+        <h5>Color</h5>
+        <div class="control-wrapper">
+          <div class="color-control" *ngFor="let color of product?.images; let f = first">
+            <input type="radio" [id]="color?.color.colorName" name="color" [checked]="f"
+              (change)="changeProductModel(color)">
+            <label [for]="color?.color.colorName" [ngStyle]="{'background-color': color?.color.colorHex}"></label>
+          </div>
+        </div>
+      </div>
+      <div class="product-details__size-radio">
+        <h5>Size</h5>
+        <div class="control-wrapper">
+          <div class="size-control" *ngFor="let sz of product?.size; let f = first">
+            <input type="radio" [id]="sz" name="size" [checked]="f">
+            <label [for]="sz">{{ sz }}</label>
+          </div>
+
+        </div>
+
+        <div class="product-details__buttons-wrapper">
+          <div class="product-details__add-to-bag-btn">
+            <button>Add to bag</button>
+          </div>
+          <div class="product-details__add-to-favorite-btn">
+            <button>
+
+              <mat-icon [ngStyle]="{'color': 'white' }">favorite_border
+              </mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="panel-wrapper">
+          <app-panel [panelData]="panelDescription" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'"></app-panel>
+          <app-panel [panelData]="panelComposition" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'"></app-panel>
+          <app-panel [panelData]="panelDelivery" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'"></app-panel>
+        </div>
+      </div>
+    </div>
+  </div>

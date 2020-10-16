@@ -12,6 +12,8 @@ export class PanelComponent implements OnInit {
   @Input() getLast: any;
   @Input() borders = false;
   @Input() padding = '1.5em 1.2em';
+  @Input() iconSize: number;
+  @Input() titleSize: number;
   constructor() { }
 
   ngOnInit(): void {

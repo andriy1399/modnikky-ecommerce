@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, SimpleChanges, OnChanges, TrackByFunction } from '@angular/core';
 import { CategoryService } from '../../shared/services/category.service';
 import { ICategory } from '../../shared/interfaces/category.interface';
 import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
@@ -7,6 +7,7 @@ import { FiltersService } from '../../shared/services/filters.service';
 import { IFilter } from '../../shared/interfaces/filter.interface';
 import { IPanelFilter } from '../../shared/interfaces/panel.interface';
 import { MatAccordionDisplayMode } from '@angular/material/expansion';
+import { ProductService } from '../../shared/services/product.service';
 
 @Component({
   selector: 'app-shop',
@@ -22,17 +23,14 @@ export class ShopComponent implements OnInit, OnDestroy {
   constructor(
     private categoryServ: CategoryService,
     private router: Router,
-    private filterServ: FiltersService
+    private filterServ: FiltersService,
+    private route: ActivatedRoute,
+    private productServ: ProductService
   ) {
-    this.rSub = this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.routUrl = event.url;
-        if (event.id === 1 || event.url.split('/').length === 3) {
-          this.getCategory(event.url);
-        }
-      }
-    });
+    this.checkRoute();
   }
+
+
 
   ngOnInit(): void {
     this.getCategory(this.routUrl);
@@ -46,15 +44,6 @@ export class ShopComponent implements OnInit, OnDestroy {
           const otherData = e.payload.doc.data() as IFilter;
           return { id, ...otherData };
         });
-        // for (const filter of dataFilters) {
-        //   this.filters.push({
-        //     name: filter.name,
-        //     id: filter.id,
-        //     criteria: filter.criteria.map(v => {
-        //       return { active: false, name: v };
-        //     })
-        //   });
-        // }
         this.filters = dataFilters.map(filter => {
           return {
             criteria: filter.criteria.map(v => {
@@ -64,13 +53,45 @@ export class ShopComponent implements OnInit, OnDestroy {
             id: filter.id
           };
         });
-
-        console.log(this.filters);
       });
   }
 
-  private getCategory(url: string): void {
-    const type = url.split('/')[2];
+  public setFilterChange(checkbox: { active: boolean, name: string }, filter: IPanelFilter): void {
+    this.filters = this.filters.map(val => {
+      if (val.name === filter.name) {
+        return {
+          criteria: val.criteria.map(v => {
+            if (v.name === checkbox.name) {
+              return { active: !v.active, name: v.name };
+            } else {
+              return v;
+            }
+          }),
+          name: val.name,
+          id: val.id,
+        };
+      } else {
+        return val;
+      }
+    });
+
+  }
+
+  private checkRoute(): void {
+    this.rSub = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const type = this.route.snapshot.paramMap.get('type');
+        this.routUrl = type;
+        this.productServ.type.next(type);
+        if (event.id === 1 || event.url.split('/').length === 3) {
+          this.getCategory(type);
+          this.getFilters();
+        }
+      }
+    });
+  }
+
+  private getCategory(type): void {
     this.type = type;
     let formatType: string;
     switch (type) {
@@ -97,6 +118,7 @@ export class ShopComponent implements OnInit, OnDestroy {
       }, err => console.log(err));
     }
   }
+  trackByFn: TrackByFunction<IPanelFilter> = (_, item) => item.id;
 
   ngOnDestroy(): void {
     if (this.rSub) {

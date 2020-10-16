@@ -1,0 +1,38 @@
+.products {
+  max-width: 1000px;
+  min-width: 900px;
+  &__row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__col {
+    width: 46%;
+    max-height: 700px;
+    margin-bottom: 5em;
+  }
+
+  &__item {
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 1s ease-in-out;
+    }
+  }
+}
+
+
+
+
+@keyframes img-hover {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

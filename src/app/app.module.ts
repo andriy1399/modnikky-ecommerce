@@ -7,10 +7,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { BagModalComponent } from './components/bag-modal/bag-modal.component';
-import { NewArrivalsComponent } from './pages/new-arrivals/new-arrivals.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ShopComponent } from './pages/shop/shop.component';
-import { SaleComponent } from './pages/sale/sale.component';
 import { ProductComponent } from './pages/product/product.component';
 import { BagComponent } from './pages/bag/bag.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
@@ -34,6 +32,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ProductListComponent } from './pages/shop/product-list/product-list.component';
 
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ImgHoverDirective } from './shared/directives/img-hover.directive';
 
 @NgModule({
   declarations: [
@@ -42,10 +41,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     FooterComponent,
     SignInComponent,
     BagModalComponent,
-    NewArrivalsComponent,
     HomeComponent,
     ShopComponent,
-    SaleComponent,
     ProductComponent,
     BagComponent,
     FavoritesComponent,
@@ -53,7 +50,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     PanelComponent,
     HideModalDirective,
     ProfileComponent,
-    ProductListComponent
+    ProductListComponent,
+    ImgHoverDirective
   ],
   imports: [
     BrowserModule,
