@@ -5,8 +5,15 @@ export interface ILink {
   rout?: string;
 }
 
+
 export interface IPanel {
   pTitle: string;
   pText?: string;
   pList?: Array<ILink>;
+}
+
+export interface IPanelFilter {
+  name: string;
+  criteria: Array<{ active: boolean, name: string }>;
+  id?: string;
 }

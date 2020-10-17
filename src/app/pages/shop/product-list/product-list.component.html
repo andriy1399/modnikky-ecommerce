@@ -1,0 +1,41 @@
+<div class="products">
+  <div class="products__row">
+    <ng-container *ngIf="loading; else elseTemplate">
+      loading...
+    </ng-container>
+    <ng-template #elseTemplate>
+      <ng-container *ngIf="products.length; else doNotFound">
+        <div class="products__col" *ngFor="let product of products">
+          <div class="products__items-wrapper">
+            <a class="products__item" [routerLink]="['/product/'+ product.category, product.id]">
+              <img class="animate-hover-img" appImgHover [imgH]="product.images[0].images[1]"
+                [src]="product.images[0].images[0]" [alt]="product.name">
+            </a>
+            <a class="products__favorite" (click)="test()" >
+              <mat-icon [ngStyle]="{'color': favorite ? 'red' : 'white' }">favorite</mat-icon>
+            </a>
+          </div>
+          <div class="products__info">
+            <h4>{{ product.name }}</h4>
+            <div class="products__colors">
+              <div style="display: flex;">
+                <span class="products__color" [ngStyle]="{'background-color': color.color.colorHex}"
+                  *ngFor="let color of product.images"></span>
+              </div>
+              <div><span *ngIf="product.isNewArrivals">New arrivals</span></div>
+            </div>
+            <div class="products__price">
+              <span [ngClass]="{'last-price': product.isSale}">USD ${{ product.price | number:"1.2-2" }}</span>
+              <span class="discount-price" *ngIf="product.isSale">USD
+                ${{ product.sale.priceWithDiscount | number:"1.2-2" }}</span>
+              <span class="discount" *ngIf="product.isSale">-{{ product.sale.percents }} </span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #doNotFound>
+        not found
+      </ng-template>
+    </ng-template>
+  </div>
+</div>

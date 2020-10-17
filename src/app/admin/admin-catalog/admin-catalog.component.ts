@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CategoryService } from '../../shared/services/category.service';
 import { ICategory } from '../../shared/interfaces/category.interface';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ControlContainer, FormControl, FormGroup, NgControl, Validators } from '@angular/forms';
 import { FiltersService } from '../../shared/services/filters.service';
 import { IFilter } from 'src/app/shared/interfaces/filter.interface';
 import { Observable } from 'rxjs';
@@ -205,6 +205,22 @@ export class AdminCatalogComponent implements OnInit {
       .then(() => {
         this.getProducts();
         this.product.reset();
+        this.product.setValue({
+          category: null,
+          name: null,
+          description: null,
+          fabricComposition: null,
+          size: null,
+          fabric: null,
+          price: null,
+          discount: null,
+          dateOfEdition: null,
+          isSale: false,
+          isNewArrivals: false,
+          file: null,
+          color: null,
+          colorHex: null,
+        });
         this.choosesImagesArr = [];
         this.product.controls.dateOfEdition.disable();
         this.product.controls.discount.disable();
@@ -246,6 +262,22 @@ export class AdminCatalogComponent implements OnInit {
       .then(() => {
         this.getProducts();
         this.product.reset();
+        this.product.setValue({
+          category: null,
+          name: null,
+          description: null,
+          fabricComposition: null,
+          size: null,
+          fabric: null,
+          price: null,
+          discount: null,
+          dateOfEdition: null,
+          isSale: false,
+          isNewArrivals: false,
+          file: null,
+          color: null,
+          colorHex: null,
+        });
         this.choosesImagesArr = [];
         this.product.controls.dateOfEdition.disable();
         this.product.controls.discount.disable();

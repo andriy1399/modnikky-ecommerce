@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRippleModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -16,7 +17,8 @@ import { MatRippleModule } from '@angular/material/core';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatRippleModule
+    MatRippleModule,
+    MatCheckboxModule
   ],
   exports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { MatRippleModule } from '@angular/material/core';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatRippleModule
+    MatRippleModule,
+    MatCheckboxModule
   ]
 })
 export class SharedModule { }

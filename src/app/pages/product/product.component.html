@@ -1,1 +1,127 @@
-<p>product works!</p>
+<div class="container">
+  <div class="product-details">
+    <div class="product-details__img-wrapper">
+      <ul class="product-details__breadcrumb">
+        <li>
+          <a [routerLink]="[ '/catalog/'+ breadcrumb?.type +'/view-all' ]">
+            <span>{{ breadcrumb?.type | uppercase }} /</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="[ '/catalog/', breadcrumb?.type, breadcrumb?.category ]"><span>{{ breadcrumb?.category | uppercase }}
+              /</span></a>
+        </li>
+        <li>
+          <a><span>{{  breadcrumb?.name | uppercase }}</span></a>
+        </li>
+      </ul>
+      <img class="animate-hover-img" *ngFor="let img of showImgArr.length ? showImgArr : product?.images[0].images;"
+        [src]="img" alt="">
+    </div>
+    <div class="product-details__img-wrapper-phone">
+      <swiper [config]="swiperConfig" style="width: 100%; height: 100%;">
+        <div class="swiper-wrapper">
+          <img class="swiper-slide" *ngFor="let image of showImgArr.length ? showImgArr : product?.images[0].images;"
+            [src]="image" />
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </swiper>
+    </div>
+    <div class="product-details__details">
+      <div class="product-details__title">
+        <h2>{{ product?.name }}</h2>
+      </div>
+      <div class="product-details__price">
+        <span [ngClass]="{'last-price': product?.isSale}">USD ${{ product?.price | number:"1.2-2" }}</span>
+        <span class="discount-price" *ngIf="product?.isSale">USD
+          ${{ product?.sale.priceWithDiscount | number:"1.2-2" }}</span>
+        <span class="discount" *ngIf="product?.isSale">-{{ product?.sale.percents }} </span>
+      </div>
+      <p class="product-details__subtitle">pre-order</p>
+      <div class="product-details__color-radio">
+        <h5>Color</h5>
+        <div class="control-wrapper">
+          <div class="color-control" *ngFor="let color of product?.images; let f = first">
+            <input type="radio" [id]="color?.color.colorName" name="color" [checked]="f"
+              (change)="changeProductModel(color)">
+            <label [for]="color?.color.colorName" [ngStyle]="{'background-color': color?.color.colorHex}"></label>
+          </div>
+        </div>
+      </div>
+      <div class="product-details__size-radio">
+        <h5>Size</h5>
+        <div class="control-wrapper">
+          <div class="size-control" *ngFor="let sz of product?.size; let f = first">
+            <input type="radio" [id]="sz" name="size" [checked]="f">
+            <label [for]="sz">{{ sz }}</label>
+          </div>
+        </div>
+
+        <div class="product-details__new-arrivals" *ngIf="product?.isNewArrivals">
+          <p>not available in the store until <b> {{ product?.dateOfEdition.toDate() | date:"yyyy-MM-dd" }}</b></p>
+        </div>
+
+        <div class="product-details__buttons-wrapper"
+          [ngClass]="{'product-details__buttons-wrapper--is-new-arrivals': product?.isNewArrivals}">
+          <div class="product-details__add-to-bag-btn">
+            <button matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'" [disabled]="product?.isNewArrivals">Add to
+              bag</button>
+          </div>
+          <div class="product-details__add-to-favorite-btn">
+            <button matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">
+              <mat-icon [ngStyle]="{'color': 'white' }">favorite_border
+              </mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="panel-wrapper">
+          <app-panel [panelData]="panelDescription" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'">
+          </app-panel>
+          <app-panel [panelData]="panelComposition" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'">
+          </app-panel>
+          <app-panel [panelData]="panelDelivery" [iconSize]="12" [titleSize]="15" [padding]="'1em .5em 1em 0'">
+          </app-panel>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="complete">
+    <div class="complete__wrapper">
+      <div class="complete__title-wrapper">
+        <h2>Complete the look</h2>
+      </div>
+
+      <div class="complete__product-wrapper">
+        <div class="complete__product" *ngFor="let item of completeLook">
+          <a [routerLink]="['/product/'+ item.category, item.id]" (click)="updateProduct(item.id, item.images[0])">
+            <img [src]="item.images[0].images[0]" [alt]="item.name">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <section class="carousel">
+    <p class="carousel__title">you may also like</p>
+    <ng-container *ngIf="moreProducts.length; else loading">
+      <carousel style="padding: 0;" height=650 [autoplay]="true" [loop]="true" [cellsToShow]="getCellCount()"
+        [overflowCellsLimit]='0' [margin]='0'>
+        <div class="carousel-cell" *ngFor="let product of moreProducts">
+          <img [src]="product.images[0].images[1]" style=" object-fit: cover; object-position: center;">
+          <div class="carousel__btn-wrapper">
+            <button class="carousel__btn" [routerLink]="['/product/'+ product.category, product.id]" matRipple
+              [matRippleColor]="'rgba(00, 00, 00, 0.1)'"
+              (click)="updateProduct(product.id, product.images[0])">SHOW</button>
+          </div>
+        </div>
+      </carousel>
+    </ng-container>
+    <ng-template #loading>
+      loading...
+    </ng-template>
+
+  </section>

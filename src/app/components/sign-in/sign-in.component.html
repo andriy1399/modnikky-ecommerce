@@ -63,7 +63,7 @@
           </div>
 
           <div class="sign-in__btn-wrapper">
-            <button type="submit" class="sign-in__submit" [disabled]="create.invalid || isBtnDisabled">sign up</button>
+            <button matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'" type="submit" class="sign-in__submit" [disabled]="create.invalid || isBtnDisabled">sign up</button>
           </div>
         </form>
       </ng-container>
@@ -93,7 +93,7 @@
             <small class="sign-in__alert-text">{{ errorTxt }}</small>
           </div>
           <div class="sign-in__btn-wrapper">
-            <button type="submit" class="sign-in__submit" [disabled]="login.invalid || isBtnDisabled">sign in</button>
+            <button matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'" type="submit" class="sign-in__submit" [disabled]="login.invalid || isBtnDisabled">sign in</button>
           </div>
         </form>
       </ng-template>

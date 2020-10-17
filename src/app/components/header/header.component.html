@@ -1,9 +1,9 @@
 <header appHeaderBg  class="header dark-mode">
   <nav class="header__nav" *ngIf="!isSearchClicked">
     <ul>
-      <li routerLinkActive='active'><a [routerLink]="['/new-arrivals']">NEW ARRIVALS</a></li>
-      <li routerLinkActive='active'><a [routerLink]="['/shop']">SHOP</a></li>
-      <li routerLinkActive='active'><a [routerLink]="['/sale']">SALE</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/catalog/new-arrivals']">NEW ARRIVALS</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/catalog/shop']">SHOP</a></li>
+      <li routerLinkActive='active'><a [routerLink]="['/catalog/sale']">SALE</a></li>
     </ul>
     <div class="header__burger">
       <button mat-icon-button [matMenuTriggerFor]="menu" class="header__burger-btn">
@@ -32,17 +32,17 @@
         <li class="header__hide-li" *ngIf="loginStatus">
           <a [routerLink]="['/' + urlAddress]">{{ urlName | uppercase }}</a>
         </li>
-        <button mat-menu-item [routerLink]="['/new-arrivals']" class="header__menu-items">
+        <button mat-menu-item [routerLink]="['/catalog/new-arrivals']" class="header__menu-items">
           <mat-icon>
             <img src="../../../assets/icons/new.svg" alt="">
           </mat-icon>
           <span>NEW ARRIVALS</span>
         </button>
-        <button mat-menu-item [routerLink]="['/shop']" class="header__menu-items">
+        <button mat-menu-item [routerLink]="['/catalog/shop']" class="header__menu-items">
           <mat-icon> <img src="../../../assets/icons/star.svg" style="margin-bottom: 4px;" alt=""></mat-icon>
           <span>SHOP</span>
         </button>
-        <button mat-menu-item [routerLink]="['/sale']" class="header__menu-items">
+        <button mat-menu-item [routerLink]="['/catalog/sale']" class="header__menu-items">
           <mat-icon><img src="../../../assets/icons/discount.svg" alt=""></mat-icon>
           <span>SALE</span>
         </button>

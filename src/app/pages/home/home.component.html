@@ -11,7 +11,7 @@
         </p>
       </div>
       <div class="home__info-bnt-wrapper">
-        <button class="home__info-btn" [routerLink]="['/new-arrivals']">SHOP NEW ARRIVALS</button>
+        <button class="home__info-btn" [routerLink]="['/catalog/new-arrivals']"  matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SHOP NEW ARRIVALS</button>
       </div>
     </div>
   </section>
@@ -28,7 +28,7 @@
         </p>
       </div>
       <div class="home__info-bnt-wrapper">
-        <button class="home__info-btn" [routerLink]="['/shop']">SHOP NOW</button>
+        <button class="home__info-btn" [routerLink]="['/catalog/shop']" matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SHOP NOW</button>
       </div>
     </div>
   </section>
@@ -67,7 +67,7 @@
         </p>
       </div>
       <div class="home__info-bnt-wrapper">
-        <button class="home__info-btn" [routerLink]="['/shop']">SHOP DENIM</button>
+        <button class="home__info-btn" [routerLink]="['/catalog/shop']" matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SHOP DENIM</button>
       </div>
     </div>
   </section>
@@ -79,7 +79,7 @@
       <div class="carousel-cell" *ngFor="let img of images">
           <img [src]="img" style=" object-fit: cover; object-position: center;">
           <div class="carousel__btn-wrapper">
-            <button class="carousel__btn" [routerLink]="['/shop']">SHOW</button>
+            <button class="carousel__btn" [routerLink]="['/catalog/new-arrivals']"  matRipple [matRippleColor]="'rgba(00, 00, 00, 0.1)'">SHOW</button>
           </div>
       </div>
     </carousel>
@@ -97,7 +97,7 @@
         </p>
       </div>
       <div class="home__info-bnt-wrapper">
-        <button class="home__info-btn" [routerLink]="['/sale']">SALE IS HERE</button>
+        <button class="home__info-btn" [routerLink]="['/catalog/sale']" matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SALE IS HERE</button>
       </div>
     </div>
   </section>
