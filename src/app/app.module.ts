@@ -34,6 +34,8 @@ import { ProductListComponent } from './pages/shop/product-list/product-list.com
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ImgHoverDirective } from './shared/directives/img-hover.directive';
 
+import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +63,7 @@ import { ImgHoverDirective } from './shared/directives/img-hover.directive';
     MatMenuModule,
     IvyCarouselModule,
     MatExpansionModule,
+    NgxUsefulSwiperModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

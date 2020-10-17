@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ProductService } from '../../shared/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { IProduct, IImage } from '../../shared/interfaces/product.interface';
 import { IPanel } from '../../shared/interfaces/panel.interface';
 import { IBreadcrumb } from '../../shared/interfaces/breadcrumb.interface';
+import { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-product',
@@ -19,12 +20,24 @@ export class ProductComponent implements OnInit {
   type: string;
   breadcrumb: IBreadcrumb;
   completeLook: [IProduct, IProduct];
+  moreProducts: Array<IProduct> = [];
+  innerWidth: number;
+
+  swiperConfig: SwiperOptions = {
+    pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    spaceBetween: 30
+  };
   constructor(
     private productsServ: ProductService,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
     this.getProduct();
   }
 
@@ -39,7 +52,7 @@ export class ProductComponent implements OnInit {
           const id = doc.id;
           const data = doc.data() as IProduct;
           this.getBreadcrumb(data);
-          this.getRandomProducts(data);
+          this.getRandomProducts({ ...data, id });
           this.product = { ...data, id };
           this.panelDescription = { pTitle: 'Product description', pText: data.description } as IPanel;
           this.panelComposition = { pTitle: 'Fabric composition', pText: data.fabricComposition.fabricText } as IPanel;
@@ -48,20 +61,25 @@ export class ProductComponent implements OnInit {
   }
 
   private getRandomProducts(prod: IProduct): void {
+    this.product = null;
+    let products: IProduct[];
     this.productsServ.getProducts()
       .subscribe(data => {
-        let products = data.map(e => {
+        products = data.map(e => {
           const id = e.payload.doc.id;
           const otherData = e.payload.doc.data() as IProduct;
           return { id, ...otherData };
         });
         products = products.filter(v => v.id !== prod.id).sort((a: any, b: any) => a.dateAdded - b.dateAdded);
-        this.completeLook = [products.reverse()[0], products.reverse()[1]];
+        this.completeLook = [products.reverse()[0], products.reverse()[0]];
+        this.moreProducts = products.filter(v => v.id !== this.completeLook[0].id && v.id !== this.completeLook[1].id);
       });
+
   }
 
-  public updateProduct(id: string): void {
+  public updateProduct(id: string, image?: IImage): void {
     this.getProduct(id);
+    this.showImgArr = image.images;
   }
   private getBreadcrumb(product: IProduct): void {
     const type = JSON.parse(localStorage.getItem('type'));
@@ -71,6 +89,17 @@ export class ProductComponent implements OnInit {
       name: product.name
     };
   }
+
+  public getCellCount(): number {
+    return this.innerWidth <= 1200 && this.innerWidth > 1025 ? 3
+      : this.innerWidth <= 1024 && this.innerWidth >= 500 ? 2
+        : this.innerWidth < 500 ? 1 : 4;
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize(event): void {
+    this.innerWidth = window.innerWidth;
+  }
+
 }
 
 

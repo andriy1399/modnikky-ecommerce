@@ -82,3 +82,68 @@ input {
 .animate-hover-img {
   animation: img-hover 1s ease-in-out 1;
 }
+
+.carousel {
+  width: 100%;
+  padding: 40px 80px;
+
+  &__title {
+    font-size: 1rem;
+    font-family: helvetica-h;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__subtitle {
+    font-size: 1rem;
+    font-family: helvetica-h;
+    margin-bottom: 1.3em;
+  }
+
+  &__btn-wrapper {
+    position: absolute;
+    z-index: 100001;
+    bottom: 1em;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &__btn {
+    box-shadow: 0 0 0 1px #202020;
+    padding: 1em 1.4em;
+    background-color: #ffffff7e;
+    transition: all 0.4s ease;
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0 0 0 1px #000000;
+      background-color: #ffffff8f;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+
+  .carousel {
+    width: 100%;
+    padding: 20px 40px;
+
+    &__subtitle {
+      margin-bottom: 1.1em;
+    }
+  }
+
+}
+@media screen and (max-width: 768px) {
+  .carousel {
+    width: 100%;
+    padding: 0.7em;
+
+    &__subtitle {
+      margin-bottom: 1em;
+    }
+    img {
+      object-fit: 100% 100%;
+    }
+  }
+
+}
+
