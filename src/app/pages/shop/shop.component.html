@@ -2,52 +2,50 @@
   <div class="top-menu-phone">
     <mat-accordion multi>
       <mat-expansion-panel [togglePosition]="'before'" class="mat-elevation-z0">
-      <mat-expansion-panel-header  [collapsedHeight]="'45px'" [expandedHeight]="'45px'"
-        [expanded]="true">
-        <mat-panel-title class="top-menu-phone__title">
-          Refine items
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="top-menu-phone__wrapper">
-        <div class="top-menu-phone__category">
-          <h3 class="top-menu-phone__category-title">Categories</h3>
-          <ul class="top-menu-phone__category-list">
-            <li>
-              <a [routerLink]="['/catalog/'+ type + '/' + 'view-all']">view all</a>
-            </li>
-            <li *ngFor="let category of categories">
-              <a [routerLink]="['/catalog/'+ type + '/' + category.name]">{{ category.name }}</a>
-            </li>
-          </ul>
+        <mat-expansion-panel-header [collapsedHeight]="'45px'" [expandedHeight]="'45px'" [expanded]="true">
+          <mat-panel-title class="top-menu-phone__title">
+            Refine items
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="top-menu-phone__wrapper">
+          <div class="top-menu-phone__category">
+            <h3 class="top-menu-phone__category-title">Categories</h3>
+            <ul class="top-menu-phone__category-list">
+              <li>
+                <a [routerLink]="['/catalog/'+ type + '/' + 'view-all']">view all</a>
+              </li>
+              <li *ngFor="let category of categories">
+                <a [routerLink]="['/catalog/'+ type + '/' + category.name]">{{ category.name }}</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="top-menu-phone__filters" *ngIf="filters.length">
+            <h3>Filters</h3>
+            <mat-accordion multi class="top-menu-phone__accordion">
+              <mat-expansion-panel [togglePosition]="'before'" class="mat-elevation-z0"
+                *ngFor="let filter of filters; trackBy: trackByFn;">
+                <mat-expansion-panel-header [expandedHeight]="'45px'">
+                  <mat-panel-title style="font-size: .8rem;">
+                    {{ filter.name | uppercase}}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="top-menu-phone__checkbox-block">
+                  <mat-checkbox [checked]='cr.active' color='primary' (change)="setFilterChange(cr, filter)"
+                    *ngFor="let cr of filter.criteria; ">{{ cr.name }}</mat-checkbox>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
         </div>
 
-        <div class="top-menu-phone__filters" *ngIf="filters.length">
-          <h3>Filters</h3>
-          <mat-accordion multi class="top-menu-phone__accordion">
-            <mat-expansion-panel [togglePosition]="'before'" class="mat-elevation-z0"
-              *ngFor="let filter of filters; trackBy: trackByFn">
-              <mat-expansion-panel-header   [expandedHeight]="'45px'"
-                [expanded]="true">
-                <mat-panel-title style="font-size: .8rem;">
-                  {{ filter.name | uppercase}}
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <div class="top-menu-phone__checkbox-block">
-                <mat-checkbox [checked]='cr.active' color='primary' (change)="setFilterChange(cr, filter)"
-                  *ngFor="let cr of filter.criteria; ">{{ cr.name }}</mat-checkbox>
-              </div>
-            </mat-expansion-panel>
-          </mat-accordion>
+        <div class="top-menu-phone__sort">
+          <span>Sort:</span>
         </div>
-      </div>
-
-      <div class="top-menu-phone__sort">
-        <span>Sort:</span>
-      </div>
-    </mat-expansion-panel>
+      </mat-expansion-panel>
     </mat-accordion>
   </div>
-  <div class="side-menu" >
+  <div class="side-menu">
     <div class="side-menu__categories">
       <h3 class="side-menu__title">Categories</h3>
       <ul class="side-menu__list-of-categories">
@@ -63,9 +61,9 @@
       <h5>Filters</h5>
       <mat-accordion multi>
         <mat-expansion-panel [togglePosition]="'before'" class="mat-elevation-z0"
-          *ngFor="let filter of filters; trackBy: trackByFn">
-          <mat-expansion-panel-header style="padding-left: .6em;" [collapsedHeight]="'35px'" [expandedHeight]="'35px'"
-            [expanded]="true">
+          *ngFor="let filter of filters; trackBy: trackByFn"
+          [expanded]="expandedFilters && expandedFilters[filter.name]">
+          <mat-expansion-panel-header style="padding-left: .6em;" [collapsedHeight]="'35px'" [expandedHeight]="'35px'">
             <mat-panel-title style="font-size: .7rem;">
               {{ filter.name | uppercase}}
             </mat-panel-title>

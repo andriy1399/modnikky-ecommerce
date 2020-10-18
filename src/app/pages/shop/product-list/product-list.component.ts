@@ -16,6 +16,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   type: string;
   loading: boolean;
   favorite = false;
+  fSub: Subscription;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -26,6 +27,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.tSub = this.productServ.type.subscribe(v => this.type = v);
+    this.fSub = this.productServ.changedFilter.subscribe(() => {
+      const category = this.route.snapshot.paramMap.get('category') || 'view-all';
+      const type = JSON.parse(localStorage.getItem('type'));
+      this.getProductsByCategory(type, category);
+    });
   }
 
   private getProductsByCategory(type: string, category: string): void {
@@ -37,9 +43,59 @@ export class ProductListComponent implements OnInit, OnDestroy {
         const data = v.data() as IProduct;
         this.products.push({ id, ...data });
       });
-      this.products.sort((a: any, b: any) => a.dateAdded - b.dateAdded);
+      this.doFilter();
       this.loading = false;
     });
+  }
+
+  private doFilter(): void {
+    const filters = JSON.parse(localStorage.getItem('filters'));
+
+    if (filters && filters.length) {
+      const filterName: string[] = [];
+      let orderFilters = filters.map((f, i, filterArrName) => {
+        filterName.push(filterArrName[i].name);
+        return f.criteria.filter(criteria => criteria.active === true);
+      }).map(arr => arr.map(v => v.name))
+        .map((arr, i) => {
+          return { name: filterName[i], arr };
+        });
+      const expandedFilters = {
+        size: orderFilters.some(v => v.arr.length && v.name === 'size'),
+        color: orderFilters.some(v => v.arr.length && v.name === 'color'),
+        fabric: orderFilters.some(v => v.arr.length && v.name === 'fabric'),
+      };
+      localStorage.setItem('expandedPanels', JSON.stringify(expandedFilters));
+      this.products = this.products
+        .filter(product => {
+          if (orderFilters.find(v => v.name === 'size').arr.length) {
+            return orderFilters.some(fil => fil.name === 'size' ? fil.arr.some(el => product.size.some(size => size === el)) : false);
+          } else {
+            return product;
+          }
+        })
+        .filter(product => {
+          if (orderFilters.find(v => v.name === 'color').arr.length) {
+            return orderFilters
+              .some(fil => fil.name === 'color' ? fil.arr.some(el => product.images.some(v => v.color.colorName === el)) : false);
+          } else {
+            return product;
+          }
+        })
+        .filter(product => {
+          if (orderFilters.find(v => v.name === 'fabric').arr.length) {
+            return orderFilters
+              .some(fil => fil.name === 'fabric' ?
+                fil.arr.some(el => product.fabricComposition.fabricTypes.some(v => v === el)) :
+                false);
+          } else {
+            return product;
+          }
+        });
+
+      orderFilters = [];
+
+    }
   }
   private checkRout(): void {
     this.rSub = this.router.events.subscribe(event => {
@@ -63,6 +119,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     if (this.tSub) {
       this.tSub.unsubscribe();
+    }
+    if (this.fSub) {
+      this.fSub.unsubscribe();
     }
   }
 

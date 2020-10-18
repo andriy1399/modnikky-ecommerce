@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { FiltersService } from '../../shared/services/filters.service';
 import { IFilter } from '../../shared/interfaces/filter.interface';
 import { IPanelFilter } from '../../shared/interfaces/panel.interface';
-import { MatAccordionDisplayMode } from '@angular/material/expansion';
 import { ProductService } from '../../shared/services/product.service';
 
 @Component({
@@ -20,6 +19,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   routUrl: string;
   rSub: Subscription;
   filters: Array<IPanelFilter> = [];
+  expandedFilters: any;
   constructor(
     private categoryServ: CategoryService,
     private router: Router,
@@ -35,6 +35,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getCategory(this.routUrl);
     this.getFilters();
+    this.expandedFilters = JSON.parse(localStorage.getItem('expandedPanels'));
   }
   private getFilters(): void {
     this.filterServ.getFilters()
@@ -44,15 +45,20 @@ export class ShopComponent implements OnInit, OnDestroy {
           const otherData = e.payload.doc.data() as IFilter;
           return { id, ...otherData };
         });
-        this.filters = dataFilters.map(filter => {
-          return {
-            criteria: filter.criteria.map(v => {
-              return { active: false, name: v };
-            }),
-            name: filter.name,
-            id: filter.id
-          };
-        });
+        const changedFilters = JSON.parse(localStorage.getItem('filters'));
+        if (changedFilters && changedFilters.length) {
+          this.filters = changedFilters;
+        } else {
+          this.filters = dataFilters.map(filter => {
+            return {
+              criteria: filter.criteria.map(v => {
+                return { active: false, name: v };
+              }),
+              name: filter.name,
+              id: filter.id
+            };
+          });
+        }
       });
   }
 
@@ -74,7 +80,8 @@ export class ShopComponent implements OnInit, OnDestroy {
         return val;
       }
     });
-
+    localStorage.setItem('filters', JSON.stringify(this.filters));
+    this.productServ.changedFilter.next('go');
   }
 
   private checkRoute(): void {
@@ -86,6 +93,7 @@ export class ShopComponent implements OnInit, OnDestroy {
         if (event.id === 1 || event.url.split('/').length === 3) {
           this.getCategory(type);
           this.getFilters();
+          this.expandedFilters = JSON.parse(localStorage.getItem('expandedPanels'));
         }
       }
     });
