@@ -54,7 +54,7 @@
         <h5>Size</h5>
         <div class="control-wrapper">
           <div class="size-control" *ngFor="let sz of product?.size; let f = first">
-            <input type="radio" [id]="sz" name="size" [checked]="f">
+            <input type="radio" [id]="sz" name="size" [checked]="f" (change)="orderProductSize(sz)">
             <label [for]="sz">{{ sz }}</label>
           </div>
         </div>
@@ -66,8 +66,8 @@
         <div class="product-details__buttons-wrapper"
           [ngClass]="{'product-details__buttons-wrapper--is-new-arrivals': product?.isNewArrivals}">
           <div class="product-details__add-to-bag-btn">
-            <button matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'" [disabled]="product?.isNewArrivals">Add to
-              bag</button>
+            <button matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'" (click)="addToBasket()"
+              [disabled]="product?.isNewArrivals">Add to bag</button>
           </div>
           <div class="product-details__add-to-favorite-btn">
             <button matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">

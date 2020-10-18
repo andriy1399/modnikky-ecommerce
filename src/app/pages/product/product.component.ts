@@ -5,6 +5,7 @@ import { IProduct, IImage } from '../../shared/interfaces/product.interface';
 import { IPanel } from '../../shared/interfaces/panel.interface';
 import { IBreadcrumb } from '../../shared/interfaces/breadcrumb.interface';
 import { SwiperOptions } from 'swiper';
+import { BasketOrder } from '../../shared/models/basket-order.model';
 
 @Component({
   selector: 'app-product',
@@ -31,6 +32,8 @@ export class ProductComponent implements OnInit {
     },
     spaceBetween: 30
   };
+  productImages: IImage;
+  orderSize: string;
   constructor(
     private productsServ: ProductService,
     private route: ActivatedRoute
@@ -43,6 +46,10 @@ export class ProductComponent implements OnInit {
 
   changeProductModel(color: IImage): void {
     this.showImgArr = color.images;
+    this.productImages = color;
+  }
+  orderProductSize(size: string): void {
+    this.orderSize = size;
   }
   private getProduct(productId?: string): void {
     const prodId = this.route.snapshot.paramMap.get('id');
@@ -88,6 +95,27 @@ export class ProductComponent implements OnInit {
       category: product.category,
       name: product.name
     };
+  }
+
+  addToBasket(): void {
+    const product = new BasketOrder(
+      this.product.category,
+      this.product.name,
+      this.productImages || this.product.images[0],
+      this.orderSize || this.product.size[0],
+      this.product.description,
+      this.product.fabricComposition,
+      this.product.price,
+      this.product.isSale,
+      this.product.sale,
+      1,
+    );
+    const orders = JSON.parse(localStorage.getItem('orders'));
+    if (orders && orders.length) {
+      localStorage.setItem('orders', JSON.stringify([...orders, product]));
+    } else {
+      localStorage.setItem('orders', JSON.stringify([product]));
+    }
   }
 
   public getCellCount(): number {

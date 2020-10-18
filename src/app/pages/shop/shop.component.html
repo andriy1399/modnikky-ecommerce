@@ -2,7 +2,7 @@
   <div class="top-menu-phone">
     <mat-accordion multi>
       <mat-expansion-panel [togglePosition]="'before'" class="mat-elevation-z0">
-        <mat-expansion-panel-header [collapsedHeight]="'45px'" [expandedHeight]="'45px'" [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'45px'" [expandedHeight]="'45px'" >
           <mat-panel-title class="top-menu-phone__title">
             Refine items
           </mat-panel-title>
@@ -24,7 +24,8 @@
             <h3>Filters</h3>
             <mat-accordion multi class="top-menu-phone__accordion">
               <mat-expansion-panel [togglePosition]="'before'" class="mat-elevation-z0"
-                *ngFor="let filter of filters; trackBy: trackByFn;">
+                *ngFor="let filter of filters; trackBy: trackByFn;"
+                [expanded]="expandedFilters && expandedFilters[filter.name]">
                 <mat-expansion-panel-header [expandedHeight]="'45px'">
                   <mat-panel-title style="font-size: .8rem;">
                     {{ filter.name | uppercase}}
