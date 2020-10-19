@@ -10,5 +10,6 @@ export interface IBasketOrder {
   isSale: boolean;
   sale: ISale;
   count?: number;
+  totalPrice?: number;
 }
 

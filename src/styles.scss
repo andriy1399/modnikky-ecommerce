@@ -120,8 +120,114 @@ input {
   }
 }
 
-@media screen and (max-width: 1200px) {
+.body-info {
+  padding: 1em 0;
+  border-bottom: 1px solid  #bdbdbd;
+  &__price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+    span {
+      font-size: 0.8rem;
+      font-family: helvetica-p, Arial, Helvetica, sans-serif;
+    }
+    .last-price {
+      text-decoration: line-through;
+    }
+    .discount {
+      padding: 0.5em 0.7em;
+      color: rgb(255, 255, 255);
+      background-color: rgb(196, 0, 0);
+    }
 
+    .discount-price {
+      color: rgb(196, 0, 0);
+    }
+  }
+
+  &__body {
+    display: flex;
+  }
+
+  &__img-wrapper {
+    width: 30%;
+    margin-right: 1em;
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  &__description {
+    width: 70%;
+    p {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin-bottom: .5em;
+    }
+  }
+  &__name {
+    font-size: 1rem !important;
+    font-family: helvetica-h, Arial, Helvetica, sans-serif !important;
+    margin-bottom: 0.3em !important;
+  }
+  &__select-control {
+    label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    margin-bottom: .5em;
+    select {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      border: 0;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+  &__price {
+  }
+  &__set-count {
+    span {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    display: flex;
+    align-items: center;
+    b {
+      font-size: 0.9rem;
+      font-family: helvetica-p, Arial, Helvetica, sans-serif !important;
+    }
+    button {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+    }
+  }
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__button-wrapper {
+    margin-top: 1em;
+  }
+
+  &__btn-remove {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 1em;
+    span {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
   .carousel {
     width: 100%;
     padding: 20px 40px;
@@ -130,7 +236,6 @@ input {
       margin-bottom: 1.1em;
     }
   }
-
 }
 @media screen and (max-width: 768px) {
   .carousel {
@@ -144,6 +249,4 @@ input {
       object-fit: 100% 100%;
     }
   }
-
 }
-

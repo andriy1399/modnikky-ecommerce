@@ -6,6 +6,7 @@ import { IPanel } from '../../shared/interfaces/panel.interface';
 import { IBreadcrumb } from '../../shared/interfaces/breadcrumb.interface';
 import { SwiperOptions } from 'swiper';
 import { BasketOrder } from '../../shared/models/basket-order.model';
+import { IBasketOrder } from '../../shared/interfaces/basket.interface';
 
 @Component({
   selector: 'app-product',
@@ -109,13 +110,24 @@ export class ProductComponent implements OnInit {
       this.product.isSale,
       this.product.sale,
       1,
+      this.product.isSale ? +this.product.sale.priceWithDiscount : this.product.price
     );
-    const orders = JSON.parse(localStorage.getItem('orders'));
+    let orders = JSON.parse(localStorage.getItem('orders'));
     if (orders && orders.length) {
-      localStorage.setItem('orders', JSON.stringify([...orders, product]));
+      const orderInBag = orders.findIndex((v: IBasketOrder) => {
+        return v.name === product.name && v.images.color.colorHex === product.images.color.colorHex;
+      });
+      if (orderInBag !== -1) {
+        orders[orderInBag].count++;
+        localStorage.setItem('orders', JSON.stringify(orders));
+      } else {
+        localStorage.setItem('orders', JSON.stringify([...orders, product]));
+      }
     } else {
       localStorage.setItem('orders', JSON.stringify([product]));
     }
+    orders = JSON.parse(localStorage.getItem('orders'));
+    this.productsServ.bag.next(orders.reduce((acc, n) => acc + n.count, 0));
   }
 
   public getCellCount(): number {

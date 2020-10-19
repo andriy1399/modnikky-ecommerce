@@ -10,6 +10,7 @@ import { IProduct, ISale } from '../interfaces/product.interface';
 export class ProductService {
   type = new Subject<string>();
   changedFilter = new Subject<string>();
+  bag = new Subject<number>();
   constructor(
     private afFirestore: AngularFirestore
   ) {
