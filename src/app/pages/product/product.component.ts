@@ -115,7 +115,9 @@ export class ProductComponent implements OnInit {
     let orders = JSON.parse(localStorage.getItem('orders'));
     if (orders && orders.length) {
       const orderInBag = orders.findIndex((v: IBasketOrder) => {
-        return v.name === product.name && v.images.color.colorHex === product.images.color.colorHex;
+        return v.name === product.name &&
+          v.images.color.colorHex === product.images.color.colorHex &&
+          v.size === (this.orderSize || this.product.size[0]);
       });
       if (orderInBag !== -1) {
         orders[orderInBag].count++;
@@ -128,6 +130,7 @@ export class ProductComponent implements OnInit {
     }
     orders = JSON.parse(localStorage.getItem('orders'));
     this.productsServ.bag.next(orders.reduce((acc, n) => acc + n.count, 0));
+    this.productsServ.bagModalShow.next(true);
   }
 
   public getCellCount(): number {

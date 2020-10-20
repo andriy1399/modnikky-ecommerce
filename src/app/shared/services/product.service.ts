@@ -11,6 +11,7 @@ export class ProductService {
   type = new Subject<string>();
   changedFilter = new Subject<string>();
   bag = new Subject<number>();
+  bagModalShow = new Subject<boolean>();
   constructor(
     private afFirestore: AngularFirestore
   ) {

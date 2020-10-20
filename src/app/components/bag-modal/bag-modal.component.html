@@ -1,1 +1,43 @@
-<p>bag-modal works!</p>
+<div class="eclipse">
+  <div class="bag-modal">
+    <div class="bag-modal__header">
+      <div class="bag-modal__header-top">
+        <div>
+          <h4>Bag ({{ countItems }})</h4>
+        </div>
+        <span (click)="closeModal()">
+          <mat-icon>close</mat-icon>
+        </span>
+      </div>
+      <div class="bag-modal__header-center">
+        <h3>Total: USD ${{ totalPrice | number: "1.2-2" }}</h3>
+      </div>
+      <div class="bag-modal__header-bottom">
+        <button class="bag-modal__view-bag-btn" matRipple [matRippleColor]="'rgba(00, 00, 00, 0.05)'"
+          (click)="viewBag()">VIEW BAG</button>
+        <button class="bag-modal__checkout-btn" matRipple
+          [matRippleColor]="'rgba(255, 255, 255, 0.1)'">CHECKOUT</button>
+      </div>
+    </div>
+    <div class="bag-modal__body">
+      <div class="bag-modal__item item" *ngFor="let product of bag; index as i"
+        [ngStyle]="{'backgroundImage': 'url('+product.images.images[0]+')'}">
+        <div class="item__btn-wrapper">
+          <button class="item__btn-remove" (click)="removeProduct(i)">
+            <mat-icon [inline]='true' style="font-size: 1.2rem;"> clear </mat-icon>
+            <span>remove</span>
+          </button>
+        </div>
+
+        <div class="item__info">
+          <h3>{{ product.name }}</h3>
+          <p>QUANTITY: {{ product.count }}</p>
+          <p>COLOR: {{ product.images.color.colorName }}</p>
+          <p>SIZE: {{ product.size }}</p>
+          <p>USD: ${{ product.totalPrice | number: "1.2-2" }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

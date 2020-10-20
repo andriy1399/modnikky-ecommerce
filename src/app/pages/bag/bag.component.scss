@@ -49,7 +49,7 @@
     padding: 1em 1.5em;
     color: white;
     transition: opacity 0.3s ease-in-out;
-    letter-spacing: .05em;
+    letter-spacing: 0.05em;
     font-family: helvetica-p, Arial, Helvetica, sans-serif;
     &:hover {
       cursor: pointer;
@@ -59,7 +59,12 @@
     &:disabled {
       cursor: no-drop;
       opacity: 0.6;
-
     }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .bag {
+    width: 93%;
   }
 }

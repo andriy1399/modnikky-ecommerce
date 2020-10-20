@@ -51,6 +51,8 @@ export class HeaderComponent implements OnInit {
 
   private getBagCount(): void {
     const orders = JSON.parse(localStorage.getItem('orders'));
-    this.countOfOrders = orders.reduce((acc, v) => acc + v.count, 0);
+    if (orders && orders.length) {
+      this.countOfOrders = orders.reduce((acc, v) => acc + v.count, 0);
+    }
   }
 }
