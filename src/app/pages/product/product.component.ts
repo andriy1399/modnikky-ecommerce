@@ -88,8 +88,8 @@ export class ProductComponent implements OnInit {
   }
 
   public updateProduct(id: string, image?: IImage): void {
-    this.getProduct(id);
     this.showImgArr = image.images;
+    this.getProduct(id);
   }
   private getBreadcrumb(product: IProduct): void {
     const type = JSON.parse(localStorage.getItem('type'));
@@ -116,7 +116,7 @@ export class ProductComponent implements OnInit {
       this.product.id
     );
 
-    const favorites = JSON.parse(localStorage.getItem('favorites'));
+    let favorites = JSON.parse(localStorage.getItem('favorites'));
 
     if (favorites && favorites.length) {
       const favBag = favorites.findIndex((v: IBasketOrder) => {
@@ -125,6 +125,7 @@ export class ProductComponent implements OnInit {
           v.size === (this.orderSize || this.product.size[0]);
       });
       if (favBag !== -1) {
+        favorites = favorites.filter((v, i) => i !==  favBag);
         localStorage.setItem('favorites', JSON.stringify(favorites));
       } else {
         localStorage.setItem('favorites', JSON.stringify([...favorites, product]));
@@ -132,16 +133,16 @@ export class ProductComponent implements OnInit {
     } else {
       localStorage.setItem('favorites', JSON.stringify([product]));
     }
-    const favoritesIds = JSON.parse(localStorage.getItem('favoritesIds'));
+    let favoritesIds = JSON.parse(localStorage.getItem('favoritesIds'));
     const favoritesId = this.product.id +
-      (this.product.images[0].color.colorHex || this.productImages.color.colorHex) +
+      ((this.productImages && this.productImages.color.colorHex) || this.product.images[0].color.colorHex) +
       (this.orderSize || this.product.size[0]);
     if (favoritesIds && favoritesIds.length) {
-      const favIndex = favorites.findIndex((v: string) => v === favoritesId);
+      const favIndex = favoritesIds.findIndex((v: string) => v === favoritesId);
       if (favIndex !== -1) {
+        favoritesIds = favoritesIds.filter((v, i) => i !==  favIndex);
         localStorage.setItem('favoritesIds', JSON.stringify(favoritesIds));
       } else {
-        console.log(favoritesIds, favoritesId);
         localStorage.setItem('favoritesIds', JSON.stringify([...favoritesIds, favoritesId]));
       }
     } else {
@@ -151,10 +152,12 @@ export class ProductComponent implements OnInit {
     this.favoritesIds = JSON.parse(localStorage.getItem('favoritesIds'));
   }
 
-  isRedHeard(prod: IProduct): boolean {
-    if (prod) {
+  isRedHeart(prod: IProduct): boolean {
+    this.favoritesIds = JSON.parse(localStorage.getItem('favoritesIds'));
+
+    if (prod && this.favoritesIds) {
       const id = prod.id +
-        (prod.images[0].color.colorHex || this.productImages.color.colorHex) +
+        ((this.productImages && this.productImages.color.colorHex) || prod.images[0].color.colorHex ) +
         (this.orderSize || prod.size[0]);
       return this.favoritesIds.includes(id);
     } else {

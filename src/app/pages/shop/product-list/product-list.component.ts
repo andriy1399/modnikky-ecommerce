@@ -3,6 +3,8 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../../../shared/services/product.service';
 import { IProduct } from '../../../shared/interfaces/product.interface';
+import { BasketOrder } from 'src/app/shared/models/basket-order.model';
+import { IBasketOrder } from 'src/app/shared/interfaces/basket.interface';
 
 @Component({
   selector: 'app-product-list',
@@ -16,10 +18,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   tSub: Subscription;
   type: string;
   loading: boolean;
-  favorite = false;
   fSub: Subscription;
   showPagination = false;
   countOfPages: number;
+  favoritesIds: string[] = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -106,6 +108,68 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
   }
 
+  addToFavorites(prod: IProduct): void {
+    const product = new BasketOrder(
+      prod.category,
+      prod.name,
+      prod.images[0],
+      prod.size[0],
+      prod.description,
+      prod.fabricComposition,
+      prod.price,
+      prod.isSale,
+      prod.sale,
+      1,
+      prod.isSale ? +prod.sale.priceWithDiscount : prod.price,
+      prod.id
+    );
+
+    let favorites = JSON.parse(localStorage.getItem('favorites'));
+
+    if (favorites && favorites.length) {
+      const favBag = favorites.findIndex((v: IBasketOrder) => {
+        return v.id === product.id &&
+          v.images.color.colorHex === product.images.color.colorHex &&
+          v.size === prod.size[0];
+      });
+      if (favBag !== -1) {
+        favorites = favorites.filter((v, i) => i !== favBag);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+      } else {
+        localStorage.setItem('favorites', JSON.stringify([...favorites, product]));
+      }
+    } else {
+      localStorage.setItem('favorites', JSON.stringify([product]));
+    }
+    let favoritesIds = JSON.parse(localStorage.getItem('favoritesIds'));
+    const favoritesId = prod.id + prod.images[0].color.colorHex + prod.size[0];
+    if (favoritesIds && favoritesIds.length) {
+      const favIndex = favoritesIds.findIndex((v: string) => v === favoritesId);
+      if (favIndex !== -1) {
+        favoritesIds = favoritesIds.filter((v, i) => i !== favIndex);
+        localStorage.setItem('favoritesIds', JSON.stringify(favoritesIds));
+      } else {
+        localStorage.setItem('favoritesIds', JSON.stringify([...favoritesIds, favoritesId]));
+      }
+    } else {
+      localStorage.setItem('favoritesIds', JSON.stringify([favoritesId]));
+    }
+
+    this.favoritesIds = JSON.parse(localStorage.getItem('favoritesIds'));
+  }
+
+  isRedHeart(prod: IProduct): boolean {
+    this.favoritesIds = JSON.parse(localStorage.getItem('favoritesIds'));
+
+    if (prod && this.favoritesIds) {
+      const id = prod.id + prod.images[0].color.colorHex + prod.size[0];
+      return this.favoritesIds.includes(id);
+    } else {
+      return false;
+    }
+  }
+
+
   private changeCount(): void {
     const count = JSON.parse(localStorage.getItem('countOfItems'));
     count ? this.countOfPages = count : this.countOfPages = 10;
@@ -136,10 +200,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     localStorage.setItem('countOfItems', JSON.stringify(this.countOfPages));
   }
 
-  test(): void {
-    console.log('test');
-    this.favorite = !this.favorite;
-  }
+
 
   ngOnDestroy(): void {
     if (this.rSub) {

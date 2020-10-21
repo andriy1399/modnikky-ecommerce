@@ -12,8 +12,9 @@
               <img class="animate-hover-img" appImgHover [imgH]="product.images[0].images[1]"
                 [src]="product.images[0].images[0]" [alt]="product.name">
             </a>
-            <a class="products__favorite" (click)="test()">
-              <mat-icon [ngStyle]="{'color': favorite ? 'red' : 'white' }">favorite</mat-icon>
+            <a class="products__favorite" (click)="addToFavorites(product)">
+              <mat-icon [ngStyle]="{'color': isRedHeart(product) ? '#c40000' : 'white' }">
+                {{ isRedHeart(product) ? 'favorite' : 'favorite_border' }}</mat-icon>
             </a>
           </div>
           <div class="products__info">
