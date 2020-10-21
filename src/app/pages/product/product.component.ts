@@ -35,6 +35,7 @@ export class ProductComponent implements OnInit {
   };
   productImages: IImage;
   orderSize: string;
+  favoritesIds: string[] = [];
   constructor(
     private productsServ: ProductService,
     private route: ActivatedRoute
@@ -43,6 +44,7 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
     this.getProduct();
+    this.favoritesIds = JSON.parse(localStorage.getItem('favoritesIds'));
   }
 
   changeProductModel(color: IImage): void {
@@ -98,6 +100,68 @@ export class ProductComponent implements OnInit {
     };
   }
 
+  addToFavorites(): void {
+    const product = new BasketOrder(
+      this.product.category,
+      this.product.name,
+      this.productImages || this.product.images[0],
+      this.orderSize || this.product.size[0],
+      this.product.description,
+      this.product.fabricComposition,
+      this.product.price,
+      this.product.isSale,
+      this.product.sale,
+      1,
+      this.product.isSale ? +this.product.sale.priceWithDiscount : this.product.price,
+      this.product.id
+    );
+
+    const favorites = JSON.parse(localStorage.getItem('favorites'));
+
+    if (favorites && favorites.length) {
+      const favBag = favorites.findIndex((v: IBasketOrder) => {
+        return v.id === product.id &&
+          v.images.color.colorHex === product.images.color.colorHex &&
+          v.size === (this.orderSize || this.product.size[0]);
+      });
+      if (favBag !== -1) {
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+      } else {
+        localStorage.setItem('favorites', JSON.stringify([...favorites, product]));
+      }
+    } else {
+      localStorage.setItem('favorites', JSON.stringify([product]));
+    }
+    const favoritesIds = JSON.parse(localStorage.getItem('favoritesIds'));
+    const favoritesId = this.product.id +
+      (this.product.images[0].color.colorHex || this.productImages.color.colorHex) +
+      (this.orderSize || this.product.size[0]);
+    if (favoritesIds && favoritesIds.length) {
+      const favIndex = favorites.findIndex((v: string) => v === favoritesId);
+      if (favIndex !== -1) {
+        localStorage.setItem('favoritesIds', JSON.stringify(favoritesIds));
+      } else {
+        console.log(favoritesIds, favoritesId);
+        localStorage.setItem('favoritesIds', JSON.stringify([...favoritesIds, favoritesId]));
+      }
+    } else {
+      localStorage.setItem('favoritesIds', JSON.stringify([favoritesId]));
+    }
+
+    this.favoritesIds = JSON.parse(localStorage.getItem('favoritesIds'));
+  }
+
+  isRedHeard(prod: IProduct): boolean {
+    if (prod) {
+      const id = prod.id +
+        (prod.images[0].color.colorHex || this.productImages.color.colorHex) +
+        (this.orderSize || prod.size[0]);
+      return this.favoritesIds.includes(id);
+    } else {
+      return false;
+    }
+  }
+
   addToBasket(): void {
     const product = new BasketOrder(
       this.product.category,
@@ -110,7 +174,8 @@ export class ProductComponent implements OnInit {
       this.product.isSale,
       this.product.sale,
       1,
-      this.product.isSale ? +this.product.sale.priceWithDiscount : this.product.price
+      this.product.isSale ? +this.product.sale.priceWithDiscount : this.product.price,
+      this.product.id
     );
     let orders = JSON.parse(localStorage.getItem('orders'));
     if (orders && orders.length) {

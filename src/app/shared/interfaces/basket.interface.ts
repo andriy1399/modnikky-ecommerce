@@ -11,5 +11,6 @@ export interface IBasketOrder {
   sale: ISale;
   count?: number;
   totalPrice?: number;
+  id?: string;
 }
 
