@@ -10,6 +10,7 @@ import { IProduct } from '../../../shared/interfaces/product.interface';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit, OnDestroy {
+  p = 1;
   rSub: Subscription;
   products: Array<IProduct> = [];
   tSub: Subscription;
@@ -17,6 +18,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   loading: boolean;
   favorite = false;
   fSub: Subscription;
+  showPagination = false;
+  countOfPages: number;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -26,6 +29,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.changeCount();
     this.tSub = this.productServ.type.subscribe(v => this.type = v);
     this.fSub = this.productServ.changedFilter.subscribe(() => {
       const category = this.route.snapshot.paramMap.get('category') || 'view-all';
@@ -35,6 +39,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   private getProductsByCategory(type: string, category: string): void {
+    this.changeCount();
+    this.showPagination = false;
     this.loading = true;
     this.productServ.getProductByCategory(type, category).get().subscribe(val => {
       this.products = [];
@@ -43,14 +49,16 @@ export class ProductListComponent implements OnInit, OnDestroy {
         const data = v.data() as IProduct;
         this.products.push({ id, ...data });
       });
+      this.p = 1;
       this.doFilter();
       this.loading = false;
+      this.changeCount();
+      setInterval(() => this.showPagination = true, 500);
     });
   }
 
   private doFilter(): void {
     const filters = JSON.parse(localStorage.getItem('filters'));
-
     if (filters && filters.length) {
       const filterName: string[] = [];
       let orderFilters = filters.map((f, i, filterArrName) => {
@@ -97,6 +105,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     }
   }
+
+  private changeCount(): void {
+    const count = JSON.parse(localStorage.getItem('countOfItems'));
+    count ? this.countOfPages = count : this.countOfPages = 10;
+  }
   private checkRout(): void {
     this.rSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -105,6 +118,22 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this.getProductsByCategory(type, category);
       }
     });
+  }
+
+  public pageChanged(event: number): void {
+    this.showPagination = false;
+    this.p = event;
+    window.scrollTo(0, 0);
+    setTimeout(() => {
+      this.showPagination = true;
+    }, 500);
+
+    this.changeCount();
+  }
+
+  public changeCountOfItems(event): void {
+    this.countOfPages = +event.target.value;
+    localStorage.setItem('countOfItems', JSON.stringify(this.countOfPages));
   }
 
   test(): void {

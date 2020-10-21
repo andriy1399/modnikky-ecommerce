@@ -35,6 +35,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ImgHoverDirective } from './shared/directives/img-hover.directive';
 
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
     IvyCarouselModule,
     MatExpansionModule,
     NgxUsefulSwiperModule,
+    NgxPaginationModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

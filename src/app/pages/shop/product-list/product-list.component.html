@@ -5,13 +5,14 @@
     </ng-container>
     <ng-template #elseTemplate>
       <ng-container *ngIf="products.length; else doNotFound">
-        <div class="products__col" *ngFor="let product of products">
+        <div class="products__col"
+          *ngFor="let product of products | paginate: { itemsPerPage: countOfPages, currentPage: p }">
           <div class="products__items-wrapper">
             <a class="products__item" [routerLink]="['/product/'+ product.category, product.id]">
               <img class="animate-hover-img" appImgHover [imgH]="product.images[0].images[1]"
                 [src]="product.images[0].images[0]" [alt]="product.name">
             </a>
-            <a class="products__favorite" (click)="test()" >
+            <a class="products__favorite" (click)="test()">
               <mat-icon [ngStyle]="{'color': favorite ? 'red' : 'white' }">favorite</mat-icon>
             </a>
           </div>
@@ -37,5 +38,34 @@
         not found
       </ng-template>
     </ng-template>
+  </div>
+  <div class="shop-pagination" *ngIf="products.length && showPagination">
+    <div class="count-of-items">
+      <div class="count-control">
+        <input type="radio" value="6" name="countOfPage" id="count-6" [checked]="countOfPages === 6"
+          (change)="changeCountOfItems($event)">
+        <label for="count-6">6</label>
+      </div>
+      <div class="count-control">
+        <input type="radio" value="10" name="countOfPage" id="count-10" [checked]="countOfPages === 10"
+          (change)="changeCountOfItems($event)">
+        <label for="count-10">10</label>
+
+      </div>
+      <div class="count-control">
+        <input type="radio" value="20" name="countOfPage" id="count-20" [checked]="countOfPages === 20"
+          (change)="changeCountOfItems($event)">
+        <label for="count-20">20</label>
+      </div>
+      <div class="count-control">
+        <input type="radio" value="40" name="countOfPage" id="count-40" [checked]="countOfPages === 40"
+          (change)="changeCountOfItems($event)">
+        <label for="count-40">40</label>
+      </div>
+    </div>
+    <pagination-controls class="shop-pagination" (pageChange)="pageChanged($event)" responsive="true" maxSize="5"
+      previousLabel="" nextLabel="">
+
+    </pagination-controls>
   </div>
 </div>
