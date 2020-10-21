@@ -12,5 +12,6 @@ export interface IBasketOrder {
   count?: number;
   totalPrice?: number;
   id?: string;
+  isNewArrivals?: boolean;
 }
 

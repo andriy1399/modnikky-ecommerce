@@ -153,6 +153,7 @@ input {
   &__img-wrapper {
     width: 30%;
     margin-right: 1em;
+    cursor: pointer;
     img {
       width: 100%;
       height: auto;
@@ -214,6 +215,27 @@ input {
 
   &__button-wrapper {
     margin-top: 1em;
+    display: flex;
+  }
+
+  &__btn-add-to-bag {
+    cursor: pointer;
+    margin-right: 1em;
+    font-size: 1rem;
+    font-family: helvetica-p, Arial, Helvetica, sans-serif;
+    &--fv {
+      padding: .5em 1.2em;
+      background-color: #000000;
+      color: #fff;
+      transition: opacity .3s ease-in-out;
+      &:hover {
+        opacity: .9;
+      }
+      &:disabled{
+        opacity: .5;
+        cursor: no-drop;
+      }
+    }
   }
 
   &__btn-remove {
@@ -223,6 +245,22 @@ input {
     margin-right: 1em;
     span {
       font-size: 1rem;
+    }
+    &--fv {
+      padding: .5em 1.2em;
+      background-color: #000000;
+      transition: opacity .3s ease-in-out;
+      span {
+        color: #fff;
+      }
+      &:hover {
+        opacity: .9;
+      }
+
+      &:disabled{
+        opacity: .5;
+        cursor: no-drop;
+      }
     }
   }
 }

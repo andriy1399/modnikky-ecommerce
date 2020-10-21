@@ -113,7 +113,8 @@ export class ProductComponent implements OnInit {
       this.product.sale,
       1,
       this.product.isSale ? +this.product.sale.priceWithDiscount : this.product.price,
-      this.product.id
+      this.product.id,
+      this.product.isNewArrivals,
     );
 
     let favorites = JSON.parse(localStorage.getItem('favorites'));

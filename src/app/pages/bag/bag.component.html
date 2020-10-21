@@ -11,7 +11,7 @@
       <ng-container *ngIf="bag && bag.length; else empty">
         <div class="body-info" *ngFor="let product of bag; index as i">
           <div class="body-info__body">
-            <div class="body-info__img-wrapper">
+            <div class="body-info__img-wrapper" [routerLink]="['/product/'+ product.category, product.id]">
               <img [src]="product.images.images[0]" [alt]="product.name">
             </div>
 

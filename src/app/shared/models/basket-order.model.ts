@@ -13,6 +13,7 @@ export class BasketOrder implements IBasketOrder {
     public sale: ISale,
     public count?: number,
     public totalPrice?: number,
-    public id?: string
+    public id?: string,
+    public isNewArrivals?: boolean,
   ) { }
 }

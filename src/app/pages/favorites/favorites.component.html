@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
   <div class="favorites">
     <div class="favorites__header">
       <div class="favorites__title">
@@ -11,7 +11,7 @@
       <ng-container *ngIf="favorites && favorites.length; else empty">
         <div class="body-info" *ngFor="let product of favorites; index as i">
           <div class="body-info__body">
-            <div class="body-info__img-wrapper">
+            <div class="body-info__img-wrapper" [routerLink]="['/product/'+ product.category, product.id]">
               <img [src]="product.images.images[0]" [alt]="product.name">
             </div>
 
@@ -29,21 +29,21 @@
               </p>
               <p>color: {{ product.images.color.colorName }}</p>
               <p>size: {{ product.size }}</p>
-              <div class="body-info__set-count">
-                <span>Quantity: <b>{{ product.count }}</b></span>
-                <button (click)="incrementAndDecrement(product, false)">
-                  <mat-icon [inline]="true" style="font-size: 1.1rem;">remove</mat-icon>
-                </button>
-                <button (click)="incrementAndDecrement(product)">
-                  <mat-icon [inline]="true" style="font-size: 1.1rem;">add</mat-icon>
-                </button>
+              <p>fabric composition: {{ product.fabricComposition.fabricText }}</p>
+              <div class="new-arrivals" *ngIf="product.isNewArrivals">
+                <p>not available in the store</p>
               </div>
             </div>
           </div>
           <div class="body-info__footer">
             <div class="body-info__button-wrapper">
-              <button class="body-info__btn-remove" (click)="removefavoritesProduct(i)">
-                <mat-icon> clear </mat-icon>
+              <button matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'" [disabled]="product.isNewArrivals"
+                class="body-info__btn-add-to-bag body-info__btn-add-to-bag--fv" (click)="addToBag(product)">
+                add to bag
+              </button>
+              <button matRipple [matRippleColor]="'rgba(00, 00, 00, 0.1)'"
+                class="body-info__btn-remove body-info__btn-remove--fv" (click)="removeFavoritesProduct(product, i)">
+                <mat-icon style="color: '#fff'"> clear </mat-icon>
                 <span>remove</span>
               </button>
             </div>
@@ -57,14 +57,5 @@
       </ng-template>
 
     </div>
-
-    <div class="favorites__footer">
-      <h3>Total USD ${{ totalPrice | number:"1.2-2" }}</h3>
-      <div class="favorites__btn-wrapper">
-        <button class="favorites__checkout-btn" matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'"
-        [disabled]="!favorites || !favorites.length">
-          proceed to checkout</button>
-      </div>
-    </div>
   </div>
-</div> -->
+</div>
