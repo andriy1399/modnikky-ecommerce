@@ -14,6 +14,9 @@ import { IBasketOrder } from '../../shared/interfaces/basket.interface';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+  defaultImage = 'https://media.giphy.com/media/PUYgk3wpNk0WA/giphy.gif';
+
+
   product: IProduct;
   showImgArr: string[] = [];
   panelDescription: IPanel;
@@ -80,7 +83,7 @@ export class ProductComponent implements OnInit {
           const otherData = e.payload.doc.data() as IProduct;
           return { id, ...otherData };
         });
-        products = products.filter(v => v.id !== prod.id).sort((a: any, b: any) => a.dateAdded - b.dateAdded);
+        products = products.filter((v, i) => v.id !== prod.id && i < 12).sort((a: any, b: any) => a.dateAdded - b.dateAdded);
         this.completeLook = [products.reverse()[0], products.reverse()[0]];
         this.moreProducts = products.filter(v => v.id !== this.completeLook[0].id && v.id !== this.completeLook[1].id);
       });

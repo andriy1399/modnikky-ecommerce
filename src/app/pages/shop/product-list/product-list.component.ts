@@ -22,6 +22,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   showPagination = false;
   countOfPages: number;
   favoritesIds: string[] = [];
+
+  defaultImg = 'https://media.giphy.com/media/PUYgk3wpNk0WA/giphy.gif';
   constructor(
     private route: ActivatedRoute,
     private router: Router,

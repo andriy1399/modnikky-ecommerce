@@ -10,7 +10,7 @@
           <div class="products__items-wrapper">
             <a class="products__item" [routerLink]="['/product/'+ product.category, product.id]">
               <img class="animate-hover-img" appImgHover [imgH]="product.images[0].images[1]"
-                [src]="product.images[0].images[0]" [alt]="product.name">
+                 [lazyLoad]="product.images[0].images[0]" [defaultImage]='defaultImg' [alt]="product.name">
             </a>
             <a class="products__favorite" (click)="addToFavorites(product)">
               <mat-icon [ngStyle]="{'color': isRedHeart(product) ? '#c40000' : 'white' }">

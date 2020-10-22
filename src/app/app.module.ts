@@ -36,6 +36,7 @@ import { ImgHoverDirective } from './shared/directives/img-hover.directive';
 
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatExpansionModule,
     NgxUsefulSwiperModule,
     NgxPaginationModule,
+    LazyLoadImageModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

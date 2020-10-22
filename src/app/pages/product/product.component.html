@@ -16,13 +16,13 @@
         </li>
       </ul>
       <img class="animate-hover-img" *ngFor="let img of showImgArr.length ? showImgArr : product?.images[0].images;"
-        [src]="img" alt="">
+      [lazyLoad]="img" [defaultImage]='defaultImage' alt="">
     </div>
     <div class="product-details__img-wrapper-phone">
       <swiper [config]="swiperConfig" style="width: 100%; height: 100%;">
         <div class="swiper-wrapper">
-          <img class="swiper-slide" *ngFor="let image of showImgArr.length ? showImgArr : product?.images[0].images;"
-            [src]="image" />
+          <img class="swiper-slide" offset="100" [defaultImage]='defaultImage' *ngFor="let image of showImgArr.length ? showImgArr : product?.images[0].images;"
+             [lazyLoad]="image" />
         </div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-next"></div>
@@ -98,7 +98,7 @@
       <div class="complete__product-wrapper">
         <div class="complete__product" *ngFor="let item of completeLook">
           <a [routerLink]="['/product/'+ item.category, item.id]" (click)="updateProduct(item.id, item.images[0])">
-            <img [src]="item.images[0].images[0]" [alt]="item.name">
+            <img  [lazyLoad]="item.images[0].images[0]" [defaultImage]='defaultImage' [alt]="item.name">
           </a>
         </div>
       </div>
@@ -112,7 +112,7 @@
       <carousel style="padding: 0;" height=650 [autoplay]="true" [loop]="true" [cellsToShow]="getCellCount()"
         [overflowCellsLimit]='0' [margin]='0'>
         <div class="carousel-cell" *ngFor="let product of moreProducts">
-          <img [src]="product.images[0].images[1]" style=" object-fit: cover; object-position: center;">
+          <img [lazyLoad]="product.images[0].images[1]" [defaultImage]='defaultImage' style=" object-fit: cover; object-position: center;">
           <div class="carousel__btn-wrapper">
             <button class="carousel__btn" [routerLink]="['/product/'+ product.category, product.id]" matRipple
               [matRippleColor]="'rgba(00, 00, 00, 0.1)'"

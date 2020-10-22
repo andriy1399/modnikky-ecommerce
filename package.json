@@ -25,6 +25,7 @@
     "angular-responsive-carousel": "^1.5.11",
     "firebase": "^7.22.1",
     "ng-animate": "^0.3.4",
+    "ng-lazyload-image": "^9.0.1",
     "ngx-color-picker": "^10.1.0",
     "ngx-pagination": "^5.0.0",
     "ngx-useful-swiper": "^10.0.1",
