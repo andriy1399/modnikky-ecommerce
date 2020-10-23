@@ -1,0 +1,27 @@
+.profile {
+  padding: 1em 8em;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  &__side-menu {
+    h3 {
+      font-size: 1.6rem;
+
+    }
+    width: 20%;
+    li + li {
+      margin-top: .5em;
+    }
+    a {
+      text-transform: uppercase;
+      color: #636363;
+    }
+    .active {
+      color: #030303;
+    }
+  }
+
+  &__content {
+    width: 75%;
+  }
+}

@@ -60,11 +60,47 @@
 
     <div class="bag__footer">
       <h3>Total USD ${{ totalPrice | number:"1.2-2" }}</h3>
-      <div class="bag__btn-wrapper">
+      <div class="bag__btn-wrapper" *ngIf="!isMakeCheckout">
         <button class="bag__checkout-btn" matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'"
-        [disabled]="!bag || !bag.length">
-          proceed to checkout</button>
+          [disabled]="!bag || !bag.length" (click)="isMakeCheckout = true">
+          make checkout</button>
       </div>
     </div>
+  </div>
+
+  <div class="checkout" *ngIf="isMakeCheckout">
+    <div class="checkout__checkout-title">
+      <h3>My Information</h3>
+    </div>
+    <form class="form checkout__form">
+      <div class="checkout__input-wrapper">
+        <mat-form-field appearance="standard" class="checkout__form-50-width">
+          <mat-label>First name*</mat-label>
+          <input matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard" class="checkout__form-50-width">
+          <mat-label>Last Name*</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="standard" class="checkout__form-full-width">
+        <mat-label>Telephone*</mat-label>
+        <span matPrefix>+38 &nbsp;</span>
+        <input type="tel" matInput placeholder="050-123-1234">
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="checkout__form-full-width">
+        <mat-label>Comment</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+
+      <div class="checkout__btn-wrapper">
+        <button class="checkout__btn checkout__btn-send" matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">send
+          order</button>
+        <button class="checkout__btn checkout__btn-cancel" matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'"
+          (click)="isMakeCheckout = false">cancel</button>
+      </div>
+    </form>
   </div>
 </div>

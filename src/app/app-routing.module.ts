@@ -5,7 +5,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProductComponent } from './pages/product/product.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { BagComponent } from './pages/bag/bag.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { ProfileGuard } from './shared/guards/profile.guard';
 import { ProductListComponent } from './pages/shop/product-list/product-list.component';
@@ -27,7 +26,7 @@ const routes: Routes = [
   {
     path: 'profile',
     canActivate: [ProfileGuard],
-    component: ProfileComponent
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
   },
   {
     path: 'admin',

@@ -1,0 +1,20 @@
+.information {
+  &__input-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__form-50-width {
+    width: 49%;
+  }
+
+  &__form-25-width {
+    width: 24%;
+  }
+
+  &__form-full-width {
+    width: 100%;
+  }
+}

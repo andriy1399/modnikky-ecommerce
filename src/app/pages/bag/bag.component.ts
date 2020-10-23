@@ -11,6 +11,7 @@ export class BagComponent implements OnInit {
   bag: Array<IBasketOrder> = [];
   countItems = 0;
   totalPrice = 0;
+  isMakeCheckout = false;
   constructor(
     private productServ: ProductService
   ) { }
