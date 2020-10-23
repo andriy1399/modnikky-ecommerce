@@ -6,21 +6,46 @@
   &__side-menu {
     h3 {
       font-size: 1.6rem;
+      font-family: helvetica-h, Arial, Helvetica, sans-serif;
 
     }
     width: 20%;
     li + li {
-      margin-top: .5em;
+      margin-top: 0.5em;
     }
     a {
       text-transform: uppercase;
       color: #636363;
+      font-family: helvetica-p, Arial, Helvetica, sans-serif;
+    }
+
+    .profile__sign-out {
+      color: #000000;
     }
     .active {
       color: #030303;
     }
   }
+  &__sign-out {
+    display: block;
+    margin-top: 2em;
+    padding: .6em 2em;
+    text-align: center;
+    border: 2px solid black;
+    background-color: #fdfdfd;
+    transition: background-color 0.3s ease-in-out;
+    letter-spacing: 0.05em;
+    font-family: helvetica-p, Arial, Helvetica, sans-serif;
+    &:hover {
+      cursor: pointer;
+      background-color: #f7f7f7;;
+    }
 
+    &:disabled {
+      cursor: no-drop;
+      opacity: 0.6;
+    }
+  }
   &__content {
     width: 75%;
   }

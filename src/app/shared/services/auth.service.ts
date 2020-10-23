@@ -30,6 +30,7 @@ export class AuthService {
           .onSnapshot(document => {
             document.forEach(user => {
               const data = user.data();
+              delete data.historyOfOrders;
               localStorage.setItem('userCredential', JSON.stringify(data));
               if (data.role === 'admin' && data.success) {
                 this.router.navigateByUrl('admin');

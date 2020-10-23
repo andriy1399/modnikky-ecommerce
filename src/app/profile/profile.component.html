@@ -11,7 +11,7 @@
         <a [routerLink]="['/profile/my-orders']" routerLinkActive='active'>My orders</a>
       </li>
       <li>
-        <a class="">Sign out</a>
+        <a class="profile__sign-out"  matRipple [matRippleColor]="'rgba(00, 00, 00, 0.1)'" (click)="signOut()">Sign out</a>
       </li>
     </ul>
   </div>
