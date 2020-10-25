@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { IMyInformation } from '../interfaces/my-information.interface';
 import { IOrder } from '../interfaces/order.interface';
 
@@ -19,7 +20,12 @@ export class OrderService {
     .doc(user.uId).set(user);
   }
 
+
   addOrder(order: IOrder): Promise<DocumentReference> {
     return this.afFirestore.collection('orders').add({ ...order as IOrder});
+  }
+
+  getOrders(): Observable<DocumentChangeAction<unknown>[]> {
+    return this.afFirestore.collection('orders').snapshotChanges();
   }
 }

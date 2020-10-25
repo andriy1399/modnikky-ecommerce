@@ -1,1 +1,107 @@
-<p>admin-orders works!</p>
+<mat-form-field appearance="fill" style="width: 100%; margin-top: 1em;">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" #input>
+</mat-form-field>
+
+<table mat-table [dataSource]="orders" multiTemplateDataRows class="mat-elevation-z8">
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef> First name </th>
+    <td mat-cell *matCellDef="let element">
+      <h3>{{ element.firstName | titlecase }}</h3>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef> Last name </th>
+    <td mat-cell *matCellDef="let element">
+      <h3>{{ element.lastName | titlecase }}</h3>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef> Phone </th>
+    <td mat-cell *matCellDef="let element">
+      <p>1) {{ element.telephone1 }}</p>
+      <p>2) {{ element.telephone2 || '---' }}</p>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="comment">
+    <th mat-header-cell *matHeaderCellDef> Comment </th>
+    <td mat-cell *matCellDef="let element">
+      <p>{{ element.comment || '---' }}</p>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let element">
+      <h4>{{ element.dateOfOrdering.toDate() | date: "HH:mm, MMM dd, yyyy" | titlecase}}</h4>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="totalPrice">
+    <th mat-header-cell *matHeaderCellDef> Total Price </th>
+    <td mat-cell *matCellDef="let element">
+      <h4>${{ element.price | number: "1.2-2" }}</h4>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef> Delete </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="warn">Delete</button>
+    </td>
+  </ng-container>
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+      <div class="table-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <div class="info-block">
+          <div class="info-block__orders">
+            <div class="body-info" *ngFor="let product of element.order; index as i">
+              <div class="body-info__body">
+                <div class="body-info__img-wrapper" [routerLink]="['/product/'+ product.category, product.id]">
+                  <img [src]="product.images.images[0]" [alt]="product.name">
+                </div>
+
+                <div class="body-info__description">
+                  <h3 class="body-info__name">{{ product.name }}</h3>
+                  <div class="body-info__price">
+                    <span [ngClass]="{'last-price': product.isSale}">USD ${{ product.price | number:"1.2-2" }}</span>
+                    <span class="discount-price" *ngIf="product.isSale">USD
+                      ${{ product.sale.priceWithDiscount | number:"1.2-2" }}</span>
+                    <span class="discount" *ngIf="product.isSale">-{{ product.sale.percents }} </span>
+                  </div>
+                  <p style="margin-bottom: 1em;" *ngIf="product.count > 1">
+                    total usd $
+                    {{ product.totalPrice | number:"1.2-2" }}
+                  </p>
+                  <p>color: {{ product.images.color.colorName }}</p>
+                  <p>size: {{ product.size }}</p>
+                  <p>composition: {{ product.fabricComposition.fabricText }}</p>
+                  <p>Quantity: <b>{{ product.count }}</b></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="info-block__customer-information">
+            <h3>Information about user</h3>
+            <p>email: {{ element.email || '---' }}</p>
+            <p>city: {{ element.city || '---' }}</p>
+            <p>street: {{ element.street || '---' }}</p>
+            <p>build: {{ element.build || '---' }}</p>
+            <p>flour: {{ element.flour || '---' }}</p>
+            <p>apartment: {{ element.apartment || '---' }}</p>
+          </div>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="table-element-row"
+    [class.table-expanded-row]="expandedElement === element"
+    (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="table-detail-row"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+  </tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
