@@ -39,3 +39,30 @@
     }
   }
 }
+
+
+
+@media screen and (max-width: 450px) {
+  .information {
+    &__input-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  
+    &__form-50-width {
+      width: 100%;
+    }
+  
+    &__form-25-width {
+      width: 49%;
+    }
+  
+    &__form-full-width {
+      width: 100%;
+    }
+  }
+}
+

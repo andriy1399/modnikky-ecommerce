@@ -1,1 +1,36 @@
-<p>my-orders works!</p>
+<div class="orders">
+  <!--  -->
+
+  <ng-container *ngIf="user?.historyOfOrders && user?.historyOfOrders.length; else emptyBlock">
+    <div class="orders__row">
+      <div class="orders__col" *ngFor="let order of user?.historyOfOrders; index as i">
+        <div class="orders__data ">
+          <div>Date: <span>{{ order.date.toDate() | date:"HH:mm, dd-MM-yyyy"}}</span></div>
+          <div>Total price: <span>$ {{ total[i] | number: "1.2-2" }}</span></div>
+        </div>
+        <div class="orders__products ">
+          <div class=" item" *ngFor="let item of order.orders" [routerLink]="['/product/'+ item.category, item.id]"
+            [ngStyle]="{'backgroundImage': 'url('+ item.images.images[0] +')'}">
+
+            <div class="item__info">
+              <h3>{{ item.name }}</h3>
+              <p>QUANTITY: {{ item.count }}</p>
+              <p>COLOR: {{ item.images.color.colorName }}</p>
+              <p>SIZE: {{ item.size }}</p>
+              <p>USD: ${{ item.totalPrice | number: "1.2-2" }}</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #emptyBlock>
+    <div class="empty-block">
+      <h2>You don't have any orders history</h2>
+    </div>
+  </ng-template>
+
+
+</div>

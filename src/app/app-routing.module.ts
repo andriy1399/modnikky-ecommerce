@@ -8,6 +8,8 @@ import { BagComponent } from './pages/bag/bag.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { ProfileGuard } from './shared/guards/profile.guard';
 import { ProductListComponent } from './pages/shop/product-list/product-list.component';
+import { ConfirmationGuard } from './shared/guards/confirmation.guard';
+import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -33,6 +35,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
+  { path: 'confirmation', canActivate: [ConfirmationGuard], component: ConfirmationComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 

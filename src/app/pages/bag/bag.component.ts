@@ -5,6 +5,7 @@ import { IMyInformation } from '../../shared/interfaces/my-information.interface
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IOrder } from '../../shared/interfaces/order.interface';
 import { OrderService } from '../../shared/services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bag',
@@ -21,7 +22,9 @@ export class BagComponent implements OnInit {
   userData: IMyInformation;
   constructor(
     private productServ: ProductService,
-    private orderServ: OrderService
+    private orderServ: OrderService,
+    private router: Router,
+
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +34,7 @@ export class BagComponent implements OnInit {
       this.getUser();
     }
     this.information = new FormGroup({
-      firstName: new FormControl( this.user ? this.user.firstName : '', [
+      firstName: new FormControl(this.user ? this.user.firstName : '', [
         Validators.required,
         Validators.minLength(3)
       ]),
@@ -148,15 +151,12 @@ export class BagComponent implements OnInit {
       };
       this.orderServ.addOrder(order)
         .then(() => {
-          localStorage.removeItem('orders');
+          localStorage.setItem('confirmation', JSON.stringify(true));
+          this.router.navigateByUrl('confirmation');
           this.isMakeCheckout = false;
-          this.getBagProducts();
         });
     }
 
   }
 
-  test(): void {
-    console.log('object');
-  }
 }

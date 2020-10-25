@@ -36,6 +36,7 @@ import { ImgHoverDirective } from './shared/directives/img-hover.directive';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     PanelComponent,
     HideModalDirective,
     ProductListComponent,
-    ImgHoverDirective
+    ImgHoverDirective,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
