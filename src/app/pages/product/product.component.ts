@@ -16,7 +16,6 @@ import { IBasketOrder } from '../../shared/interfaces/basket.interface';
 export class ProductComponent implements OnInit {
   defaultImage = 'https://media.giphy.com/media/PUYgk3wpNk0WA/giphy.gif';
 
-
   product: IProduct;
   showImgArr: string[] = [];
   panelDescription: IPanel;

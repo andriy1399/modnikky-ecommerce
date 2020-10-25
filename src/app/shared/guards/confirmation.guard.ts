@@ -13,10 +13,10 @@ export class ConfirmationGuard implements CanActivate {
   }
 
   private check(): boolean {
-    if (JSON.parse(localStorage.getItem('confirmation'))) {
+    const confirmation = JSON.parse(localStorage.getItem('confirmation'));
+    if (confirmation && confirmation.success) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }

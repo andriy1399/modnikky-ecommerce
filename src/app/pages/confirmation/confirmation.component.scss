@@ -1,0 +1,121 @@
+.confirmation {
+  width: 100%;
+  padding: 0 2em;
+  &__content {
+    max-width: 800px;
+    margin: 1em auto 0;
+  }
+
+  &__text {
+    padding: 2em 4em;
+    border: 2px solid black;
+    h2,
+    p {
+      text-align: center;
+    }
+  }
+  &__summary {
+  }
+
+  &__title-block {
+    padding: 2em 0;
+    border-bottom: 1px solid #bdbdbd;
+    h2,
+    h4 {
+      text-align: center;
+    }
+  }
+
+  &__total {
+    margin-top: 1em;
+    h2 {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+  }
+
+
+		&__btn-wrapper {
+      margin-top: 2em;
+      display: flex;
+      justify-content: space-between;
+		}
+
+		&__btn {
+      margin: 0 auto;
+      padding: 1em 2em;
+      color: #ffffff;
+      background-color: #000000;
+      transition: opacity 0.3s ease-in-out;
+      letter-spacing: 0.05em;
+      font-family: helvetica-p, Arial, Helvetica, sans-serif;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
+  
+      &:disabled {
+        cursor: no-drop;
+        opacity: 0.6;
+      }
+		}
+
+}
+
+@media screen and (max-width: 650px) {
+  .confirmation {
+    &__text {
+      padding: 2em;
+      border: 1.5px solid black;
+      h2,
+      p {
+        text-align: center;
+      }
+      p {
+        font-size: 0.8rem;
+      }
+      h2 {
+        font-size: 1.1rem;
+      }
+    }
+
+    &__title-block {
+      padding: 1em 0;
+      h2 {
+        font-size: 1.1rem;
+      }
+      h4 {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .confirmation {
+    padding: 0 1em;
+
+    &__text {
+      padding: 1em 1.5em;
+      border: 1.5px solid black;
+    }
+    &__total {
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .body-info {
+    &__body {
+      flex-direction: column;
+    }
+    &__img-wrapper {
+      width: 100%;
+      margin-right: 0;
+    }
+    &__description {
+      width: 100%;
+    }
+  }
+}

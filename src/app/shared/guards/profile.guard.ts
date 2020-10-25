@@ -12,7 +12,7 @@ export class ProfileGuard implements CanActivate {
     return this.checkLogin();
   }
   checkLogin(): boolean {
-    if (localStorage.getItem('userCredential')) {
+    if (JSON.parse(localStorage.getItem('userCredential'))) {
       const user = JSON.parse(localStorage.getItem('userCredential'));
       if (user && user.role === 'user') {
         return true;

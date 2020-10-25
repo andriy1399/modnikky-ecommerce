@@ -127,9 +127,14 @@ export class BagComponent implements OnInit {
       }
       this.orderServ.addOrder(order)
         .then(() => {
-          localStorage.removeItem('orders');
+          localStorage.setItem('confirmation', JSON.stringify({
+            success: true,
+            name: this.information.value.firstName,
+            date: new Date()
+          }));
+          this.router.navigateByUrl('confirmation');
+          this.productServ.bag.next(0);
           this.isMakeCheckout = false;
-          this.getBagProducts();
         });
 
       this.orderServ.updateInformation({
@@ -151,8 +156,13 @@ export class BagComponent implements OnInit {
       };
       this.orderServ.addOrder(order)
         .then(() => {
-          localStorage.setItem('confirmation', JSON.stringify(true));
+          localStorage.setItem('confirmation', JSON.stringify({
+            success: true,
+            name: this.information.value.firstName,
+            date: new Date()
+          }));
           this.router.navigateByUrl('confirmation');
+          this.productServ.bag.next(0);
           this.isMakeCheckout = false;
         });
     }

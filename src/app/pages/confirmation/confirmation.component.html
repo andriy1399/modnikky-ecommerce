@@ -1,1 +1,51 @@
-<p>confirmation works!</p>
+<div class="confirmation">
+  <div class="confirmation__content">
+    <div class="confirmation__text">
+        <h2>Order confirmation</h2>
+
+        <p>{{ confirmation.name | titlecase }}, thank you for your order!</p>
+
+        <p>We've received your order and will contact you as soon as your package is shipped. You can find your purchase
+          information below.</p>
+    </div>
+
+    <div class="confirmation__summary">
+      <div class="confirmation__title-block">
+        <h2>Order Summary</h2>
+        <h4>{{ confirmation.date | date: "longDate" }}</h4>
+      </div>
+      <div class="body-info" *ngFor="let product of products; index as i">
+        <div class="body-info__body">
+          <div class="body-info__img-wrapper" [routerLink]="['/product/'+ product.category, product.id]">
+            <img  [alt]="product.name"  [lazyLoad]="product.images.images[0]" [defaultImage]='defaultImage' >
+          </div>
+
+          <div class="body-info__description">
+            <h3 class="body-info__name">{{ product.name }}</h3>
+            <div class="body-info__price">
+              <span [ngClass]="{'last-price': product.isSale}">USD ${{ product.price | number:"1.2-2" }}</span>
+              <span class="discount-price" *ngIf="product.isSale">USD
+                ${{ product.sale.priceWithDiscount | number:"1.2-2" }}</span>
+              <span class="discount" *ngIf="product.isSale">-{{ product.sale.percents }} </span>
+            </div>
+            <p style="margin-bottom: 1em;" *ngIf="product.count > 1">
+              total usd $
+              {{ product.totalPrice | number:"1.2-2" }}
+            </p>
+            <p>color: {{ product.images.color.colorName }}</p>
+            <p>size: {{ product.size }}</p>
+            <p>composition: {{ product.fabricComposition.fabricText }}</p>
+            <p>quantity: {{ product.count }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="confirmation__total">
+      <h2>Total USD ${{ totalPrice | number:"1.2-2" }}</h2>
+    </div>
+
+    <div class="confirmation__btn-wrapper">
+      <button class="confirmation__btn"  matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'" [routerLink]="['/catalog/shop']" >Continue shopping</button>
+    </div>
+  </div>
+</div>

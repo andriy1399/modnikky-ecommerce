@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IMyInformation } from 'src/app/shared/interfaces/my-information.interface';
 import { OrderService } from 'src/app/shared/services/order.service';
-import { IHistory } from '../../shared/interfaces/my-information.interface';
 
 @Component({
   selector: 'app-my-orders',
