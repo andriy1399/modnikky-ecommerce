@@ -51,4 +51,11 @@ export class AdminOrdersComponent implements OnInit {
       });
   }
 
+  deleteOrder(id: string): void {
+    this.orderServ.deleteOrder(id)
+      .then(() => {
+        this.getOrders();
+      });
+  }
+
 }

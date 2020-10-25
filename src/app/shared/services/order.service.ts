@@ -19,7 +19,9 @@ export class OrderService {
     return this.afFirestore.collection('users')
     .doc(user.uId).set(user);
   }
-
+  deleteOrder(id: string): Promise<void> {
+    return this.afFirestore.doc('orders/' + id).delete();
+  }
 
   addOrder(order: IOrder): Promise<DocumentReference> {
     return this.afFirestore.collection('orders').add({ ...order as IOrder});

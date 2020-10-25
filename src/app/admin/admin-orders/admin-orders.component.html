@@ -45,7 +45,7 @@
   <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef> Delete </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-raised-button color="warn">Delete</button>
+      <button mat-raised-button color="warn" (click)="deleteOrder(element.orderId)">Delete</button>
     </td>
   </ng-container>
   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->

@@ -55,13 +55,15 @@ tr.table-element-row:not(.table-expanded-row):active {
 .info-block {
   width: 100%;
   display: flex;
+  justify-content: space-between;
   &__orders {
     width: 60%;
   }
 
   &__customer-information {
-    width: 40%;
+    width: 38%;
     padding: 1em;
+    border-left: 1px solid rgb(51, 51, 51);
     h3 {
       text-align: center;
       font-size: 1.1rem;
