@@ -15,13 +15,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 const routes: Routes = [
   {
     path: '', component: AdminComponent, children: [
       { path: '', pathMatch: 'full', redirectTo: 'category' },
       { path: 'category', component: AdminCategoryComponent },
       { path: 'catalog', component: AdminCatalogComponent },
-      { path: 'filters', component: AdminFiltersComponent }
+      { path: 'filters', component: AdminFiltersComponent },
+      { path: 'orders', component: AdminOrdersComponent }
     ]
   }
 ];
@@ -30,7 +32,8 @@ const routes: Routes = [
     AdminComponent,
     AdminCategoryComponent,
     AdminCatalogComponent,
-    AdminFiltersComponent
+    AdminFiltersComponent,
+    AdminOrdersComponent
   ],
   imports: [
     SharedModule,
