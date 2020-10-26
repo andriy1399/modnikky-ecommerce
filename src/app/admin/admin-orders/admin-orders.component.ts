@@ -46,7 +46,6 @@ export class AdminOrdersComponent implements OnInit {
           const otherData = e.payload.doc.data() as IOrder;
           return { orderId, ...otherData };
         }));
-        console.log(this.orders);
         this.orders.paginator = this.paginator;
       });
   }
