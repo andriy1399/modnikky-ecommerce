@@ -82,8 +82,9 @@ export class ProductComponent implements OnInit {
           const otherData = e.payload.doc.data() as IProduct;
           return { id, ...otherData };
         });
-        products = products.filter((v, i) => v.id !== prod.id && i < 12).sort((a: any, b: any) => a.dateAdded - b.dateAdded);
-        this.completeLook = [products.reverse()[0], products.reverse()[0]];
+        products = products.filter((v, i) => v.id !== prod.id);
+        this.completeLook = [products[0], products[1]];
+        products = products.filter((v, i) => v.id !== prod.id && i < 12).sort((a: any, b: any) => a.dateAdded + b.dateAdded);
         this.moreProducts = products.filter(v => v.id !== this.completeLook[0].id && v.id !== this.completeLook[1].id);
       });
 

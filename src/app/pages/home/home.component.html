@@ -11,7 +11,8 @@
         </p>
       </div>
       <div class="home__info-bnt-wrapper">
-        <button class="home__info-btn" [routerLink]="['/catalog/new-arrivals']"  matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SHOP NEW ARRIVALS</button>
+        <button class="home__info-btn" [routerLink]="['/catalog/new-arrivals']" matRipple
+          [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SHOP NEW ARRIVALS</button>
       </div>
     </div>
   </section>
@@ -28,32 +29,18 @@
         </p>
       </div>
       <div class="home__info-bnt-wrapper">
-        <button class="home__info-btn" [routerLink]="['/catalog/shop']" matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SHOP NOW</button>
+        <button class="home__info-btn" [routerLink]="['/catalog/shop']" matRipple
+          [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SHOP NOW</button>
       </div>
     </div>
   </section>
   <div class="collections">
-    <div class="col">
-      <a>
-        <img
-          src="https://lp2.hm.com/hmgoepprod?set=quality[79],source[/ff/af/ffafdf814691d1aaed2677fa6a0eb5ddb46c52d5.jpg],origin[dam],category[ladies_knitwear_jumpers],type[LOOKBOOK],res[m],hmver[2]&call=url[file:/product/main]"
-          alt="">
+    <div class="col" *ngFor="let product of threeProducts">
+      <a [routerLink]="['/product/'+ product.category, product.id]">
+        <img [lazyLoad]="product.images[0].images[0]" [defaultImage]='defaultImage' [alt]="product.name">
       </a>
     </div>
-    <div class="col">
-      <a>
-        <img
-          src="http://lp2.hm.com/hmgoepprod?set=quality[79],source[/5e/b9/5eb94328b3e26220908489454ed7f68d586ddda5.jpg],origin[dam],category[ladies_knitwear_turtlenecks],type[LOOKBOOK],res[m],hmver[1]&call=url[file:/product/main]"
-          alt="">
-      </a>
-    </div>
-    <div class="col">
-      <a>
-        <img
-          src="https://lp2.hm.com/hmgoepprod?set=quality[79],source[/80/92/80926e7dfb64490b009aa7986271960f5b41c739.jpg],origin[dam],category[ladies_knitwear_turtlenecks],type[LOOKBOOK],res[w],hmver[5]&call=url[file:/product/main]"
-          alt="">
-      </a>
-    </div>
+
   </div>
   <section class="home__section">
     <div class="home__info">
@@ -67,7 +54,8 @@
         </p>
       </div>
       <div class="home__info-bnt-wrapper">
-        <button class="home__info-btn" [routerLink]="['/catalog/shop']" matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SHOP DENIM</button>
+        <button class="home__info-btn" [routerLink]="['/catalog/shop']" matRipple
+          [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SHOP DENIM</button>
       </div>
     </div>
   </section>
@@ -76,16 +64,18 @@
     <p class="carousel__subtitle">NEW ARRIVALS</p>
     <carousel style="padding: 0;" height=650 [autoplay]="true" [loop]="true" [cellsToShow]="getCellCount()"
       [overflowCellsLimit]='0' [margin]='0'>
-      <div class="carousel-cell" *ngFor="let img of images">
-          <img [src]="img" style=" object-fit: cover; object-position: center;">
-          <div class="carousel__btn-wrapper">
-            <button class="carousel__btn" [routerLink]="['/catalog/new-arrivals']"  matRipple [matRippleColor]="'rgba(00, 00, 00, 0.1)'">SHOW</button>
-          </div>
+      <div class="carousel-cell" *ngFor="let product of newArrivals">
+        <img [lazyLoad]="product.images[0].images[0]" [defaultImage]='defaultImage'
+          style=" object-fit: cover; object-position: center;">
+        <div class="carousel__btn-wrapper">
+          <button class="carousel__btn" [routerLink]="['/product/'+ product.category, product.id]" matRipple
+            [matRippleColor]="'rgba(00, 00, 00, 0.1)'">SHOW</button>
+        </div>
       </div>
     </carousel>
   </section>
 
-   <section class="home__section">
+  <section class="home__section">
     <div class="home__info">
       <div class="home__info-title">
         <h4>HIGH DISCOUNTS</h4>
@@ -97,9 +87,9 @@
         </p>
       </div>
       <div class="home__info-bnt-wrapper">
-        <button class="home__info-btn" [routerLink]="['/catalog/sale']" matRipple [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SALE IS HERE</button>
+        <button class="home__info-btn" [routerLink]="['/catalog/sale']" matRipple
+          [matRippleColor]="'rgba(255, 255, 255, 0.1)'">SALE IS HERE</button>
       </div>
     </div>
   </section>
 </div>
-

@@ -53,7 +53,16 @@ export class ProductService {
       }
     }
   }
+  getProductByType(type: string): Observable<DocumentChangeAction<unknown>[]> {
+    const typeName = this.getType(type);
+    return this.afFirestore.collection('products', ref => {
+      return ref.where(typeName, '==', true);
+    }).snapshotChanges();
+  }
 
+  getProductLimit(limit: number): Observable<DocumentChangeAction<unknown>[]> {
+    return this.afFirestore.collection('products', ref => ref.limit(limit)).snapshotChanges();
+  }
 
   private getType(type: string): string {
     switch (type) {
