@@ -1,7 +1,9 @@
 <div class="products">
   <div class="products__row">
     <ng-container *ngIf="loading; else elseTemplate">
-      loading...
+      <div class="image__loading-wrapper">
+        <img class="image__loading" src="https://media.giphy.com/media/PUYgk3wpNk0WA/giphy.gif"  alt="">
+      </div>
     </ng-container>
     <ng-template #elseTemplate>
       <ng-container *ngIf="products.length; else doNotFound">
@@ -35,11 +37,15 @@
           </div>
         </div>
       </ng-container>
-      <ng-template #doNotFound>
-        not found
+      <ng-template #doNotFound >
+        <div class="not-found-block">
+          <h2>Products not found</h2>
+        </div>
       </ng-template>
     </ng-template>
+
   </div>
+
   <div class="shop-pagination" *ngIf="products.length && showPagination">
     <div class="count-of-items">
       <div class="count-control">
