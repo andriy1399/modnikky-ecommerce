@@ -38,6 +38,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
 
+import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
+import { ngxUiLoaderConfig } from './preloader-config';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { ConfirmationComponent } from './pages/confirmation/confirmation.compone
     NgxUsefulSwiperModule,
     NgxPaginationModule,
     LazyLoadImageModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderRouterModule,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

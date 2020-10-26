@@ -1,8 +1,11 @@
 <div class="container">
   <app-header></app-header>
-  <router-outlet></router-outlet>
+  <div  ngxUiLoaderBlurred blur="12">
+    <router-outlet></router-outlet>
+  </div>
   <app-footer></app-footer>
 </div>
 
 <app-bag-modal *ngIf="showBagModal" @bagModal></app-bag-modal>
 <app-sign-in [@EclipseAnime] *ngIf="signInModal.isSignInClicked"></app-sign-in>
+<ngx-ui-loader></ngx-ui-loader>
