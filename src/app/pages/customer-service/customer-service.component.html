@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="customer-service">
+    <div class="customer-service__title">
+      <h2>Customer Service</h2>
+    </div>
+
+    <div class="customer-service__content">
+      <div class="customer-service__item-wrapper">
+        <p class="customer-service__subtitle">
+          Quality
+        </p>
+        <app-panel [titleSize]='getSize()' [padding]="'1rem'" [iconSize]='getSize()' *ngFor="let info of quality; let l = last" [borders]='true' [panelData]="info" [getLast]="l"></app-panel>
+      </div>
+      <div class="customer-service__item-wrapper">
+        <p class="customer-service__subtitle">
+          Delivery
+        </p>
+        <app-panel [titleSize]='getSize()' [padding]="'1rem'" [iconSize]='getSize()' *ngFor="let info of delivery; let l = last" [borders]='true' [panelData]="info" [getLast]="l"></app-panel>
+      </div>
+      <div class="customer-service__item-wrapper">
+        <p class="customer-service__subtitle">
+          Payment
+        </p>
+        <app-panel [titleSize]='getSize()' [padding]="'1rem'" [iconSize]='getSize()' *ngFor="let info of payment; let l = last" [borders]='true' [panelData]="info" [getLast]="l"></app-panel>
+      </div>
+    </div>
+  </div>
+
+</div>

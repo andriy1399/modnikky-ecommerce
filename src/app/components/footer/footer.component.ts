@@ -10,12 +10,11 @@ export class FooterComponent implements OnInit {
   footerInfo: Array<IPanel> = [
     {
       pTitle: 'CUSTOMER SERVICE', pList: [
-        { text: 'contact' },
-        { text: 'TRACK ORDER' },
-        { text: 'DELIVERY & RETURNS' },
-        { text: 'PAYMENT' },
-        { text: 'MAKE A RETURN' },
-        { text: 'FAQ' }
+        { text: 'quality', href: 'customer-service' },
+        { text: 'DELIVERY ', href: 'customer-service' },
+        { text: 'PAYMENT', href: 'customer-service' },
+        { text: 'RETURNS', href: 'customer-service' },
+        { text: 'MAKE A RETURN', href: 'customer-service' },
       ]
     },
     {

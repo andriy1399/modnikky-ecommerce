@@ -10,6 +10,7 @@ import { ProfileGuard } from './shared/guards/profile.guard';
 import { ProductListComponent } from './pages/shop/product-list/product-list.component';
 import { ConfirmationGuard } from './shared/guards/confirmation.guard';
 import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
+import { CustomerServiceComponent } from './pages/customer-service/customer-service.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -21,7 +22,7 @@ const routes: Routes = [
       { path: ':category', component: ProductListComponent }
     ]
   },
-
+  { path: 'customer-service', component: CustomerServiceComponent },
   { path: 'favorites', component: FavoritesComponent },
   { path: 'bag', component: BagComponent },
   { path: 'product/:category/:id', component: ProductComponent },

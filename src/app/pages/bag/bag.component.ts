@@ -97,7 +97,7 @@ export class BagComponent implements OnInit {
   }
 
   sendOrder(): void {
-    if (this.user) {
+    if (this.user && this.user.role !== 'admin') {
       const { uId, city, street, build, flour, aboutMyself, apartment, dateOfBirthday, telephone2, email } = this.user;
 
       const order: IOrder = {
@@ -119,6 +119,7 @@ export class BagComponent implements OnInit {
         price: +(this.totalPrice).toFixed(2),
         comment: this.information.value.comment || null
       };
+
       let { historyOfOrders } = this.userData;
       if (historyOfOrders && historyOfOrders.length) {
         historyOfOrders.push({ orders: this.bag, date: new Date() });
@@ -127,6 +128,7 @@ export class BagComponent implements OnInit {
       }
       this.orderServ.addOrder(order)
         .then(() => {
+
           localStorage.setItem('confirmation', JSON.stringify({
             success: true,
             name: this.information.value.firstName,

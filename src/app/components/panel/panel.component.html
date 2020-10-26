@@ -21,7 +21,7 @@
       <ul *ngIf="panelData?.pList">
         <li *ngFor="let li of panelData?.pList">
           <ng-container *ngIf="!li.img; else withImg">
-            <a>{{ li.text }}</a>
+            <a [routerLink]="[li.href]">{{ li.text }}</a>
           </ng-container>
           <ng-template #withImg>
             <a [href]="li.href" target="_blanc">

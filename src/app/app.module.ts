@@ -40,6 +40,7 @@ import { ConfirmationComponent } from './pages/confirmation/confirmation.compone
 
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 import { ngxUiLoaderConfig } from './preloader-config';
+import { CustomerServiceComponent } from './pages/customer-service/customer-service.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ngxUiLoaderConfig } from './preloader-config';
     HideModalDirective,
     ProductListComponent,
     ImgHoverDirective,
-    ConfirmationComponent
+    ConfirmationComponent,
+    CustomerServiceComponent
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,7 @@
         <ul class="footer__list">
           <li *ngFor="let item of info.pList">
             <ng-container *ngIf="!item.img; else withImg">
-              <a>{{ item.text }}</a>
+              <a [routerLink]="[item.href]">{{ item.text }}</a>
             </ng-container>
             <ng-template #withImg>
               <a [href]="item.href" target="_blanc">
