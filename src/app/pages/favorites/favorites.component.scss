@@ -43,3 +43,36 @@
     padding: 0.4em 0;
   }
 }
+
+
+
+@media screen and (max-width: 650px) {
+  .favorites {
+    width: 93%;
+  }
+
+}
+
+@media screen and (max-width: 420px) {
+
+  .body-info {
+    &__body {
+      flex-direction: column;
+    }
+    &__img-wrapper {
+      width: 100%;
+      margin-right: 0;
+    }
+    &__description {
+      width: 100%;
+    }
+
+    &__button-wrapper {
+      width: 100%;
+      justify-content: space-around;
+    }
+    &__btn-add-to-bag , &__btn-remove {
+      margin: 0;
+    }
+  }
+}

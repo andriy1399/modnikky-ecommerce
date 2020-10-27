@@ -63,7 +63,6 @@
   }
 }
 
-
 .checkout {
   width: 600px;
   margin: 1em auto;
@@ -126,10 +125,47 @@
   }
 }
 
-
-
 @media screen and (max-width: 650px) {
   .bag {
     width: 93%;
+  }
+
+  .checkout {
+    width: 93%;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .bag {
+    width: 93%;
+  }
+
+  .checkout {
+    width: 93%;
+
+    &__input-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    &__form-50-width {
+      width: 100%;
+    }
+  }
+
+  .body-info {
+    &__body {
+      flex-direction: column;
+    }
+    &__img-wrapper {
+      width: 100%;
+      margin-right: 0;
+    }
+    &__description {
+      width: 100%;
+    }
   }
 }

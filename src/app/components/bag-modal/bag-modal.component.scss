@@ -115,3 +115,14 @@
     }
   }
 }
+
+
+@media screen and (max-width: 420px) {
+  .bag-modal {
+    width: 100%;
+  }
+
+  .item {
+    height: 575px;
+  }
+}
