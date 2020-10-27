@@ -24,6 +24,12 @@ export class BagModalComponent implements OnInit, OnDestroy {
   closeModal(): void {
     this.productServ.bagModalShow.next(false);
   }
+
+  closeBagModal(event): void {
+    if (event.target.className === 'eclipse') {
+      this.productServ.bagModalShow.next(false);
+    }
+  }
   private getBagProducts(): void {
     this.bag = JSON.parse(localStorage.getItem('orders'));
     if (this.bag && this.bag.length) {

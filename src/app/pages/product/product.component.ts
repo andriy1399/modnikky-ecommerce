@@ -132,7 +132,7 @@ export class ProductComponent implements OnInit {
         favorites = favorites.filter((v, i) => i !==  favBag);
         localStorage.setItem('favorites', JSON.stringify(favorites));
       } else {
-        localStorage.setItem('favorites', JSON.stringify([...favorites, product]));
+        localStorage.setItem('favorites', JSON.stringify([product, ...favorites]));
       }
     } else {
       localStorage.setItem('favorites', JSON.stringify([product]));
@@ -147,7 +147,7 @@ export class ProductComponent implements OnInit {
         favoritesIds = favoritesIds.filter((v, i) => i !==  favIndex);
         localStorage.setItem('favoritesIds', JSON.stringify(favoritesIds));
       } else {
-        localStorage.setItem('favoritesIds', JSON.stringify([...favoritesIds, favoritesId]));
+        localStorage.setItem('favoritesIds', JSON.stringify([favoritesId, ...favoritesIds]));
       }
     } else {
       localStorage.setItem('favoritesIds', JSON.stringify([favoritesId]));
@@ -195,7 +195,7 @@ export class ProductComponent implements OnInit {
         orders[orderInBag].count++;
         localStorage.setItem('orders', JSON.stringify(orders));
       } else {
-        localStorage.setItem('orders', JSON.stringify([...orders, product]));
+        localStorage.setItem('orders', JSON.stringify([product, ...orders]));
       }
     } else {
       localStorage.setItem('orders', JSON.stringify([product]));

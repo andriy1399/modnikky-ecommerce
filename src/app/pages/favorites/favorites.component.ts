@@ -31,7 +31,7 @@ export class FavoritesComponent implements OnInit {
     this.favorites = this.favorites.filter((_, i) => i !== index);
     localStorage.setItem('favorites', JSON.stringify(this.favorites));
     let favoritesIds = JSON.parse(localStorage.getItem('favoritesIds'));
-    favoritesIds = favoritesIds.filter(v => v === prod.id + prod.images.color.colorHex + prod.size);
+    favoritesIds = favoritesIds.filter(v => v !== prod.id + prod.images.color.colorHex + prod.size);
     localStorage.setItem('favoritesIds', JSON.stringify(favoritesIds));
     this.getFavoritesProducts();
     if (!this.favorites.length) {
