@@ -7,7 +7,7 @@
     </ul>
     <div class="header__burger">
       <button mat-icon-button [matMenuTriggerFor]="menu" class="header__burger-btn">
-        <mat-icon style="margin-bottom: 5px;">
+        <mat-icon style="margin-bottom: 5px;" style="color: #ffffff;">
           <svg viewBox="0 0 45 32" fill="black" xmlns="http://www.w3.org/2000/svg" class="header__burger-svg">
             <path d="M0 0H44.3077V2.46154H0V0Z" />
             <path d="M0 14.7692H44.3077V17.2308H0V14.7692Z" />
@@ -15,35 +15,31 @@
           </svg>
         </mat-icon>
       </button>
-      <mat-menu #menu xPosition="after">
+      <mat-menu #menu xPosition="after" >
         <button *ngIf="!loginStatus" mat-menu-item class="header__menu-items" (click)="signInModal.isSignInClicked = true">
-          <mat-icon>
-            <img src="../../../assets/icons/add-button.svg" alt="">
+          <mat-icon [ngStyle]="{'color': '#000000'}">
+            account_circle
           </mat-icon>
           <span>SIGN IN</span>
         </button>
         <button *ngIf="loginStatus" mat-menu-item class="header__menu-items" [routerLink]="['/' + urlAddress]">
-          <mat-icon>
-            <img src="../../../assets/icons/add-button.svg" alt="">
+          <mat-icon [ngStyle]="{'color': '#000000'}" >
+            account_circle
           </mat-icon>
           <span >{{ urlName | uppercase }}</span>
         </button>
-
-        <li class="header__hide-li" *ngIf="loginStatus">
-          <a [routerLink]="['/' + urlAddress]">{{ urlName | uppercase }}</a>
-        </li>
         <button mat-menu-item [routerLink]="['/catalog/new-arrivals']" class="header__menu-items">
-          <mat-icon>
-            <img src="../../../assets/icons/new.svg" alt="">
+          <mat-icon [ngStyle]="{'color': '#000000'}">
+            fiber_new
           </mat-icon>
           <span>NEW ARRIVALS</span>
         </button>
         <button mat-menu-item [routerLink]="['/catalog/shop']" class="header__menu-items">
-          <mat-icon> <img src="../../../assets/icons/star.svg" style="margin-bottom: 4px;" alt=""></mat-icon>
+          <mat-icon [ngStyle]="{'color': '#000000'}"> shopping_cart</mat-icon>
           <span>SHOP</span>
         </button>
         <button mat-menu-item [routerLink]="['/catalog/sale']" class="header__menu-items">
-          <mat-icon><img src="../../../assets/icons/discount.svg" alt=""></mat-icon>
+          <mat-icon [ngStyle]="{'color': '#000000'}"> attach_money</mat-icon>
           <span>SALE</span>
         </button>
       </mat-menu>

@@ -10,22 +10,23 @@
     &:nth-child(1) {
       justify-content: flex-start;
       align-items: flex-end;
-      background-image: url("https://images.unsplash.com/photo-1593528625646-d705402054ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+      background-image: url('../../../assets/images/photo-1593528625646-d705402054ba.jpg');
     }
     &:nth-of-type(2) {
-      background-image: url("https://cdn.pixabay.com/photo/2016/11/29/03/36/beautiful-1867093_1280.jpg");
+      background-image: url("../../../assets/images/beautiful-1867093_1280.webp");
+
     }
 
     &:nth-of-type(3) {
       justify-content: flex-end;
       align-items: flex-end;
-      background-image: url("https://lp2.hm.com/hmgoepprod?set=width[1920],quality[80],options[limit]&source=url[https://www2.hm.com/content/dam/ladies_s02/september_2020/1172b/1172B-3x2-casually-dressy.jpg]&scale=width[global.width],height[15000],options[global.options]&sink=format[jpg],quality[global.quality]  ");
+      background-image: url("../../../assets/images/hmgoepprod.jpg");
     }
 
     &:nth-of-type(5) {
       justify-content: flex-end;
       align-items: flex-start;
-      background-image: url("https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+      background-image: url("../../../assets/images/pexels-photo-1126993.jpeg");
     }
   }
 
@@ -55,7 +56,7 @@
 
   &__info-btn {
     padding: 1.1em 2em;
-    width: 247px;
+    width: 260px;
     color: #ffffff;
     font-size: 1rem;
     box-shadow: 0 0 0 1px #ffffff;
@@ -80,36 +81,6 @@
     width: 100%;
   }
 }
-
-// .carousel {
-//   width: 100%;
-//   padding: 40px 80px;
-
-//   &__subtitle {
-//     font-size: 1rem;
-//     font-family: helvetica-h;
-//     margin-bottom: 1.3em;
-//   }
-
-//   &__btn-wrapper {
-//     position: absolute;
-//     z-index: 100001;
-//     bottom: 1em;
-//     left: 50%;
-//     transform: translateX(-50%);
-//   }
-//   &__btn {
-//     box-shadow: 0 0 0 1px #202020;
-//     padding: 1em 1.4em;
-//     background-color: #ffffff42;
-//     transition: all .4s ease;
-//     &:hover {
-//       cursor: pointer;
-//       box-shadow: 0 0 0 1px #000000;
-//       background-color: #ffffff6b;
-//     }
-//   }
-// }
 
 @media screen and (max-width: 1200px) {
   .home {
@@ -138,19 +109,11 @@
 
     &__info-btn {
       padding: 1em 2em;
-      width: 200px;
+      width: 225px;
       font-size: 0.8rem;
     }
   }
 
-  // .carousel {
-  //   width: 100%;
-  //   padding: 20px 40px;
-
-  //   &__subtitle {
-  //     margin-bottom: 1.1em;
-  //   }
-  // }
 }
 
 @media screen and (max-width: 970px) {
@@ -235,15 +198,4 @@
     }
   }
 
-  // .carousel {
-  //   width: 100%;
-  //   padding: 0.7em;
-
-  //   &__subtitle {
-  //     margin-bottom: 1em;
-  //   }
-  //   img {
-  //     object-fit: 100% 100%;
-  //   }
-  // }
 }
