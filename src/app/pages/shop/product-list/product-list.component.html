@@ -1,9 +1,9 @@
 <div class="products">
   <div class="products__row">
     <ng-container *ngIf="loading; else elseTemplate">
-      <div class="image__loading-wrapper">
+      <!-- <div class="image__loading-wrapper">
         <img class="image__loading" src="https://media.giphy.com/media/PUYgk3wpNk0WA/giphy.gif"  alt="">
-      </div>
+      </div> -->
     </ng-container>
     <ng-template #elseTemplate>
       <ng-container *ngIf="products.length; else doNotFound">
