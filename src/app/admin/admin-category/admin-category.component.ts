@@ -4,9 +4,6 @@ import { ICategory } from '../../shared/interfaces/category.interface';
 import { CategoryService } from '../../shared/services/category.service';
 import { Category } from '../../shared/models/category.model';
 
-// export interface Fruit {
-//   name: string;
-// }
 @Component({
   selector: 'app-admin-category',
   templateUrl: './admin-category.component.html',
