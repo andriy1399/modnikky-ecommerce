@@ -26,4 +26,7 @@ export class NewsService {
   deleteNews(pId: string): Promise<void> {
     return this.afFirestore.doc('news/' + pId).delete();
   }
+  getPostById(id: string): firebase.firestore.DocumentReference<firebase.firestore.DocumentData> {
+    return this.afFirestore.collection('news').ref.doc(id);
+  }
 }

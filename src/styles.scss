@@ -125,7 +125,7 @@ input {
 
 .body-info {
   padding: 1em 0;
-  border-bottom: 1px solid  #bdbdbd;
+  border-bottom: 1px solid #bdbdbd;
   &__price {
     display: flex;
     justify-content: space-between;
@@ -169,7 +169,7 @@ input {
     p {
       font-size: 0.8rem;
       text-transform: uppercase;
-      margin-bottom: .5em;
+      margin-bottom: 0.5em;
     }
   }
   &__name {
@@ -182,7 +182,7 @@ input {
       font-size: 0.8rem;
       text-transform: uppercase;
     }
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
     select {
       font-size: 0.8rem;
       text-transform: uppercase;
@@ -208,7 +208,6 @@ input {
       display: flex;
       align-items: center;
       cursor: pointer;
-
     }
   }
   &__footer {
@@ -227,15 +226,15 @@ input {
     font-size: 1rem;
     font-family: helvetica-p, Arial, Helvetica, sans-serif;
     &--fv {
-      padding: .5em 1.2em;
+      padding: 0.5em 1.2em;
       background-color: #000000;
       color: #fff;
-      transition: opacity .3s ease-in-out;
+      transition: opacity 0.3s ease-in-out;
       &:hover {
-        opacity: .9;
+        opacity: 0.9;
       }
-      &:disabled{
-        opacity: .5;
+      &:disabled {
+        opacity: 0.5;
         cursor: no-drop;
       }
     }
@@ -250,18 +249,18 @@ input {
       font-size: 1rem;
     }
     &--fv {
-      padding: .5em 1.2em;
+      padding: 0.5em 1.2em;
       background-color: #000000;
-      transition: opacity .3s ease-in-out;
+      transition: opacity 0.3s ease-in-out;
       span {
         color: #fff;
       }
       &:hover {
-        opacity: .9;
+        opacity: 0.9;
       }
 
-      &:disabled{
-        opacity: .5;
+      &:disabled {
+        opacity: 0.5;
         cursor: no-drop;
       }
     }
@@ -292,6 +291,19 @@ input {
   }
 }
 
+@media screen and (max-width: 420px) {
+  div[class^="ql-"],
+  p[class^="ql-"] {
+    font-size: 0.8rem !important;
+  }
+  .ql-size-large {
+    font-size: 1rem !important;
+    line-height: 1;
+  }
+  p[class^="ql-align-"] {
+    font-size: .8rem;
+  }
+}
 .ngx-pagination .current {
   background-color: black !important;
 }

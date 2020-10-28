@@ -41,6 +41,8 @@ import { ConfirmationComponent } from './pages/confirmation/confirmation.compone
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 import { ngxUiLoaderConfig } from './preloader-config';
 import { CustomerServiceComponent } from './pages/customer-service/customer-service.component';
+import { NewsComponent } from './pages/news/news.component';
+import { NewsDetailsComponent } from './pages/news-details/news-details.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { CustomerServiceComponent } from './pages/customer-service/customer-serv
     ProductListComponent,
     ImgHoverDirective,
     ConfirmationComponent,
-    CustomerServiceComponent
+    CustomerServiceComponent,
+    NewsComponent,
+    NewsDetailsComponent
   ],
   imports: [
     BrowserModule,

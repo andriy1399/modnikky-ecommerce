@@ -1,0 +1,20 @@
+<div class="container">
+
+  <div class="post">
+    <ul class="post__breadcrumb">
+      <li>
+        <a [routerLink]="[ 'home' ]">
+          <span>{{ 'home' | uppercase }} /</span>
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="[ '/news' ]"><span>{{ 'news' | uppercase }} /</span></a>
+      </li>
+      <li>
+        <a><span>{{  this.shortTitle | uppercase }}</span></a>
+      </li>
+    </ul>
+
+    <quill-view-html [content]="post?.htmlContent"></quill-view-html>
+  </div>
+</div>

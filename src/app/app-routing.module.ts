@@ -11,6 +11,8 @@ import { ProductListComponent } from './pages/shop/product-list/product-list.com
 import { ConfirmationGuard } from './shared/guards/confirmation.guard';
 import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
 import { CustomerServiceComponent } from './pages/customer-service/customer-service.component';
+import { NewsComponent } from './pages/news/news.component';
+import { NewsDetailsComponent } from './pages/news-details/news-details.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'favorites', component: FavoritesComponent },
   { path: 'bag', component: BagComponent },
   { path: 'product/:category/:id', component: ProductComponent },
+  { path: 'news', component: NewsComponent },
+  { path: 'news/:id', component: NewsDetailsComponent },
   {
     path: 'profile',
     canActivate: [ProfileGuard],

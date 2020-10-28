@@ -1,0 +1,33 @@
+<div class="container">
+
+  <h1>Latest news</h1>
+  <div class="news">
+    <div class="news__post post" *ngFor="let post of news| paginate: { itemsPerPage: 6, currentPage: p }">
+      <a [routerLink]=" ['/news', post.id]">
+      <div class="post__image-wrapper">
+        <img [lazyLoad]="post.poster" [defaultImage]='defaultImage'>
+      </div>
+
+      <div class="post__info">
+        <div class="post__date">
+          <span>{{ post.date.toDate() | date: "longDate" }}</span>
+        </div>
+        <div class="post__title">
+          <h2>{{ post.title }}</h2>
+        </div>
+        <div class="post__title">
+          <p>{{ post.description }}</p>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+  <div class="paginator">
+
+    <pagination-controls class="shop-pagination" (pageChange)="pageChanged($event)" responsive="true" maxSize="5"
+      previousLabel="" nextLabel="">
+
+    </pagination-controls>
+
+  </div>
+</div>

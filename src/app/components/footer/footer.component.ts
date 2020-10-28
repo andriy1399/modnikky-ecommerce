@@ -19,7 +19,7 @@ export class FooterComponent implements OnInit {
     },
     {
       pTitle: 'info', pList: [
-        { text: 'Gift vouchers' },
+        { text: 'news', href: 'news' },
         { text: 'size guide' },
         { text: 'careers at modnikky' },
         { text: 'about us' },
