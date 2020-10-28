@@ -1,0 +1,58 @@
+<div class="news-admin">
+  <mat-tab-group mat-stretch-tabs="center" [selectedIndex]="tabsIndex" (selectedIndexChange)="setTabs($event)">
+    <mat-tab label="Editor">
+      <form class="news-admin__form-and-editor">
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Title</mat-label>
+          <input matInput [(ngModel)]="titlePost" name="titlePost">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="descriptionPost" name="descriptionPost"></textarea>
+        </mat-form-field>
+        <h4 style="text-align: center;">Choose image for poster</h4>
+        <div class="image-upload__wrapper">
+          <div class="image-upload-block" style="width: 28%;">
+            <div class="form-control" *ngIf="!uploadProgress || imgStatus">
+              <div class="form-control__file">
+                <input type="file" id="file" class="form-control__file-input"
+                  (change)="uploadFile($event)">
+                <label for="file" matRipple>
+                  Choose file
+                </label>
+              </div>
+            </div>
+            <mat-progress-spinner diameter='55' [mode]="'determinate'" [value]="uploadProgress | async"
+              *ngIf="uploadProgress  && !imgStatus">
+            </mat-progress-spinner>
+          </div>
+
+          <div class="image-preview-details">
+            <div class="image-preview">
+              <img *ngIf="previewImages" [src]="previewImages">
+            </div>
+            <div class="btn-delete__wrapper" *ngIf="previewImages">
+              <button mat-raised-button color="warn" type="button" (click)="clearPreviewImage()">Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <quill-editor [styles]="editorStyles" [(ngModel)]="newsHTML" name="newsHTML"></quill-editor>
+
+        <div class="btn-wrapper">
+          <ng-container *ngIf="isEditing; else bntAdd">
+            <button mat-raised-button color="accent"
+              [disabled]="!previewImages || !newsHTML || !descriptionPost || !titlePost">Save Post</button>
+          </ng-container>
+          <ng-template #bntAdd>
+            <button mat-raised-button color="primary" (click)="addPost()"
+              [disabled]="!previewImages || !newsHTML || !descriptionPost || !titlePost">Add Post</button>
+          </ng-template>
+        </div>
+      </form>
+    </mat-tab>
+    <mat-tab label="Table">
+
+    </mat-tab>
+  </mat-tab-group>
+</div>

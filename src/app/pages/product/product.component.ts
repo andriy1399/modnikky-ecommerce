@@ -52,6 +52,7 @@ export class ProductComponent implements OnInit {
   changeProductModel(color: IImage): void {
     this.showImgArr = color.images;
     this.productImages = color;
+    window.scrollTo(0, 0);
   }
   orderProductSize(size: string): void {
     this.orderSize = size;
@@ -129,7 +130,7 @@ export class ProductComponent implements OnInit {
           v.size === (this.orderSize || this.product.size[0]);
       });
       if (favBag !== -1) {
-        favorites = favorites.filter((v, i) => i !==  favBag);
+        favorites = favorites.filter((v, i) => i !== favBag);
         localStorage.setItem('favorites', JSON.stringify(favorites));
       } else {
         localStorage.setItem('favorites', JSON.stringify([product, ...favorites]));
@@ -144,7 +145,7 @@ export class ProductComponent implements OnInit {
     if (favoritesIds && favoritesIds.length) {
       const favIndex = favoritesIds.findIndex((v: string) => v === favoritesId);
       if (favIndex !== -1) {
-        favoritesIds = favoritesIds.filter((v, i) => i !==  favIndex);
+        favoritesIds = favoritesIds.filter((v, i) => i !== favIndex);
         localStorage.setItem('favoritesIds', JSON.stringify(favoritesIds));
       } else {
         localStorage.setItem('favoritesIds', JSON.stringify([favoritesId, ...favoritesIds]));
@@ -161,7 +162,7 @@ export class ProductComponent implements OnInit {
 
     if (prod && this.favoritesIds) {
       const id = prod.id +
-        ((this.productImages && this.productImages.color.colorHex) || prod.images[0].color.colorHex ) +
+        ((this.productImages && this.productImages.color.colorHex) || prod.images[0].color.colorHex) +
         (this.orderSize || prod.size[0]);
       return this.favoritesIds.includes(id);
     } else {

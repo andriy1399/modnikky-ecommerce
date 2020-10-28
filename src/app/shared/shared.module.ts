@@ -9,7 +9,7 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { QuillModule } from 'ngx-quill';
 @NgModule({
   declarations: [],
   imports: [
@@ -23,7 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCheckboxModule,
     MatDatepickerModule,
     MatFormFieldModule,
-
+    QuillModule.forRoot()
   ],
   exports: [
     CommonModule,
@@ -37,6 +37,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
+    QuillModule
   ]
 })
 export class SharedModule { }

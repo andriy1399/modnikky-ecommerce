@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
+import { AdminNewsComponent } from './admin-news/admin-news.component';
 const routes: Routes = [
   {
     path: '', component: AdminComponent, children: [
@@ -23,7 +24,8 @@ const routes: Routes = [
       { path: 'category', component: AdminCategoryComponent },
       { path: 'catalog', component: AdminCatalogComponent },
       { path: 'filters', component: AdminFiltersComponent },
-      { path: 'orders', component: AdminOrdersComponent }
+      { path: 'orders', component: AdminOrdersComponent },
+      { path: 'news', component: AdminNewsComponent }
     ]
   }
 ];
@@ -33,7 +35,8 @@ const routes: Routes = [
     AdminCategoryComponent,
     AdminCatalogComponent,
     AdminFiltersComponent,
-    AdminOrdersComponent
+    AdminOrdersComponent,
+    AdminNewsComponent
   ],
   imports: [
     SharedModule,

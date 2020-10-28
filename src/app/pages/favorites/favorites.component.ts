@@ -69,7 +69,7 @@ export class FavoritesComponent implements OnInit {
         orders[orderInBag].count++;
         localStorage.setItem('orders', JSON.stringify(orders));
       } else {
-        localStorage.setItem('orders', JSON.stringify([...orders, product]));
+        localStorage.setItem('orders', JSON.stringify([product, ...orders]));
       }
     } else {
       localStorage.setItem('orders', JSON.stringify([product]));
