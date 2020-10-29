@@ -35,7 +35,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   private searchProducts(search: string = this.defaultName): void {
-    console.log(search);
     this.uSub = this.productServ.getProducts().subscribe(data => {
       const items: IProduct[] = data.map(el => {
         const d = el.payload.doc.data();
@@ -43,7 +42,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         return { id, ...d as IProduct };
       });
 
-      this.products = items.filter(v => v.searchName.includes(search));
+      this.products = items.filter(v => v.searchName.includes(search.toLocaleLowerCase()));
       if (!this.products || !this.products.length) {
         this.searchIsEmpty = true;
       } else {

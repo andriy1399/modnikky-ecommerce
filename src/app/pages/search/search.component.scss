@@ -164,11 +164,8 @@
 
       .discount {
         padding: 0.5em .8em;
-
       }
-
     }
-
 
     &__color {
       height: 18px;
@@ -184,7 +181,11 @@
 
 
 @media screen and (max-width: 525px) {
-
+  .container {
+    h2 {
+      font-size: 1.2rem;
+    }
+  }
 
   .products {
     padding: 0 1em;
@@ -207,9 +208,7 @@
         padding: 0.5em .8em;
 
       }
-
     }
-
 
     &__color {
       height: 15px;
