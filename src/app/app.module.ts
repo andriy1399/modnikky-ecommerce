@@ -43,6 +43,7 @@ import { ngxUiLoaderConfig } from './preloader-config';
 import { CustomerServiceComponent } from './pages/customer-service/customer-service.component';
 import { NewsComponent } from './pages/news/news.component';
 import { NewsDetailsComponent } from './pages/news-details/news-details.component';
+import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { NewsDetailsComponent } from './pages/news-details/news-details.componen
     ConfirmationComponent,
     CustomerServiceComponent,
     NewsComponent,
-    NewsDetailsComponent
+    NewsDetailsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ import { ConfirmationComponent } from './pages/confirmation/confirmation.compone
 import { CustomerServiceComponent } from './pages/customer-service/customer-service.component';
 import { NewsComponent } from './pages/news/news.component';
 import { NewsDetailsComponent } from './pages/news-details/news-details.component';
+import { SearchComponent } from './pages/search/search.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -26,6 +27,7 @@ const routes: Routes = [
   },
   { path: 'customer-service', component: CustomerServiceComponent },
   { path: 'favorites', component: FavoritesComponent },
+  { path: 'search', component: SearchComponent },
   { path: 'bag', component: BagComponent },
   { path: 'product/:category/:id', component: ProductComponent },
   { path: 'news', component: NewsComponent },

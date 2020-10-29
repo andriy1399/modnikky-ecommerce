@@ -42,7 +42,7 @@ export class AdminCategoryComponent implements OnInit {
 
   addCategory(): void {
     if (this.nameCategory.trim()) {
-      const category = new Category(this.nameCategory, this.showShop, this.showNewArrivals, this.showSale);
+      const category = new Category(this.nameCategory.toLowerCase(), this.showShop, this.showNewArrivals, this.showSale);
       delete category.id;
       this.categoryServ.addCategory(category)
         .then(() => {

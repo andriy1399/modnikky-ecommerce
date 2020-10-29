@@ -29,5 +29,6 @@ export interface IProduct {
   dateAdded: Date;
   sale?: ISale ;
   dateOfEdition?: Date;
+  searchName?: string;
   id?: string;
 }

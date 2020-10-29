@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IPost } from 'src/app/shared/interfaces/post.interface';
 import { NewsService } from '../../shared/services/news.service';
-
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',

@@ -198,7 +198,10 @@ export class AdminCatalogComponent implements OnInit {
       isNewArrivals,
       new Date(),
       discount ? this.generateDiscount(price, discount) : null,
-      dateOfEdition ? dateOfEdition : null
+      dateOfEdition ? dateOfEdition : null,
+      (name + ' ' + category + ' '
+        + this.choosesImagesArr.reduce((a, c) => a.concat(c.color.colorName), []).join('')
+        + ' ' + description).toLowerCase()
     );
 
     this.productServ.addProduct(newProduct)
@@ -224,6 +227,7 @@ export class AdminCatalogComponent implements OnInit {
         this.choosesImagesArr = [];
         this.product.controls.dateOfEdition.disable();
         this.product.controls.discount.disable();
+        window.scrollTo(0, 0);
       });
   }
 
@@ -255,6 +259,9 @@ export class AdminCatalogComponent implements OnInit {
       new Date(),
       discount ? this.generateDiscount(price, discount) : null,
       dateOfEdition ? dateOfEdition : null,
+      (name + ' ' + category + ' '
+        + this.choosesImagesArr.reduce((a, c) => a.concat(c.color.colorName), []).join('')
+        + ' ' + description).toLowerCase()
     );
 
     const product: IProduct = { ...editedProduct, id: this.editingProductId };
@@ -282,6 +289,7 @@ export class AdminCatalogComponent implements OnInit {
         this.product.controls.dateOfEdition.disable();
         this.product.controls.discount.disable();
         this.isEditing = false;
+        window.scrollTo(0, 0);
       });
   }
 

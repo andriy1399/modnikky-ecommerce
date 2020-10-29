@@ -1,4 +1,5 @@
 import { T } from '@angular/cdk/keycodes';
+import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
 import { Observable, Subject } from 'rxjs';
@@ -12,6 +13,7 @@ export class ProductService {
   changedFilter = new Subject<string>();
   bag = new Subject<number>();
   bagModalShow = new Subject<boolean>();
+  search = new Subject<string>();
   constructor(
     private afFirestore: AngularFirestore
   ) {

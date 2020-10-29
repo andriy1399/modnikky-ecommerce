@@ -13,5 +13,6 @@ export class Product implements IProduct {
     public dateAdded: Date,
     public sale?: ISale,
     public dateOfEdition?: Date,
+    public searchName?: string
   ) { }
 }

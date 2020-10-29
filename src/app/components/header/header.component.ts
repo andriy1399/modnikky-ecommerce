@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SignInModalService } from '../../shared/services/sign-in-modal.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { ProductService } from '../../shared/services/product.service';
+import { Router } from '@angular/router';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +19,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     public signInModal: SignInModalService,
     private auth: AuthService,
-    private productServ: ProductService
+    private productServ: ProductService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +28,7 @@ export class HeaderComponent implements OnInit {
     this.checkLogin();
     this.getBagCount();
     this.productServ.bag.subscribe(c => this.countOfOrders = c);
+    this.productServ.search.subscribe(_ => this.router.navigateByUrl('search'));
   }
 
   checkLogin(): void {
@@ -47,6 +51,15 @@ export class HeaderComponent implements OnInit {
       this.urlName = '';
       this.loginStatus = false;
     }
+  }
+
+  searchItems(event: Event): void {
+    const word = (event.target as HTMLInputElement).value;
+    if (word) {
+      this.productServ.search.next(word);
+      localStorage.setItem('searchName', JSON.stringify(word));
+    }
+
   }
 
   private getBagCount(): void {
