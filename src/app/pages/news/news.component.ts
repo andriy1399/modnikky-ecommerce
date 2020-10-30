@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IPost } from 'src/app/shared/interfaces/post.interface';
 import { NewsService } from '../../shared/services/news.service';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
@@ -13,12 +13,17 @@ export class NewsComponent implements OnInit {
   p = 1;
   constructor(
     private newsServ: NewsService,
-    private title: Title
+    private title: Title,
+    private meta: Meta
   ) { }
 
   ngOnInit(): void {
     this.title.setTitle('News | Modnikky');
     this.getNews();
+    this.meta.addTags([
+      { name: 'keywords', content: `news, press, modnikky news, new trends, shop, modnikky` },
+      { name: 'description', content: `Browse our range of clothes for women. You will always find the latest trends and styles at Modnikky. Shop online or in-store.`}
+    ]);
   }
 
   private getNews(): void {

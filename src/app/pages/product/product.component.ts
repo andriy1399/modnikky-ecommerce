@@ -7,7 +7,7 @@ import { IBreadcrumb } from '../../shared/interfaces/breadcrumb.interface';
 import { SwiperOptions } from 'swiper';
 import { BasketOrder } from '../../shared/models/basket-order.model';
 import { IBasketOrder } from '../../shared/interfaces/basket.interface';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product',
@@ -42,7 +42,8 @@ export class ProductComponent implements OnInit {
   constructor(
     private productsServ: ProductService,
     private route: ActivatedRoute,
-    private title: Title
+    private title: Title,
+    private meta: Meta
   ) { }
 
   ngOnInit(): void {
@@ -72,6 +73,10 @@ export class ProductComponent implements OnInit {
           this.panelDescription = { pTitle: 'Product description', pText: data.description } as IPanel;
           this.panelComposition = { pTitle: 'Fabric composition', pText: data.fabricComposition.fabricText } as IPanel;
           this.title.setTitle(`${this.product.name} - ${this.product.category} | ${this.breadcrumb.type || '-'} | Modnikky`);
+          this.meta.addTags([
+            { name: 'keywords', content: `${this.product.name}, ${this.product.category}, ${this.breadcrumb.type}, modnikky, shop` },
+            { name: 'description', content: this.product.description }
+          ]);
         }
       }).catch(err => console.log(err));
   }

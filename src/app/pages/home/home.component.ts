@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { IProduct } from '../../shared/interfaces/product.interface';
 import { ProductService } from '../../shared/services/product.service';
 
@@ -17,12 +17,17 @@ export class HomeComponent implements OnInit {
   public innerWidth: number;
   constructor(
     private productServ: ProductService,
-    private title: Title
+    private title: Title,
+    private meta: Meta
   ) {
     title.setTitle('Modnikky | Online fashion store');
   }
 
   ngOnInit(): void {
+    this.meta.addTags([
+      { name: 'keywords', content: 'Modnikky, home, closes, shop, online shop, clothe store, modnikky' },
+      { name: 'description', content: `Shop for women's fashion, beauty and home essentials online! We offer quality styles at the best price and in a sustainable way.`}
+    ]);
     this.innerWidth = window.innerWidth;
     this.getProductByType();
     this.getProductsLimit();

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../../shared/services/news.service';
 import { ActivatedRoute } from '@angular/router';
 import { IPost } from '../../shared/interfaces/post.interface';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-news-details',
@@ -15,7 +15,8 @@ export class NewsDetailsComponent implements OnInit {
   constructor(
     private newsServ: NewsService,
     private route: ActivatedRoute,
-    private title: Title
+    private title: Title,
+    private meta: Meta
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +32,10 @@ export class NewsDetailsComponent implements OnInit {
           this.post = { ...data, id };
           this.shortTitle = data.title.split(' ').slice(0, 3).join(' ');
           this.title.setTitle(`${this.shortTitle} - News | Modnikky`);
+          this.meta.addTags([
+            { name: 'keywords', content: `${this.shortTitle}, modnikky, news, press` },
+            { name: 'description', content: this.post.description }
+          ]);
         }
       }).catch(err => console.log(err));
   }
