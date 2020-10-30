@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { IBasketOrder } from 'src/app/shared/interfaces/basket.interface';
 import { BasketOrder } from 'src/app/shared/models/basket-order.model';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -12,10 +13,12 @@ export class FavoritesComponent implements OnInit {
   favorites: Array<IBasketOrder> = [];
   countItems = 0;
   constructor(
-    private productsServ: ProductService
+    private productsServ: ProductService,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Favorites products | Modnikky');
     this.getFavoritesProducts();
   }
   private getFavoritesProducts(): void {

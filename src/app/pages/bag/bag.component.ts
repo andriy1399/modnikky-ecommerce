@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IOrder } from '../../shared/interfaces/order.interface';
 import { OrderService } from '../../shared/services/order.service';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-bag',
@@ -24,10 +25,11 @@ export class BagComponent implements OnInit {
     private productServ: ProductService,
     private orderServ: OrderService,
     private router: Router,
-
+    private title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle(`Shopping Bag | Modnikky`);
     this.user = JSON.parse(localStorage.getItem('userCredential'));
     this.getBagProducts();
     if (this.user) {

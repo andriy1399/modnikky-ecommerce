@@ -3,6 +3,7 @@ import { ProductService } from '../../shared/services/product.service';
 import { Subscription } from 'rxjs';
 import { IProduct } from '../../shared/interfaces/product.interface';
 import { delay } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-search',
@@ -20,10 +21,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   searchWord = '';
   uSub: Subscription;
   constructor(
-    private productServ: ProductService
+    private productServ: ProductService,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Search products | Modnikky');
     this.defaultName = JSON.parse(localStorage.getItem('searchName'));
     this.changeCount();
     this.searchProducts();

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../../shared/services/news.service';
 import { ActivatedRoute } from '@angular/router';
 import { IPost } from '../../shared/interfaces/post.interface';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-news-details',
@@ -13,7 +14,8 @@ export class NewsDetailsComponent implements OnInit {
   shortTitle: string;
   constructor(
     private newsServ: NewsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +30,7 @@ export class NewsDetailsComponent implements OnInit {
           const data = doc.data() as IPost;
           this.post = { ...data, id };
           this.shortTitle = data.title.split(' ').slice(0, 3).join(' ');
+          this.title.setTitle(`${this.shortTitle} - News | Modnikky`);
         }
       }).catch(err => console.log(err));
   }

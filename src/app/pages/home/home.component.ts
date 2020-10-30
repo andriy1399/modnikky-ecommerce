@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { IProduct } from '../../shared/interfaces/product.interface';
 import { ProductService } from '../../shared/services/product.service';
 
@@ -15,8 +16,11 @@ export class HomeComponent implements OnInit {
 
   public innerWidth: number;
   constructor(
-    private productServ: ProductService
-  ) { }
+    private productServ: ProductService,
+    private title: Title
+  ) {
+    title.setTitle('Modnikky | Online fashion store');
+  }
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
@@ -37,13 +41,13 @@ export class HomeComponent implements OnInit {
 
   getProductsLimit(): void {
     this.productServ.getProductLimit(3)
-    .subscribe(data => {
-      this.threeProducts = data.map(e => {
-        const id = e.payload.doc.id;
-        const otherData = e.payload.doc.data() as IProduct;
-        return { id, ...otherData };
+      .subscribe(data => {
+        this.threeProducts = data.map(e => {
+          const id = e.payload.doc.id;
+          const otherData = e.payload.doc.data() as IProduct;
+          return { id, ...otherData };
+        });
       });
-    });
   }
 
   public getCellCount(): number {

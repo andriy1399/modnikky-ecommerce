@@ -3,6 +3,7 @@ import { IMyInformation } from '../../shared/interfaces/my-information.interface
 import { ISignUp } from '../../shared/interfaces/sign-up.interface';
 import { IUser } from '../../shared/interfaces/user.interface';
 import { OrderService } from '../../shared/services/order.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-my-information',
@@ -14,11 +15,14 @@ export class MyInformationComponent implements OnInit {
   userCredential: IMyInformation;
   user: IMyInformation;
   constructor(
-    private orderServ: OrderService
+    private orderServ: OrderService,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
     this.userCredential = JSON.parse(localStorage.getItem('userCredential'));
+    this.title.setTitle(`${this.userCredential.firstName.toUpperCase()} - my information | Modnikky`);
+
     this.getUser();
   }
 

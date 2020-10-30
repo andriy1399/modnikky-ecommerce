@@ -7,6 +7,7 @@ import { IBreadcrumb } from '../../shared/interfaces/breadcrumb.interface';
 import { SwiperOptions } from 'swiper';
 import { BasketOrder } from '../../shared/models/basket-order.model';
 import { IBasketOrder } from '../../shared/interfaces/basket.interface';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product',
@@ -40,7 +41,8 @@ export class ProductComponent implements OnInit {
   favoritesIds: string[] = [];
   constructor(
     private productsServ: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
@@ -69,6 +71,7 @@ export class ProductComponent implements OnInit {
           this.product = { ...data, id };
           this.panelDescription = { pTitle: 'Product description', pText: data.description } as IPanel;
           this.panelComposition = { pTitle: 'Fabric composition', pText: data.fabricComposition.fabricText } as IPanel;
+          this.title.setTitle(`${this.product.name} - ${this.product.category} | ${this.breadcrumb.type || '-'} | Modnikky`);
         }
       }).catch(err => console.log(err));
   }
@@ -94,6 +97,7 @@ export class ProductComponent implements OnInit {
   public updateProduct(id: string, image?: IImage): void {
     this.showImgArr = image.images;
     this.getProduct(id);
+    localStorage.setItem('type', JSON.stringify('shop'));
   }
   private getBreadcrumb(product: IProduct): void {
     const type = JSON.parse(localStorage.getItem('type'));

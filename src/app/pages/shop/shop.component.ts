@@ -7,6 +7,7 @@ import { FiltersService } from '../../shared/services/filters.service';
 import { IFilter } from '../../shared/interfaces/filter.interface';
 import { IPanelFilter } from '../../shared/interfaces/panel.interface';
 import { ProductService } from '../../shared/services/product.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-shop',
@@ -25,7 +26,8 @@ export class ShopComponent implements OnInit, OnDestroy {
     private router: Router,
     private filterServ: FiltersService,
     private route: ActivatedRoute,
-    private productServ: ProductService
+    private productServ: ProductService,
+    private title: Title
   ) {
     this.checkRoute();
   }
@@ -88,6 +90,7 @@ export class ShopComponent implements OnInit, OnDestroy {
     this.rSub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const type = this.route.snapshot.paramMap.get('type');
+        this.title.setTitle(`${type.toUpperCase()} - Women's closing online store | Modnikky`);
         this.routUrl = type;
         this.productServ.type.next(type);
         if (event.id === 1 || event.url.split('/').length === 3) {

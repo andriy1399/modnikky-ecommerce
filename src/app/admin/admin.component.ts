@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin',
@@ -9,10 +10,12 @@ import { AuthService } from '../shared/services/auth.service';
 export class AdminComponent implements OnInit {
 
   constructor(
-    public auth: AuthService
+    public auth: AuthService,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle(`ADMIN | Modnikky`);
   }
 
 }

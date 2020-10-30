@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IMyInformation } from 'src/app/shared/interfaces/my-information.interface';
 import { OrderService } from 'src/app/shared/services/order.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-my-orders',
@@ -13,11 +14,13 @@ export class MyOrdersComponent implements OnInit {
   user: IMyInformation;
   total: number[];
   constructor(
-    private orderServ: OrderService
+    private orderServ: OrderService,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
     this.userCredential = JSON.parse(localStorage.getItem('userCredential'));
+    this.title.setTitle(`${this.userCredential.firstName.toUpperCase()} - my orders | Modnikky`);
     this.getUser();
   }
 

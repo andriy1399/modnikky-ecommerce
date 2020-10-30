@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IPost } from 'src/app/shared/interfaces/post.interface';
 import { NewsService } from '../../shared/services/news.service';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
@@ -11,10 +12,12 @@ export class NewsComponent implements OnInit {
   defaultImage = 'https://media.giphy.com/media/PUYgk3wpNk0WA/giphy.gif';
   p = 1;
   constructor(
-    private newsServ: NewsService
+    private newsServ: NewsService,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('News | Modnikky');
     this.getNews();
   }
 

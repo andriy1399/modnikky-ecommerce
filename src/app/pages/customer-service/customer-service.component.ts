@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { IPanel } from 'src/app/shared/interfaces/panel.interface';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-customer-service',
@@ -81,10 +82,13 @@ export class CustomerServiceComponent implements OnInit {
     },
   ];
   innerWidth: number;
-  constructor() { }
+  constructor(
+    private title: Title
+  ) { }
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
+    this.title.setTitle('Customer service | Modnikky');
   }
   public getSize(): number {
     return this.innerWidth <= 1200 && this.innerWidth > 1025 ? 16
