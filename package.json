@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~10.0.4",
     "@angular/platform-browser-dynamic": "~10.0.4",
     "@angular/router": "~10.0.4",
+    "@angular/service-worker": "~10.0.4",
     "angular-responsive-carousel": "^1.5.11",
     "firebase": "^7.22.1",
     "ng-animate": "^0.3.4",

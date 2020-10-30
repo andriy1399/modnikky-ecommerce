@@ -44,6 +44,7 @@ import { CustomerServiceComponent } from './pages/customer-service/customer-serv
 import { NewsComponent } from './pages/news/news.component';
 import { NewsDetailsComponent } from './pages/news-details/news-details.component';
 import { SearchComponent } from './pages/search/search.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { SearchComponent } from './pages/search/search.component';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
