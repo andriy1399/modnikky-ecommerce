@@ -97,7 +97,7 @@
 
       <div class="complete__product-wrapper">
         <div class="complete__product" *ngFor="let item of completeLook">
-          <a [routerLink]="['/product/'+ item.category, item.id]" (click)="updateProduct(item.id, item.images[0])">
+          <a [routerLink]="['/product/'+ item.category, item.id]" (click)="updateProduct(item.id)">
             <img  [lazyLoad]="item.images[0].images[0]" [defaultImage]='defaultImage' [alt]="item.name">
           </a>
         </div>
@@ -116,7 +116,7 @@
           <div class="carousel__btn-wrapper">
             <button class="carousel__btn" [routerLink]="['/product/'+ product.category, product.id]" matRipple
               [matRippleColor]="'rgba(00, 00, 00, 0.1)'"
-              (click)="updateProduct(product.id, product.images[0])">SHOW</button>
+              (click)="updateProduct(product.id)">SHOW</button>
           </div>
         </div>
       </carousel>

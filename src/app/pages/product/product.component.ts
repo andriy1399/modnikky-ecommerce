@@ -99,8 +99,9 @@ export class ProductComponent implements OnInit {
 
   }
 
-  public updateProduct(id: string, image?: IImage): void {
-    this.showImgArr = image.images;
+  public updateProduct(id: string): void {
+    this.showImgArr = [];
+    this.productImages = null;
     this.getProduct(id);
     localStorage.setItem('type', JSON.stringify('shop'));
   }
